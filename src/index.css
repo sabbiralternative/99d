@@ -1,0 +1,7 @@
+a {
+  cursor: pointer;
+}
+
+.rfm-marquee-container {
+  overflow: hidden !important;
+}
