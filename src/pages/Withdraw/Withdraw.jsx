@@ -28,7 +28,7 @@ const Withdraw = () => {
   }, [bankData, setAddBank, showBankAccount]);
 
   return (
-    <div className="col-md-10 featured-box">
+    <div className="col-md-10 featured-box deposit-withdraw">
       <div className="bankingUi">
         <div className="container-fluid">
           <div className="row">

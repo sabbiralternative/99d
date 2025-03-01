@@ -1054,19 +1054,19 @@
   border: var(--bs-card-border-width) solid var(--bs-card-border-color);
   border-radius: var(--bs-card-border-radius);
 }
-.card-header {
+.deposit-withdraw .card-header {
   padding: 0.5rem 1rem;
   margin-bottom: 0;
   background-color: rgba(0, 0, 0, 0.03);
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-.card-header {
+.deposit-withdraw .card-header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
 }
-.card-header > h2 {
+.deposit-withdraw .card-header > h2 {
   margin-bottom: 0;
   color: var(--white, #fff);
 
