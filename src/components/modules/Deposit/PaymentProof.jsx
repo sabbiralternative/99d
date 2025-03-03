@@ -6,8 +6,10 @@ import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { useBankAccountMutation } from "../../../redux/features/deposit/event.api";
 import { useDepositStatement } from "../../../hooks/accountStatement";
+import useUTR from "../../../hooks/utr";
 
 const PaymentProof = ({ paymentId, amount }) => {
+  const { mutate: getUTR } = useUTR();
   const { refetch } = useDepositStatement();
   const [handlePayment] = useBankAccountMutation();
   const { token } = useSelector((state) => state.auth);
@@ -32,9 +34,16 @@ const PaymentProof = ({ paymentId, amount }) => {
         });
         const data = res.data;
         if (data?.success) {
+          getUTR(data?.filePath, {
+            onSuccess: (data) => {
+              if (data?.success) {
+                setUtr(data?.utr);
+              }
+            },
+          });
           setLoading(false);
           setUploadedImage(data?.fileName);
-          setUtr(data?.utr);
+
           setFilePath(data?.filePath);
           setImage(null);
         } else {
@@ -48,7 +57,7 @@ const PaymentProof = ({ paymentId, amount }) => {
       };
       handleSubmitImage();
     }
-  }, [image, token]);
+  }, [image, token, getUTR]);
 
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
