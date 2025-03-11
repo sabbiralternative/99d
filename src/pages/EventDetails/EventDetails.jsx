@@ -9,6 +9,7 @@ import { setPredictOdd } from "../../redux/features/events/eventSlice";
 import RightSidebar from "../../components/modules/EventDetails/RightSidebar";
 import Score from "../../components/modules/EventDetails/Score";
 import ScoreCard from "../../components/modules/EventDetails/ScoreCard";
+import HorseGreyhound from "../../components/modules/EventDetails/HorseGreyhound";
 
 const EventDetails = () => {
   const { eventTypeId, eventId } = useParams();
@@ -152,6 +153,11 @@ const EventDetails = () => {
                   {fancyData && fancyData?.length > 0 && (
                     <Fancy fancy={fancyData} />
                   )}
+
+                  {(eventTypeId == 7 || eventTypeId == 4339) &&
+                  data?.result?.length > 0 ? (
+                    <HorseGreyhound data={data?.result} />
+                  ) : null}
                 </div>
               </div>
             </div>

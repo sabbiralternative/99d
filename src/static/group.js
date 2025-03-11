@@ -26,13 +26,13 @@ export const homeTab = [
     id: 4,
     name: "Horse Racing",
 
-    group: 3,
+    group: 7,
   },
   {
     id: 5,
     name: "Greyhound Racing",
 
-    group: 66,
+    group: 4339,
   },
   {
     id: 6,
