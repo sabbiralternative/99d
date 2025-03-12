@@ -19,7 +19,7 @@ function App() {
 
   useEffect(() => {
     if (isMobile) {
-      navigate("/m");
+      navigate("/m/");
     }
   }, [navigate]);
 

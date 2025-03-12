@@ -1,16 +1,24 @@
+import { useNavigate } from "react-router-dom";
 import images from "../../../assets/images";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
   return (
     <div className="sidebar d-none col-md-2 d-md-block">
       <div>
-        <div className="deposit-withdraw-sidebar-title deposit">
+        <div
+          onClick={() => navigate("/deposit")}
+          className="deposit-withdraw-sidebar-title deposit"
+        >
           <h5 className="d-inline-block m-b-0" tabIndex={0}>
             <img src={images.deposit} />
             Deposit
           </h5>
         </div>
-        <div className="deposit-withdraw-sidebar-title withdraw">
+        <div
+          onClick={() => navigate("/withdraw")}
+          className="deposit-withdraw-sidebar-title withdraw"
+        >
           <h5 className="d-inline-block m-b-0" tabIndex={0}>
             <img src={images.withdraw} />
             Withdraw

@@ -14,7 +14,7 @@ const LatestEvent = () => {
                 className="new-launch-text"
               >
                 <img alt="" src={`/src/assets/img/${event?.eventTypeId}.png`} />
-                <span>India v England</span>
+                <span>{event?.eventName}</span>
               </Link>
             </div>
           );
