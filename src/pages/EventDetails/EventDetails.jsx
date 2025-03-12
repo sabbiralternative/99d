@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPredictOdd } from "../../redux/features/events/eventSlice";
 import RightSidebar from "../../components/modules/EventDetails/RightSidebar";
-import Score from "../../components/modules/EventDetails/Score";
+// import Score from "../../components/modules/EventDetails/Score";
 import ScoreCard from "../../components/modules/EventDetails/ScoreCard";
 import HorseGreyhound from "../../components/modules/EventDetails/HorseGreyhound";
 
@@ -134,9 +134,9 @@ const EventDetails = () => {
                   )}
 
                   <div className="markets">
-                    {eventTypeId == 4 && data?.result?.[0]?.score && (
+                    {/* {eventTypeId == 4 && data?.result?.[0]?.score && (
                       <Score score={data?.result?.[0]?.score} />
-                    )}
+                    )} */}
 
                     {eventTypeId == 4 &&
                       data?.result?.[0]?.score2?.length !== 0 &&
