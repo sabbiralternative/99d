@@ -196,7 +196,7 @@ const Login = () => {
                         gold365info@gmail.com
                       </a>
                     </p>
-                    <div className="social_connect">
+                    {/* <div className="social_connect">
                       <img
                         src="https://cdn-icons-png.flaticon.com/512/2201/2201767.png"
                         className="slide-right handicon"
@@ -262,7 +262,7 @@ const Login = () => {
                         </svg>
                         <span>Telegram</span>
                       </a>
-                    </div>
+                    </div> */}
                   </form>
                 </div>
               </div>
