@@ -1101,7 +1101,7 @@ p {
 
 .sidebar .sidebar-title :before {
   font-family: "Font Awesome 5 Free";
-  content: "\f107";
+  /* content: "\f107"; */
   padding-right: 3px;
   font-weight: 900;
   float: right;
