@@ -26,8 +26,6 @@ const Header = () => {
     }
   };
 
-  console.log(socialLink);
-
   return (
     <div>
       <header className="header">

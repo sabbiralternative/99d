@@ -10,8 +10,10 @@ import back from "../icon/back-arrow.svg";
 import bankPicture from "../icon/bankPicture.svg";
 import deleteIcon from "../icon/delete-icon.svg";
 import edit from "../icon/edit.svg";
+import logo from "../img/gold365/logo.png";
 
 export default {
+  logo,
   star,
   back,
   bankPicture,
