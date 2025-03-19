@@ -1,19 +1,21 @@
 /* eslint-disable react/no-unknown-property */
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import WithdrawConfirm from "./WithdrawConfirm";
 import BankAccounts from "./BankAccounts";
 import SelectAmount from "./SelectAmount";
 import { useBankAccount } from "../../hooks/bankAccount";
 import AddBank from "./AddBank";
+import { setAddBank } from "../../redux/features/global/globalSlice";
 
 const Withdraw = () => {
   const [amount, setAmount] = useState("");
   const [showBankAccount, setShowBankAccount] = useState(false);
   const [confirmWithdraw, setConfirmWithdraw] = useState(false);
   const [bank, setBank] = useState("");
+  const dispatch = useDispatch();
 
-  const { addBank, setAddBank } = useSelector((state) => state.global);
+  const { addBank } = useSelector((state) => state.global);
   const payload = {
     type: "getBankAccounts",
     status: "1",
@@ -23,9 +25,9 @@ const Withdraw = () => {
   useEffect(() => {
     if (showBankAccount && bankData?.length < 1) {
       setShowBankAccount(false);
-      setAddBank(true);
+      dispatch(setAddBank(true));
     }
-  }, [bankData, setAddBank, showBankAccount]);
+  }, [bankData, showBankAccount, dispatch]);
 
   return (
     <div className="col-md-10 featured-box deposit-withdraw">
@@ -50,11 +52,8 @@ const Withdraw = () => {
                 setBank={setBank}
               />
             )}
-            {addBank && bankData?.length == 1 && (
-              <AddBank
-                setAddBank={setAddBank}
-                refetchBankData={refetchBankData}
-              />
+            {addBank && bankData?.length == 0 && (
+              <AddBank refetchBankData={refetchBankData} />
             )}
             {confirmWithdraw && (
               <WithdrawConfirm

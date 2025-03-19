@@ -65,7 +65,7 @@ const AddBank = ({ refetchBankData }) => {
       //   if (refetchWithdrawData) {
       //     refetchWithdrawData();
       //   }
-      setAddBank(false);
+      dispatch(setAddBank(false));
     } else {
       toast.error(data?.result?.message);
     }
@@ -129,9 +129,12 @@ const AddBank = ({ refetchBankData }) => {
         <div className="card-add-bank" ref={addBankRef}>
           <div className="card-header">
             <h2 style={{ color: "black" }}>Add Bank Account</h2>
-            <div className="close-btn">
+            <div
+              onClick={() => dispatch(setAddBank(false))}
+              style={{ cursor: "pointer" }}
+              className="close-btn"
+            >
               <svg
-                onClick={() => setAddBank(false)}
                 width="1rem"
                 height="1rem"
                 viewBox="0 0 14 15"
@@ -272,7 +275,7 @@ const AddBank = ({ refetchBankData }) => {
                 <div className="btn-box ">
                   <button
                     style={{ border: "none" }}
-                    onClick={() => setAddBank(false)}
+                    onClick={() => dispatch(setAddBank(false))}
                     className="cancel-btn "
                   >
                     <span className="">Cancel</span>
