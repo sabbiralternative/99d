@@ -79,7 +79,7 @@ const Login = () => {
     }
   };
   return (
-    <div className="login">
+    <div className="login" style={{ minHeight: "100vh", height: "100%" }}>
       <div className="wrapper">
         <div className="container-fluid">
           <div className="row">

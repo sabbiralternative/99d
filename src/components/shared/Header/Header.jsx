@@ -10,11 +10,23 @@ import Dropdown from "./Dropdown";
 import images from "../../../assets/images";
 import HeaderBottomMenu from "./HeaderBottomMenu";
 import { Settings } from "../../../api";
+import useWhatsApp from "../../../hooks/whatsapp";
 
 const Header = () => {
-  const { user } = useSelector((state) => state.auth);
+  const { user, token } = useSelector((state) => state.auth);
   const { data: balance } = useBalance();
   const { logo } = useContext(ApiContext);
+  const { data: socialLink } = useWhatsApp();
+
+  const navigateWhatsApp = () => {
+    if (token && socialLink?.result?.branchWhatsapplink) {
+      window.open(socialLink?.result?.branchWhatsapplink, "_blank");
+    } else {
+      window.open(socialLink?.result?.whatsapplink, "_blank");
+    }
+  };
+
+  console.log(socialLink);
 
   return (
     <div>
@@ -99,14 +111,16 @@ const Header = () => {
         </div>
         <div />
       </header>
-      <Link
-        target="_blank"
-        style={{ background: "none" }}
-        className="whatsapp_link"
-        to="http://wa.link/lotus365support51"
-      >
-        <img src={images.whatsapp} />
-      </Link>
+      {socialLink?.result?.whatsapplink ||
+      socialLink?.result?.branchWhatsapplink ? (
+        <a
+          style={{ background: "none" }}
+          className="whatsapp_link"
+          onClick={navigateWhatsApp}
+        >
+          <img src={images.whatsapp} />
+        </a>
+      ) : null}
     </div>
   );
 };
