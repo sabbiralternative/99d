@@ -16,6 +16,7 @@ import IntCasino from "../pages/IntCasino/IntCasino";
 import Deposit from "../pages/Deposit/Deposit";
 import PrivateRoute from "./PrivateRoute";
 import Withdraw from "../pages/Withdraw/Withdraw";
+import Rules from "../pages/Rules/Rules";
 
 export const router = createBrowserRouter(
   [
@@ -66,6 +67,10 @@ export const router = createBrowserRouter(
         {
           path: "/withdraw",
           element: <Withdraw />,
+        },
+        {
+          path: "/rules",
+          element: <Rules />,
         },
       ],
     },

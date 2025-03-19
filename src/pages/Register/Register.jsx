@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { AxiosSecure } from "../../lib/AxiosSecure";
 import toast from "react-hot-toast";
 import { ApiContext } from "../../context/ApiProvider";
-import { API } from "../../api";
+import { API, Settings } from "../../api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHandPointDown,
@@ -109,7 +109,7 @@ const Register = () => {
         orderId: data?.result?.orderId,
         otpMethod: "sms",
       });
-      toast.error(data?.result?.message);
+      toast.success(data?.result?.message);
     } else {
       toast.error(data?.error?.errorMessage);
     }
@@ -127,7 +127,14 @@ const Register = () => {
                   onClick={() => navigate("/")}
                   className="log-logo m-b-20 text-center"
                 >
-                  <img className="logo-login" src={logo} />
+                  <img
+                    style={{
+                      height: `${Settings.logoHeight}`,
+                      width: `${Settings.logoWidth}`,
+                    }}
+                    className="logo-login"
+                    src={logo}
+                  />
                 </div>
                 <div className="featured-box-login featured-box-secundary default">
                   <h4 className="text-center">

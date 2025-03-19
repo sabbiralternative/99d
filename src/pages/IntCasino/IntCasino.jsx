@@ -99,9 +99,7 @@ const IntCasino = () => {
   }, [category]);
 
   const handleNavigateToIFrame = (casino) => {
-    navigate(
-      `/casino/${casino?.name?.replace(/ /g, "")}/${casino?.event_type_id}`
-    );
+    navigate(`/casino/${casino?.name?.replace(/ /g, "")}/${casino?.id}`);
   };
 
   return (

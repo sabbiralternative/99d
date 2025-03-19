@@ -26,7 +26,7 @@ import {
   handleIncreasePrice,
 } from "../../../utils/editBetSlipPrice";
 
-const BetSlip = () => {
+const BetSlip = ({ profit }) => {
   const { eventTypeId } = useParams();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -291,7 +291,28 @@ const BetSlip = () => {
                             />
                           </div>
                         </td>
-                        <td className="text-right bet-profit">0</td>
+                        <td className="text-right bet-profit">
+                          {" "}
+                          {price &&
+                          stake &&
+                          placeBetValues?.back &&
+                          (placeBetValues?.btype === "MATCH_ODDS" ||
+                            placeBetValues?.btype === "BOOKMAKER" ||
+                            placeBetValues?.btype === "BOOKMAKER2")
+                            ? profit
+                            : null}
+                          {price &&
+                          stake &&
+                          placeBetValues?.lay &&
+                          (placeBetValues?.btype === "MATCH_ODDS" ||
+                            placeBetValues?.btype === "BOOKMAKER" ||
+                            placeBetValues?.btype === "BOOKMAKER2")
+                            ? stake
+                            : null}
+                          {price && stake && placeBetValues?.btype == "FANCY"
+                            ? 0
+                            : null}
+                        </td>
                       </tr>
                       <tr>
                         <td colSpan={5} className="value-buttons">

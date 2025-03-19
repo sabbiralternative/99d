@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { ApiContext } from "../../../context/ApiProvider";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faSearchPlus } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import Notification from "./Notification";
 import useBalance from "../../../hooks/balance";
 import { useSelector } from "react-redux";
@@ -11,6 +11,7 @@ import images from "../../../assets/images";
 import HeaderBottomMenu from "./HeaderBottomMenu";
 import { Settings } from "../../../api";
 import useWhatsApp from "../../../hooks/whatsapp";
+import Search from "./Search";
 
 const Header = () => {
   const { user, token } = useSelector((state) => state.auth);
@@ -37,7 +38,14 @@ const Header = () => {
                   to="/"
                   className="logo router-link-exact-active router-link-active"
                 >
-                  <img className="logo-icon" src={logo} />
+                  <img
+                    style={{
+                      height: `${Settings.logoHeight}`,
+                      width: `${Settings.logoWidth}`,
+                    }}
+                    className="logo-icon"
+                    src={logo}
+                  />
                 </Link>
               </div>
               <ul className="float-right d-flex align-items-center">
@@ -55,20 +63,8 @@ const Header = () => {
                     </Link>
                   )}
                 </li>
-                <li className="search float-left">
-                  <input
-                    name="game_keyword"
-                    placeholder="All Events"
-                    autoComplete="off"
-                    type="text"
-                    className="ng-untouched ng-pristine ng-valid"
-                    aria-expanded="false"
-                    aria-autocomplete="list"
-                  />
-                  <a>
-                    <FontAwesomeIcon icon={faSearchPlus} />
-                  </a>
-                </li>
+
+                <Search />
                 <li className="float-left download-apklink">
                   <div>
                     <Link to="/rules" className="rules-link m-r-5">

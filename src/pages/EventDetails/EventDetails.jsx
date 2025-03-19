@@ -3,7 +3,7 @@ import { useGetEventDetailsQuery } from "../../redux/features/events/events";
 import MatchOdds from "../../components/modules/EventDetails/MatchOdds";
 import Bookmaker from "../../components/modules/EventDetails/Bookmaker";
 import Fancy from "../../components/modules/EventDetails/Fancy";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPredictOdd } from "../../redux/features/events/eventSlice";
 import RightSidebar from "../../components/modules/EventDetails/RightSidebar";
@@ -13,6 +13,7 @@ import HorseGreyhound from "../../components/modules/EventDetails/HorseGreyhound
 
 const EventDetails = () => {
   const { eventTypeId, eventId } = useParams();
+  const [profit, setProfit] = useState(0);
   const dispatch = useDispatch();
   const { placeBetValues, price, stake } = useSelector((state) => state.event);
 
@@ -38,6 +39,26 @@ const EventDetails = () => {
       fancy.tabGroupName === "Normal" &&
       fancy?.visible == true
   );
+
+  useEffect(() => {
+    if (
+      price &&
+      stake &&
+      placeBetValues?.back &&
+      placeBetValues?.btype === "MATCH_ODDS"
+    ) {
+      const multiply = price * stake;
+      setProfit(formatNumber(multiply - stake));
+    } else if (
+      price &&
+      stake &&
+      placeBetValues?.back &&
+      (placeBetValues?.btype === "BOOKMAKER" ||
+        placeBetValues?.btype === "BOOKMAKER2")
+    ) {
+      setProfit(formatNumber(1 + price / stake));
+    }
+  }, [price, stake, profit, placeBetValues, setProfit]);
 
   useEffect(() => {
     let total;
@@ -161,7 +182,7 @@ const EventDetails = () => {
                 </div>
               </div>
             </div>
-            <RightSidebar hasVideo={data?.score?.hasVideo} />
+            <RightSidebar profit={profit} hasVideo={data?.score?.hasVideo} />
           </div>
         </div>
       </div>

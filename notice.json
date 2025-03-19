@@ -24,9 +24,12 @@
       "bookmakerCashOut": true,
       "mac88": true,
       "referral": true,
-      "logoHeight": 65,
-      "logoWidth": 250,
-      "logoFormat": "png",
+      "logo": {
+        "height": "65px",
+        "width": "auto",
+        "format": "png"
+      },
+
       "paymentIntent": false,
       "registrationWhatsapp": true,
       "ourCasino": true,
