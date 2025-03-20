@@ -3,12 +3,14 @@ import { getSetApis } from "../api/config";
 import { API, Settings } from "../api";
 import notice from "../../notice.json";
 import images from "../assets/images";
+
 export const ApiContext = createContext(null);
 
 const ApiProvider = ({ children }) => {
   const [noticeLoaded, setNoticeLoaded] = useState(false);
   const [logo, setLogo] = useState("");
   const baseUrl = notice?.result?.Settings?.baseUrl;
+
   useEffect(() => {
     const fetchAPI = () => {
       getSetApis(setNoticeLoaded, baseUrl);
@@ -45,6 +47,7 @@ const ApiProvider = ({ children }) => {
       FavIconLink.type = "image/png";
       FavIconLink.href = `${API.assets}/${Settings.siteUrl}/favicon.png`;
       document.head.appendChild(FavIconLink);
+
       document.title = Settings.siteTitle;
 
       return () => {

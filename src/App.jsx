@@ -5,7 +5,6 @@ import { Settings } from "./api";
 import { useDispatch } from "react-redux";
 import disableDevtool from "disable-devtool";
 import { logout } from "./redux/features/auth/authSlice";
-import { isMobile } from "react-device-detect";
 
 function App() {
   const disabledDevtool = Settings.disabledDevtool;
@@ -16,12 +15,6 @@ function App() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
-
-  useEffect(() => {
-    if (isMobile) {
-      navigate("/m/");
-    }
-  }, [navigate]);
 
   useEffect(() => {
     if (disabledDevtool) {

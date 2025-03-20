@@ -5,13 +5,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { isMobile } from "react-device-detect";
 
 const PrivateRoute = ({ children }) => {
+  const dispatch = useDispatch();
   const { token } = useSelector((state) => state.auth);
 
-  const dispatch = useDispatch();
+  if (isMobile) {
+    window.location.href = "/m/";
+  }
+
   if (Settings.forceLogin) {
     if (!token) {
       dispatch(logout());
-      return <Navigate to={`${isMobile ? "/m/" : "/login"}`}></Navigate>;
+      return <Navigate to={"/login"}></Navigate>;
     }
   }
   return children;
