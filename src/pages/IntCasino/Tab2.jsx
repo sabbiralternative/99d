@@ -44,13 +44,33 @@ const Tab2 = ({ categories, setSelectedSubCategory, selectedSubCategory }) => {
               }`}
             >
               <span>
-                <img
+                {/* <img
                   className="img-fluid"
-                  src={`/src/assets/icon/${category
+                  src={`/icon/${category
                     ?.split(" ")
                     .join("")
                     .toLowerCase()}.svg`}
+                /> */}
+                <img
+                  className="img-fluid"
+                  src={`/icon/${category
+                    ?.split(" ")
+                    .join("")
+                    .toLowerCase()}.svg`}
+                  onError={(e) => {
+                    if (e.target.src.endsWith(".svg")) {
+                      // Try webp only once after svg fails
+                      e.target.src = `/icon/${category
+                        ?.split(" ")
+                        .join("")
+                        .toLowerCase()}.webp`;
+                    } else {
+                      // If webp fails, do nothing (leave broken img)
+                      e.target.onerror = null;
+                    }
+                  }}
                 />
+
                 {category}
               </span>
             </a>
