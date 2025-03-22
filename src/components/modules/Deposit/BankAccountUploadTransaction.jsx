@@ -14,6 +14,7 @@ import QR from "./QR";
 import USDT from "./USDT";
 import PG from "./PG";
 import { useBankAccountMutation } from "../../../redux/features/deposit/event.api";
+import images from "../../../assets/images";
 
 const BankAccountUploadTransaction = ({ setTab, amount }) => {
   const [getPaymentMethod, { data }] = useBankAccountMutation();
@@ -174,19 +175,19 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
                         {method?.type == "upi" || method?.type == "pg" ? (
                           <img
                             style={{ height: "20px", width: "20px" }}
-                            src={"/src/assets/icon/upi.png"}
+                            src={"/icon/upi.png"}
                           />
                         ) : null}
                         {method?.type == "usdt" ? (
                           <img
                             style={{ height: "20px", width: "20px" }}
-                            src={"/src/assets/icon/usdt.png"}
+                            src={"/icon/usdt.png"}
                           />
                         ) : null}
                         {method?.type == "whatsapp" ? (
                           <img
                             style={{ height: "20px", width: "20px" }}
-                            src={"/src/assets/img/wp_support.webp"}
+                            src={images.whatsapp}
                           />
                         ) : null}
                       </button>

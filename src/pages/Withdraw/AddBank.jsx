@@ -243,7 +243,7 @@ const AddBank = ({ refetchBankData }) => {
                       <button
                         onClick={getOtp}
                         style={{
-                          backgroundColor: "var(--bg-primary)",
+                          backgroundColor: "var(--theme1-bg)",
                           borderRadius: "4px",
                           padding: "6px 0px",
                           width: "80px",

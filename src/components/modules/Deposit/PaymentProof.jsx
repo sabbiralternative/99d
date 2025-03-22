@@ -127,7 +127,7 @@ const PaymentProof = ({ paymentId, amount }) => {
               name="transaction_id"
               id="transactionId"
               placeholder="6 to 12 Digit UTR Number"
-              value={utr !== null && utr}
+              value={utr !== null ? utr : null}
             />
           </div>
           {!filePath && !loading && (
