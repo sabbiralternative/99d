@@ -6,6 +6,7 @@ import { FaRegSquarePlus } from "react-icons/fa6";
 import { homeTab } from "../../../static/group";
 import { useDispatch } from "react-redux";
 import { setGroup } from "../../../redux/features/global/globalSlice";
+import { Settings } from "../../../api";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
@@ -25,24 +26,29 @@ const Sidebar = () => {
   return (
     <div className="sidebar d-none col-md-2 d-md-block">
       <div>
-        <div
-          onClick={() => navigate("/deposit")}
-          className="deposit-withdraw-sidebar-title deposit"
-        >
-          <h5 className="d-inline-block m-b-0" tabIndex={0}>
-            <img src={images.deposit} />
-            Deposit
-          </h5>
-        </div>
-        <div
-          onClick={() => navigate("/withdraw")}
-          className="deposit-withdraw-sidebar-title withdraw"
-        >
-          <h5 className="d-inline-block m-b-0" tabIndex={0}>
-            <img src={images.withdraw} />
-            Withdraw
-          </h5>
-        </div>
+        {Settings.deposit && (
+          <div
+            onClick={() => navigate("/deposit")}
+            className="deposit-withdraw-sidebar-title deposit"
+          >
+            <h5 className="d-inline-block m-b-0" tabIndex={0}>
+              <img src={images.deposit} />
+              Deposit
+            </h5>
+          </div>
+        )}
+        {Settings.withdraw && (
+          <div
+            onClick={() => navigate("/withdraw")}
+            className="deposit-withdraw-sidebar-title withdraw"
+          >
+            <h5 className="d-inline-block m-b-0" tabIndex={0}>
+              <img src={images.withdraw} />
+              Withdraw
+            </h5>
+          </div>
+        )}
+
         <div
           data-bs-toggle="collapse"
           data-bs-target=".casino"

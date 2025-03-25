@@ -151,16 +151,22 @@ const Login = () => {
                         <FontAwesomeIcon icon={faSignInAlt} className="ml-2" />
                       </button>
                     </div>
-                    <div className="form-group text-center mb-0">
-                      <button
-                        onClick={loginWithDemo}
-                        type="button"
-                        className="btn btn-submit btn-login"
-                      >
-                        Login with Demo ID
-                        <FontAwesomeIcon icon={faSignInAlt} className="ml-2" />
-                      </button>
-                    </div>
+                    {Settings.demoLogin && (
+                      <div className="form-group text-center mb-0">
+                        <button
+                          onClick={loginWithDemo}
+                          type="button"
+                          className="btn btn-submit btn-login"
+                        >
+                          Login with Demo ID
+                          <FontAwesomeIcon
+                            icon={faSignInAlt}
+                            className="ml-2"
+                          />
+                        </button>
+                      </div>
+                    )}
+
                     {Settings.registration && (
                       <div className="form-group text-center mt-2">
                         <button
@@ -176,17 +182,21 @@ const Login = () => {
                         </button>
                       </div>
                     )}
-
-                    <div className="form-group text-center mt-0">
-                      <button
-                        onClick={() => navigate("/forgot-password")}
-                        type="button"
-                        className="btn btn-submit btn-login"
-                      >
-                        Forgot Password
-                        <FontAwesomeIcon icon={faSignInAlt} className="ml-2" />
-                      </button>
-                    </div>
+                    {Settings.registration && (
+                      <div className="form-group text-center mt-0">
+                        <button
+                          onClick={() => navigate("/forgot-password")}
+                          type="button"
+                          className="btn btn-submit btn-login"
+                        >
+                          Forgot Password
+                          <FontAwesomeIcon
+                            icon={faSignInAlt}
+                            className="ml-2"
+                          />
+                        </button>
+                      </div>
+                    )}
 
                     <small className="recaptchaTerms">
                       This site is protected by reCAPTCHA and the Google
