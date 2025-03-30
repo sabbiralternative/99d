@@ -5,12 +5,13 @@ import { API } from "../../../api";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { useBankAccountMutation } from "../../../redux/features/deposit/event.api";
-import { useDepositStatement } from "../../../hooks/accountStatement";
+import { useAccountStatement } from "../../../hooks/accountStatement";
 import useUTR from "../../../hooks/utr";
 
 const PaymentProof = ({ paymentId, amount }) => {
   const { mutate: getUTR } = useUTR();
-  const { refetch } = useDepositStatement();
+
+  const { refetch } = useAccountStatement();
   const [handlePayment] = useBankAccountMutation();
   const { token } = useSelector((state) => state.auth);
   const navigate = useNavigate();

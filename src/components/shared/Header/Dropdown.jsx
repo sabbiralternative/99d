@@ -15,6 +15,12 @@ const Dropdown = () => {
         <Link to="/account-statement">Account Statement</Link>
       </li>
       <li>
+        <Link to="/bonus-statement">Bonus Statement</Link>
+      </li>
+      <li>
+        <Link to="/deposit-withdraw-report">Deposit Withdraw Report</Link>
+      </li>
+      <li>
         <Link to="/reports/profit-loss">Profit Loss Report</Link>
       </li>
       <li>
