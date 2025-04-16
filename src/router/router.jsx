@@ -19,6 +19,7 @@ import Withdraw from "../pages/Withdraw/Withdraw";
 import Rules from "../pages/Rules/Rules";
 import BonusStatement from "../pages/BonusStatement/BonusStatement";
 import DepositWithdrawReport from "../pages/DepositWithdrawReport/DepositWithdrawReport";
+import ReferralStatement from "../pages/ReferralStatement/ReferralStatement";
 
 export const router = createBrowserRouter(
   [
@@ -77,6 +78,10 @@ export const router = createBrowserRouter(
         {
           path: "/bonus-statement",
           element: <BonusStatement />,
+        },
+        {
+          path: "/referral-statement",
+          element: <ReferralStatement />,
         },
         {
           path: "/deposit-withdraw-report",

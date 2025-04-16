@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ApiContext } from "../../../context/ApiProvider";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,8 +12,10 @@ import HeaderBottomMenu from "./HeaderBottomMenu";
 import { Settings } from "../../../api";
 import useWhatsApp from "../../../hooks/whatsapp";
 import Search from "./Search";
+import Referral from "../../modals/Referral/Referral";
 
 const Header = () => {
+  const [showReferral, setShowReferral] = useState(false);
   const { user, token } = useSelector((state) => state.auth);
   const { data: balance } = useBalance();
   const { logo } = useContext(ApiContext);
@@ -29,6 +31,7 @@ const Header = () => {
 
   return (
     <div>
+      {showReferral && <Referral setShowReferral={setShowReferral} />}
       <header className="header">
         <div className="container-fluid">
           <div className="row">
@@ -95,7 +98,7 @@ const Header = () => {
                     {user}
                     <FontAwesomeIcon icon={faChevronDown} />
                   </span>
-                  <Dropdown />
+                  <Dropdown setShowReferral={setShowReferral} />
                 </li>
               </ul>
               <Notification />

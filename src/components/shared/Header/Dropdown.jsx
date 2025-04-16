@@ -1,8 +1,9 @@
 import { useDispatch } from "react-redux";
 import { logout } from "../../../redux/features/auth/authSlice";
 import { Link, useNavigate } from "react-router-dom";
+import { Settings } from "../../../api";
 
-const Dropdown = () => {
+const Dropdown = ({ setShowReferral }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -16,6 +17,14 @@ const Dropdown = () => {
       </li>
       <li>
         <Link to="/bonus-statement">Bonus Statement</Link>
+      </li>
+      {Settings.referral && (
+        <li onClick={() => setShowReferral(true)}>
+          <a style={{ color: "black" }}>Referral</a>
+        </li>
+      )}
+      <li>
+        <Link to="/referral-statement">Referral Statement</Link>
       </li>
       <li>
         <Link to="/deposit-withdraw-report">Deposit Withdraw Report</Link>

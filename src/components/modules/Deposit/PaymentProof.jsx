@@ -111,6 +111,8 @@ const PaymentProof = ({ paymentId, amount }) => {
       e.preventDefault();
     }
   };
+
+  console.log(image);
   return (
     <div className="col-md-6">
       <form onSubmit={handleDepositSubmit}>
