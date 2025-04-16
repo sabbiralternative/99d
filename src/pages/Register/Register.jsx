@@ -251,11 +251,13 @@ const Register = () => {
                             referralCode: e.target.value,
                           });
                         }}
+                        readOnly={referralCode}
                         placeholder="Referral Code"
                         type="text"
                         aria-required="true"
                         aria-invalid="false"
                         className="form-control ng-dirty ng-valid ng-touched"
+                        defaultValue={referralCode}
                       />
                       <FontAwesomeIcon
                         style={{
