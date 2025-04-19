@@ -283,13 +283,13 @@ const Register = () => {
                         <b>Login here</b>
                       </Link>
                     </div>
-                    <small className="recaptchaTerms">
+                    {/* <small className="recaptchaTerms">
                       This site is protected by reCAPTCHA and the Google
                       <a>Privacy Policy</a>
                       and
                       <a>Terms of Service</a>
                       apply.
-                    </small>
+                    </small> */}
                   </form>
                 </div>
               </div>
