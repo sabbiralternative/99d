@@ -14,8 +14,10 @@ import {
   faSignInAlt,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
+import useWhatsApp from "../../hooks/whatsapp";
 
 const Login = () => {
+  const { data: socialLink } = useWhatsApp();
   const navigate = useNavigate();
   const { logo } = useContext(ApiContext);
   const dispatch = useDispatch();
@@ -78,6 +80,14 @@ const Login = () => {
       toast.error(result?.error);
     }
   };
+
+  const openWhatsapp = () => {
+    if (socialLink?.result?.whatsapplink) {
+      window.open(socialLink?.result?.whatsapplink, "_blank");
+    }
+  };
+
+  console.log(socialLink);
   return (
     <div className="login" style={{ minHeight: "100vh", height: "100%" }}>
       <div className="wrapper">
@@ -182,12 +192,28 @@ const Login = () => {
                         </button>
                       </div>
                     )}
+                    {Settings.registrationWhatsapp &&
+                      socialLink?.result?.whatsapplink && (
+                        <div className="form-group text-center mt-2">
+                          <button
+                            onClick={openWhatsapp}
+                            type="button"
+                            className="btn btn-submit btn-login"
+                          >
+                            Get ID on Whatsapp
+                            <FontAwesomeIcon
+                              icon={faSignInAlt}
+                              className="ml-2"
+                            />
+                          </button>
+                        </div>
+                      )}
                     {Settings.registration && (
                       <div className="form-group text-center mt-0">
                         <button
                           onClick={() => navigate("/forgot-password")}
                           type="button"
-                          className="btn btn-submit btn-login"
+                          className="btn  "
                         >
                           Forgot Password
                           <FontAwesomeIcon
