@@ -87,7 +87,6 @@ const Login = () => {
     }
   };
 
-  console.log(socialLink);
   return (
     <div className="login" style={{ minHeight: "100vh", height: "100%" }}>
       <div className="wrapper">
