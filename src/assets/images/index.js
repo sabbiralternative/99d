@@ -11,8 +11,10 @@ import bankPicture from "../icon/bankPicture.svg";
 import deleteIcon from "../icon/delete-icon.svg";
 import edit from "../icon/edit.svg";
 import logo from "../img/gold365/logo.png";
+import telegram from "../icon/telegram.png";
 
 export default {
+  telegram,
   logo,
   star,
   back,
