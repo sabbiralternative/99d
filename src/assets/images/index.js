@@ -12,8 +12,10 @@ import deleteIcon from "../icon/delete-icon.svg";
 import edit from "../icon/edit.svg";
 import logo from "../img/gold365/logo.png";
 import telegram from "../icon/telegram.png";
+import instagram from "../icon/instagram.png";
 
 export default {
+  instagram,
   telegram,
   logo,
   star,

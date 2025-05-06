@@ -108,6 +108,20 @@ const Header = () => {
         </div>
         <div />
       </header>
+      {socialLink?.result?.instagramLink ? (
+        <a
+          style={{ background: "none", bottom: "30%", right: "4.5%" }}
+          className="whatsapp_link"
+          onClick={() =>
+            window.open(socialLink?.result?.instagramLink, "_blank")
+          }
+        >
+          <img
+            style={{ filter: "none", height: "60px", width: "60px" }}
+            src={images.instagram}
+          />
+        </a>
+      ) : null}
       {socialLink?.result?.telegramLink ? (
         <a
           style={{ background: "none", bottom: "17%", right: "4.5%" }}
