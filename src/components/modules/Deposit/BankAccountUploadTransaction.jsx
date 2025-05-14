@@ -149,8 +149,11 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
                               ? "var(--theme2-bg)"
                               : "transparent",
                           display: "flex",
+                          flexDirection: "column",
                           gap: "5px",
+                          borderRadius: "5px",
                           alignItems: "center",
+                          justifyContent: "space-between",
                         }}
                         key={method?.paymentId}
                         className="nav-link active"
@@ -165,31 +168,35 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
                         data-original-title
                         title
                       >
-                        <span> {method?.title}</span>
                         {method?.type == "qr" && (
-                          <FaQrcode size={20} color="gray" />
+                          <FaQrcode size={25} color="gray" />
                         )}
                         {method?.type == "bank" && (
-                          <CiBank size={20} color="gray" />
+                          <CiBank size={28} color="gray" />
                         )}
                         {method?.type == "upi" || method?.type == "pg" ? (
                           <img
-                            style={{ height: "20px", width: "20px" }}
-                            src={"/icon/upi.png"}
+                            style={{ height: "25px", width: "25px" }}
+                            src={images.upi}
                           />
                         ) : null}
                         {method?.type == "usdt" ? (
                           <img
-                            style={{ height: "20px", width: "20px" }}
-                            src={"/icon/usdt.png"}
+                            style={{ height: "25px", width: "25px" }}
+                            src={images.ustd}
                           />
                         ) : null}
                         {method?.type == "whatsapp" ? (
                           <img
-                            style={{ height: "20px", width: "20px" }}
-                            src={images.whatsapp}
+                            style={{
+                              height: "20px",
+                              width: "20px",
+                              filter: "none",
+                            }}
+                            src={images.whatsApp}
                           />
                         ) : null}
+                        <span> {method?.title}</span>
                       </button>
                     );
                   })}
