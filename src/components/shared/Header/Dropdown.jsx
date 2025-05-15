@@ -30,6 +30,9 @@ const Dropdown = ({ setShowReferral }) => {
         <Link to="/deposit-withdraw-report">Deposit Withdraw Report</Link>
       </li>
       <li>
+        <Link to="/my-bank-details">My Bank Details</Link>
+      </li>
+      <li>
         <Link to="/reports/profit-loss">Profit Loss Report</Link>
       </li>
       <li>
