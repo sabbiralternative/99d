@@ -55,6 +55,7 @@ export const API = {
 };
 
 export const Settings = {
+  baseUrl: "",
   paymentIntent: "",
   otp: "",
   casino: "",
