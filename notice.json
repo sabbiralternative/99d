@@ -41,7 +41,7 @@
       "language": false,
       "build": "development",
       "betDelay": false,
-      "otp": true
+      "otp": false
     },
 
     "endpoint": {
