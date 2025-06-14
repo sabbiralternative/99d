@@ -41,10 +41,12 @@
       "language": false,
       "build": "development",
       "betDelay": false,
-      "otp": false
+      "otp": false,
+      "otpWhatsapp": true
     },
 
     "endpoint": {
+      "otpless": "https://api7.live/api/exchange/diamond/otpless",
       "eventDetails": "https://cache7.live/api/exchange/encrypted/odds/event",
       "login": "https://api7.live/api/account/diamond/login",
       "inPlayAndPopularEvents": "https://api7.live/api/exchange/odds/inPlayAndPopularEvents",
