@@ -248,6 +248,7 @@ const Register = () => {
                         aria-required="true"
                         aria-invalid="false"
                         className="form-control ng-dirty ng-valid ng-touched"
+                        maxLength={6}
                       />
                       <FontAwesomeIcon
                         style={{
