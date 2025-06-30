@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import useCloseModalClickOutside from "../../hooks/closeModal";
-
+import { IoClose } from "react-icons/io5";
 const ShowImage = ({ setShowImage, image }) => {
   const showImageRef = useRef();
   useCloseModalClickOutside(showImageRef, () => {
@@ -30,6 +30,7 @@ const ShowImage = ({ setShowImage, image }) => {
           <div className="modal-content" ref={showImageRef}>
             <div className="modal-body">
               <button
+                onClick={() => setShowImage(false)}
                 type="button"
                 data-dismiss="modal"
                 aria-label="Close"
@@ -42,10 +43,14 @@ const ShowImage = ({ setShowImage, image }) => {
                   opacity: 1,
                 }}
               >
-                <i className="fa fa-close"></i>
+                <IoClose size={30} />
               </button>
               <div className="table-responsive">
-                <img src={image} alt="" />
+                <img
+                  style={{ width: "100%", height: "100%" }}
+                  src={image}
+                  alt="image"
+                />
               </div>
             </div>
           </div>
