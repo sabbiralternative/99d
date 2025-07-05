@@ -45,8 +45,9 @@ const Login = () => {
       localStorage.setItem("token", token);
       localStorage.setItem("bonusToken", bonusToken);
       if (data?.result?.changePassword) {
-        navigate("/change-password");
-      } else {
+        navigate("/change-password-login");
+      }
+      if (!data?.result?.changePassword && token && user) {
         navigate("/");
         toast.success("Login successful");
       }
@@ -73,7 +74,10 @@ const Login = () => {
       localStorage.setItem("token", token);
 
       localStorage.setItem("bonusToken", bonusToken);
-      if (token && user) {
+      if (result?.result?.changePassword) {
+        navigate("/change-password-login");
+      }
+      if (!result?.result?.changePassword && token && user) {
         navigate("/");
         toast.success("Login successful");
       }
