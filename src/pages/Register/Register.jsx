@@ -78,6 +78,11 @@ const Register = () => {
         const game = data?.result?.buttonValue?.game;
         const memberId = data?.result?.memberId;
         dispatch(setUser({ user, token }));
+        const modal = {
+          banner: data?.result?.banner,
+          bannerTitle: data?.result?.bannerTitle,
+        };
+        localStorage.setItem("modal", JSON.stringify(modal));
         localStorage.setItem("memberId", memberId);
         localStorage.setItem("buttonValue", JSON.stringify(game));
         localStorage.setItem("token", token);

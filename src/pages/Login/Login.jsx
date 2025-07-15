@@ -39,6 +39,11 @@ const Login = () => {
       const user = data?.result?.loginName;
       const game = data?.result?.buttonValue?.game;
       const memberId = data?.result?.memberId;
+      const modal = {
+        banner: data?.result?.banner,
+        bannerTitle: data?.result?.bannerTitle,
+      };
+      localStorage.setItem("modal", JSON.stringify(modal));
       dispatch(setUser({ user, token }));
       localStorage.setItem("memberId", memberId);
       localStorage.setItem("buttonValue", JSON.stringify(game));
@@ -68,7 +73,11 @@ const Login = () => {
       const bonusToken = result?.result?.bonusToken;
       const user = result?.result?.loginName;
       const game = result?.result?.buttonValue?.game;
-
+      const modal = {
+        banner: result?.result?.banner,
+        bannerTitle: result?.result?.bannerTitle,
+      };
+      localStorage.setItem("modal", JSON.stringify(modal));
       dispatch(setUser({ user, token }));
       localStorage.setItem("buttonValue", JSON.stringify(game));
       localStorage.setItem("token", token);

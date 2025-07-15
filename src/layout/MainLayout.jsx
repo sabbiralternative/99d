@@ -3,10 +3,12 @@
 import { Outlet } from "react-router-dom";
 import Header from "../components/shared/Header/Header";
 import Sidebar from "../components/shared/Sidebar/Sidebar";
+import Banner from "../components/modals/Banner/Banner";
 
 const MainLayout = () => {
   return (
     <div _nghost-ask-c9 ng-version="12.1.5">
+      <Banner />
       <div _nghost-ask-c85>
         <div _ngcontent-ask-c85 id="app">
           <div _ngcontent-ask-c85 className="wrapper">
