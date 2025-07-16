@@ -27,6 +27,7 @@ const ChangePasswordLogin = () => {
     const data = await handleChangePassword(payload).unwrap();
     if (data.success) {
       toast.success(data?.result?.message);
+      localStorage.removeItem("changePassword");
       localStorage.clear();
       navigate("/login");
     } else {

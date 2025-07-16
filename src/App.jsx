@@ -29,6 +29,14 @@ function App() {
       });
     }
   }, [navigate, disabledDevtool, dispatch]);
+
+  useEffect(() => {
+    const changePassword = localStorage.getItem("changePassword");
+    if (changePassword) {
+      navigate("/change-password-login");
+    }
+  }, [location.pathname, navigate]);
+
   return <MainLayout />;
 }
 

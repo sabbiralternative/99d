@@ -50,6 +50,7 @@ const Login = () => {
       localStorage.setItem("token", token);
       localStorage.setItem("bonusToken", bonusToken);
       if (data?.result?.changePassword) {
+        localStorage.setItem("changePassword", true);
         navigate("/change-password-login");
       }
       if (!data?.result?.changePassword && token && user) {
@@ -84,6 +85,7 @@ const Login = () => {
 
       localStorage.setItem("bonusToken", bonusToken);
       if (result?.result?.changePassword) {
+        localStorage.setItem("changePassword", true);
         navigate("/change-password-login");
       }
       if (!result?.result?.changePassword && token && user) {
