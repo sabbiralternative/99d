@@ -23,6 +23,12 @@ export const homeTab = [
     group: 2,
   },
   {
+    id: 499,
+    name: "Sportsbook",
+    group: null,
+    path: "/casino/sportsbook/550000",
+  },
+  {
     id: 4,
     name: "Horse Racing",
 
@@ -130,6 +136,12 @@ export const headerTab = [
     group: 2,
   },
   {
+    id: 6,
+    name: "Sports book",
+    group: null,
+    path: "/casino/sportsbook/550000",
+  },
+  {
     id: 4,
     name: "Casino",
     group: null,
@@ -141,11 +153,7 @@ export const headerTab = [
     group: null,
     path: "/int-casino",
   },
-  {
-    id: 6,
-    name: "Sports book",
-    group: null,
-  },
+
   {
     id: 7,
     name: "Horse Racing",

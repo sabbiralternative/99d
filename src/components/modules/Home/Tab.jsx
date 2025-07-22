@@ -1,10 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setGroup } from "../../../redux/features/global/globalSlice";
 import { homeTab } from "../../../static/group";
+import { useNavigate } from "react-router-dom";
 
 const Tab = () => {
   const { group } = useSelector((state) => state.global);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   return (
     <>
       <ul role="tablist" className="nav nav-tabs" aria-label="Tabs">
@@ -16,7 +18,9 @@ const Tab = () => {
               className={` nav-item ${group === tab.group ? "active" : ""}`}
             >
               <a
-                onClick={() => dispatch(setGroup(tab.group))}
+                onClick={() =>
+                  tab.path ? navigate(tab.path) : dispatch(setGroup(tab.group))
+                }
                 role="tab"
                 className={`nav-link  ${group === tab.group ? "active" : ""}`}
                 aria-controls
