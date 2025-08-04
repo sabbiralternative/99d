@@ -183,7 +183,13 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
                         {method?.type == "usdt" ? (
                           <img
                             style={{ height: "25px", width: "25px" }}
-                            src={images.ustd}
+                            src={images.trc}
+                          />
+                        ) : null}
+                        {method?.type == "usdt_bep20" ? (
+                          <img
+                            style={{ height: "25px", width: "25px" }}
+                            src={images.bep}
                           />
                         ) : null}
                         {method?.type == "whatsapp" ? (
@@ -231,9 +237,10 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
                             {methodType === "qr" && (
                               <QR depositData={depositData} />
                             )}
-                            {methodType === "usdt" && (
+                            {methodType === "usdt" ||
+                            methodType === "usdt_bep20" ? (
                               <USDT depositData={depositData} />
-                            )}
+                            ) : null}
                             {methodType === "pg" && (
                               <PG depositData={depositData} />
                             )}

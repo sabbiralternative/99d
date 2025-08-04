@@ -16,8 +16,12 @@ import instagram from "../icon/instagram.png";
 import whatsApp from "../img/whatsapp.png";
 import upi from "../img/upi.png";
 import ustd from "../img/usdt.png";
+import trc from "../icon/trc20.svg";
+import bep from "../icon/bep20.svg";
 
 export default {
+  trc,
+  bep,
   ustd,
   upi,
   whatsApp,
