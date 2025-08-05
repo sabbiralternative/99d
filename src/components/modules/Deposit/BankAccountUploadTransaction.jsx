@@ -20,8 +20,8 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
   const [getPaymentMethod, { data }] = useBankAccountMutation();
   const [paymentId, setPaymentId] = useState(null);
   const [methodType, setMethodType] = useState(null);
-  const [pgPaymentMethods, setPgPaymentMethods] = useState({});
-  const [qrcode, setQrcode] = useState("");
+  // const [pgPaymentMethods, setPgPaymentMethods] = useState({});
+  // const [qrcode, setQrcode] = useState("");
   const [orderId, setOrderId] = useState("");
   const [time, setTime] = useState(null);
   const [depositData, setDepositData] = useState({});
@@ -50,9 +50,9 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
 
       if (data?.success) {
         if (Settings?.paymentIntent) {
-          setPgPaymentMethods(data?.result);
+          // setPgPaymentMethods(data?.result);
           setTime(60 * 20);
-          setQrcode(data?.result?.upi);
+          // setQrcode(data?.result?.upi);
           setOrderId(data?.result?.orderId);
         } else {
           window.location.href = data?.result?.link;
@@ -68,9 +68,7 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
       };
 
       const res = await AxiosSecure.post(API.bankAccount, depositDetail);
-      console.log(res);
       const data = res?.data;
-      console.log(data);
       if (data?.success) {
         if (method?.type === "whatsapp") {
           window.location.href = data?.result?.link;
@@ -101,15 +99,13 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
     }
   }, [time, navigate, pgStatus]);
 
-  const formatTime = (time) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
-    return `${minutes.toString().padStart(2, "0")}:${seconds
-      .toString()
-      .padStart(2, "0")}`;
-  };
-
-  console.log(depositData);
+  // const formatTime = (time) => {
+  //   const minutes = Math.floor(time / 60);
+  //   const seconds = time % 60;
+  //   return `${minutes.toString().padStart(2, "0")}:${seconds
+  //     .toString()
+  //     .padStart(2, "0")}`;
+  // };
 
   return (
     <div className="col-md-8">
@@ -136,76 +132,81 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
                     display: "flex",
                   }}
                 >
-                  {data?.result?.map((method) => {
-                    return (
-                      <button
-                        onClick={() => handleVisibleBankMethod(method)}
-                        style={{
-                          color:
-                            method?.paymentId === paymentId ? "white" : "black",
-                          borderColor: "#dee2e6",
-                          backgroundColor:
-                            method?.paymentId === paymentId
-                              ? "var(--theme2-bg)"
-                              : "transparent",
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: "5px",
-                          borderRadius: "5px",
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                        }}
-                        key={method?.paymentId}
-                        className="nav-link active"
-                        id="nav-imps-128375-tab"
-                        data-id={128375}
-                        data-toggle="tab"
-                        data-target="#nav-imps-128375"
-                        type="button"
-                        role="tab"
-                        aria-controls="nav-imps-128375"
-                        aria-selected="false"
-                        data-original-title
-                        title
-                      >
-                        {method?.type == "qr" && (
-                          <FaQrcode size={25} color="gray" />
-                        )}
-                        {method?.type == "bank" && (
-                          <CiBank size={28} color="gray" />
-                        )}
-                        {method?.type == "upi" || method?.type == "pg" ? (
-                          <img
-                            style={{ height: "25px", width: "25px" }}
-                            src={images.upi}
-                          />
-                        ) : null}
-                        {method?.type == "usdt" ? (
-                          <img
-                            style={{ height: "25px", width: "25px" }}
-                            src={images.trc}
-                          />
-                        ) : null}
-                        {method?.type == "usdt_bep20" ? (
-                          <img
-                            style={{ height: "25px", width: "25px" }}
-                            src={images.bep}
-                          />
-                        ) : null}
-                        {method?.type == "whatsapp" ? (
-                          <img
+                  {data?.result?.length > 0 &&
+                    [...data.result]
+                      .sort((a, b) => a?.sort - b?.sort)
+                      ?.map((method) => {
+                        return (
+                          <button
+                            onClick={() => handleVisibleBankMethod(method)}
                             style={{
-                              height: "20px",
-                              width: "20px",
-                              filter: "none",
+                              color:
+                                method?.paymentId === paymentId
+                                  ? "white"
+                                  : "black",
+                              borderColor: "#dee2e6",
+                              backgroundColor:
+                                method?.paymentId === paymentId
+                                  ? "var(--theme2-bg)"
+                                  : "transparent",
+                              display: "flex",
+                              flexDirection: "column",
+                              gap: "5px",
+                              borderRadius: "5px",
+                              alignItems: "center",
+                              justifyContent: "space-between",
                             }}
-                            src={images.whatsApp}
-                          />
-                        ) : null}
-                        <span> {method?.title}</span>
-                      </button>
-                    );
-                  })}
+                            key={method?.paymentId}
+                            className="nav-link active"
+                            id="nav-imps-128375-tab"
+                            data-id={128375}
+                            data-toggle="tab"
+                            data-target="#nav-imps-128375"
+                            type="button"
+                            role="tab"
+                            aria-controls="nav-imps-128375"
+                            aria-selected="false"
+                            data-original-title
+                            title
+                          >
+                            {method?.type == "qr" && (
+                              <FaQrcode size={25} color="gray" />
+                            )}
+                            {method?.type == "bank" && (
+                              <CiBank size={28} color="gray" />
+                            )}
+                            {method?.type == "upi" || method?.type == "pg" ? (
+                              <img
+                                style={{ height: "25px", width: "25px" }}
+                                src={images.upi}
+                              />
+                            ) : null}
+                            {method?.type == "usdt" ? (
+                              <img
+                                style={{ height: "25px", width: "25px" }}
+                                src={images.trc}
+                              />
+                            ) : null}
+                            {method?.type == "usdt_bep20" ? (
+                              <img
+                                style={{ height: "25px", width: "25px" }}
+                                src={images.bep}
+                              />
+                            ) : null}
+                            {method?.type == "whatsapp" ? (
+                              <img
+                                style={{
+                                  height: "20px",
+                                  width: "20px",
+                                  filter: "none",
+                                }}
+                                src={images.whatsApp}
+                              />
+                            ) : null}
+                            <span> {method?.title}</span>
+                          </button>
+                        );
+                      })}
                 </div>
               </nav>
               <div className="tab-content" id="nav-tabContent">
