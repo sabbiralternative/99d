@@ -18,8 +18,10 @@ import upi from "../img/upi.png";
 import ustd from "../img/usdt.png";
 import trc from "../icon/trc20.svg";
 import bep from "../icon/bep20.svg";
+import info from "../img/info-icon-svgrepo-com.svg";
 
 export default {
+  info,
   trc,
   bep,
   ustd,
