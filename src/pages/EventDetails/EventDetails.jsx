@@ -8,9 +8,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPredictOdd } from "../../redux/features/events/eventSlice";
 import RightSidebar from "../../components/modules/EventDetails/RightSidebar";
 // import Score from "../../components/modules/EventDetails/Score";
-import ScoreCard from "../../components/modules/EventDetails/ScoreCard";
+// import ScoreCard from "../../components/modules/EventDetails/ScoreCard";
 import HorseGreyhound from "../../components/modules/EventDetails/HorseGreyhound";
 import SportsBook from "./SportsBook/SportsBook";
+import CricketScore from "../../components/modules/EventDetails/CricketScore";
 
 const EventDetails = () => {
   const { eventTypeId, eventId } = useParams();
@@ -160,11 +161,15 @@ const EventDetails = () => {
                       <Score score={data?.result?.[0]?.score} />
                     )} */}
 
-                    {eventTypeId == 4 &&
+                    {/* {eventTypeId == 4 &&
                       data?.result?.[0]?.score2?.length !== 0 &&
                       !Array.isArray(data?.result?.[0]?.score2) && (
                         <ScoreCard score2={data?.result?.[0]?.score2} />
-                      )}
+                      )} */}
+
+                    {eventTypeId == 4 && data?.iscore && (
+                      <CricketScore iscore={data?.iscore} />
+                    )}
                     {matchOdds && matchOdds?.length > 0 && (
                       <MatchOdds matchOdds={matchOdds} />
                     )}
