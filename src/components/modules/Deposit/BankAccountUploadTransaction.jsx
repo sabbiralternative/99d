@@ -249,6 +249,7 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
                               <PaymentProof
                                 amount={amount}
                                 paymentId={paymentId}
+                                methodType={methodType}
                               />
                             )}
                           </div>
