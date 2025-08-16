@@ -105,14 +105,8 @@ const PaymentProof = ({ paymentId, amount, methodType }) => {
   };
   const handleUTRChange = (e) => {
     const value = e.target.value;
-    if (/^[0-9]*$/.test(value)) {
-      setUtr(value);
-    }
-  };
-  const handleKeyDown = (e) => {
-    if (!/[0-9]/.test(e.key) && e.key !== "Backspace" && e.key !== "Delete") {
-      e.preventDefault();
-    }
+
+    setUtr(value);
   };
 
   console.log(image);
@@ -130,7 +124,6 @@ const PaymentProof = ({ paymentId, amount, methodType }) => {
             </label>
             <input
               onChange={handleUTRChange}
-              onKeyDown={handleKeyDown}
               type="text"
               className="form-control"
               name="transaction_id"
