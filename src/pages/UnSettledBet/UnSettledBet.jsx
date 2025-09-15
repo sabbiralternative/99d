@@ -1,7 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import { useCurrentBets } from "../../hooks/currentBets";
 
 const UnSettledBet = () => {
+  const navigate = useNavigate();
   const { data: currentBets } = useCurrentBets();
+
+  const navigateGameList = (item) => {
+    navigate(`/event-details/${item?.eventTypeId}/${item?.eventId}`);
+  };
 
   return (
     <div className="col-md-10 featured-box">
@@ -109,6 +115,7 @@ const UnSettledBet = () => {
                         {currentBets?.map((bet, idx) => {
                           return (
                             <tr
+                              onClick={() => navigateGameList(bet)}
                               key={bet?.betId}
                               className={`${
                                 bet?.betType === "Back" ? "back" : "lay"
