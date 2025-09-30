@@ -28,7 +28,9 @@ const EventDetails = () => {
 
   const matchOdds = data?.result?.filter(
     (match_odd) =>
-      match_odd.btype === "MATCH_ODDS" && match_odd?.visible == true
+      match_odd.btype === "MATCH_ODDS" &&
+      match_odd?.visible == true &&
+      match_odd?.name !== "tied match"
   );
 
   const bookmaker = data?.result?.filter(
@@ -40,6 +42,13 @@ const EventDetails = () => {
       fancy.btype === "FANCY" &&
       fancy.tabGroupName === "Normal" &&
       fancy?.visible == true
+  );
+
+  const tiedMatch = data?.result?.filter(
+    (match_odd) =>
+      match_odd.btype === "MATCH_ODDS" &&
+      match_odd?.visible == true &&
+      match_odd?.name === "tied match"
   );
 
   useEffect(() => {
@@ -187,6 +196,9 @@ const EventDetails = () => {
                   ) : null}
                   {data && data?.sportsbook?.Result && (
                     <SportsBook sportsBook={data?.sportsbook?.Result} />
+                  )}
+                  {tiedMatch && tiedMatch?.length > 0 && (
+                    <MatchOdds matchOdds={tiedMatch} />
                   )}
                 </div>
               </div>
