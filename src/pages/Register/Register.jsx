@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AxiosSecure } from "../../lib/AxiosSecure";
 import toast from "react-hot-toast";
@@ -13,13 +13,15 @@ import {
   faSignInAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import useWhatsApp from "../../hooks/whatsapp";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../redux/features/auth/authSlice";
 import getOtpOnWhatsapp from "../../utils/getOtpOnWhatsapp";
+import images from "../../assets/images";
 const Register = () => {
+  const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const referralCode = localStorage.getItem("referralCode");
-  const { refetch } = useWhatsApp();
+  const { refetch, data } = useWhatsApp();
   const [userData, setUserData] = useState({
     password: "",
     confirmPassword: "",
@@ -124,7 +126,9 @@ const Register = () => {
   const handleGetOtpOnWhatsapp = async () => {
     await getOtpOnWhatsapp(userData.mobileNo, setOrder);
   };
-
+  const getWhatsappOTP = (link) => {
+    window.open(link, "_blank");
+  };
   return (
     <div className="login" style={{ minHeight: "100vh", height: "100%" }}>
       <div className="wrapper">
@@ -298,6 +302,64 @@ const Register = () => {
                         <FontAwesomeIcon icon={faSignInAlt} className="ml-2" />
                       </button>
                     </div>
+                    {!token &&
+                      data?.result?.whatsapplink &&
+                      Settings.registrationWhatsapp && (
+                        <Fragment>
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              gap: "10px",
+                              margin: "10px 0px",
+                            }}
+                          >
+                            <div
+                              style={{
+                                border: "1px solid gray",
+                                width: "100%",
+                                opacity: "0.5",
+                              }}
+                            />
+                            <span
+                              style={{
+                                opacity: "0.5",
+                                fontSize: "14px",
+                              }}
+                            >
+                              Or
+                            </span>
+                            <div
+                              style={{
+                                border: "1px solid gray",
+                                width: "100%",
+                                opacity: "0.5",
+                              }}
+                            />
+                          </div>
+                          <button
+                            onClick={() =>
+                              getWhatsappOTP(data?.result?.whatsapplink)
+                            }
+                            className="btn btn-primary btn-block"
+                            type="button"
+                          >
+                            <img
+                              style={{
+                                height: "18px",
+                                width: "18px",
+                              }}
+                              src={images.whatsapp2}
+                              alt=""
+                            />
+                            <span style={{ marginLeft: "10px" }}>
+                              {" "}
+                              Get OTP on Whatsapp
+                            </span>
+                          </button>
+                        </Fragment>
+                      )}
                     <div className="mt-2 mb-1">
                       <b>Already have User?</b>{" "}
                       <Link to="/login" className="ms-1">

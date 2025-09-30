@@ -97,11 +97,11 @@ const Login = () => {
     }
   };
 
-  const openWhatsapp = () => {
-    if (socialLink?.result?.whatsapplink) {
-      window.open(socialLink?.result?.whatsapplink, "_blank");
-    }
-  };
+  // const openWhatsapp = () => {
+  //   if (socialLink?.result?.whatsapplink) {
+  //     window.open(socialLink?.result?.whatsapplink, "_blank");
+  //   }
+  // };
 
   const handleOpenSocialLink = (link) => {
     if (link) {
@@ -221,7 +221,7 @@ const Login = () => {
                         </button>
                       </div>
                     )}
-                    {Settings.registrationWhatsapp &&
+                    {/* {Settings.registrationWhatsapp &&
                       socialLink?.result?.whatsapplink && (
                         <div className="form-group text-center mt-2">
                           <button
@@ -236,7 +236,7 @@ const Login = () => {
                             />
                           </button>
                         </div>
-                      )}
+                      )} */}
                     {Settings.registration && (
                       <div className="form-group text-center mt-0">
                         <button

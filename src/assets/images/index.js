@@ -19,8 +19,10 @@ import ustd from "../img/usdt.png";
 import trc from "../icon/trc20.svg";
 import bep from "../icon/bep20.svg";
 import info from "../img/info-icon-svgrepo-com.svg";
+import whatsapp2 from "../img/1384023 (1).png";
 
 export default {
+  whatsapp2,
   info,
   trc,
   bep,
