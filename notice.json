@@ -6,7 +6,7 @@
   "result": {
     "settings": {
       "siteTitle": "Jainbook",
-      "siteUrl": "a23money.com",
+      "siteUrl": "lotus365d.com",
       "interval": "600",
       "casino": "mac88",
       "liveCasinoType": "ultrawin",
@@ -42,7 +42,7 @@
       "language": false,
       "build": "development",
       "betDelay": false,
-      "otp": false,
+      "otp": true,
       "otpWhatsapp": true
     },
 

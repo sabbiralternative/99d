@@ -33,7 +33,7 @@ const AddBank = ({ refetchBankData }) => {
   const handleAddBank = async (e) => {
     e.preventDefault();
     if (bankDetails.accountNumber !== bankDetails.confirmAccountNumber) {
-      toast.success("Bank account number did not matched!");
+      return toast.error("Bank account number did not matched!");
     }
     if (mobile && !bankDetails.otp && Settings.otp) {
       return toast.error("Please enter otp to add new account");
@@ -108,6 +108,7 @@ const AddBank = ({ refetchBankData }) => {
   useEffect(() => {
     const getMobile = () => {
       const decode = jwtDecode(token);
+
       if (decode?.mobile) {
         setMobile(decode?.mobile);
       }
@@ -125,25 +126,30 @@ const AddBank = ({ refetchBankData }) => {
     }
   }, [timer]);
 
-  const getOtpOnWhatsapp = async () => {
-    const otpData = {
-      mobile: mobile,
-      type: "otpsend",
-    };
+  // const getOtpOnWhatsapp = async () => {
+  //   const otpData = {
+  //     mobile: mobile,
+  //     type: "otpsend",
+  //   };
 
-    const res = await AxiosSecure.post(API.otpless, otpData);
-    const data = res.data;
+  //   const res = await AxiosSecure.post(API.otpless, otpData);
+  //   const data = res.data;
 
-    if (data?.success) {
-      toast.success(data?.result?.message);
-    } else {
-      toast.error(data?.error?.errorMessage);
-    }
-  };
+  //   if (data?.success) {
+  //     toast.success(data?.result?.message);
+  //   } else {
+  //     toast.error(data?.error?.errorMessage);
+  //   }
+  // };
+
   return (
     <>
       <div className="Modal-Background  ">
-        <div className="card-add-bank" ref={addBankRef}>
+        <div
+          className="card-add-bank"
+          ref={addBankRef}
+          style={{ maxWidth: "600px", borderRadius: "6px" }}
+        >
           <div className="card-header">
             <h2 style={{ color: "black" }}>Add Bank Account</h2>
             <div
@@ -263,7 +269,7 @@ const AddBank = ({ refetchBankData }) => {
                           alignItems: "center",
                         }}
                       >
-                        {Settings.otpWhatsapp && (
+                        {/* {Settings.otpWhatsapp && (
                           <button
                             onClick={getOtpOnWhatsapp}
                             style={{
@@ -280,7 +286,7 @@ const AddBank = ({ refetchBankData }) => {
                           >
                             Get OTP Whatsapp
                           </button>
-                        )}
+                        )} */}
 
                         <button
                           onClick={getOtp}
