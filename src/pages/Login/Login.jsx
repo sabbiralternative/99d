@@ -43,7 +43,9 @@ const Login = () => {
         banner: data?.result?.banner,
         bannerTitle: data?.result?.bannerTitle,
       };
-      localStorage.setItem("modal", JSON.stringify(modal));
+      if (modal?.banner) {
+        localStorage.setItem("modal", JSON.stringify(modal));
+      }
       dispatch(setUser({ user, token }));
       localStorage.setItem("memberId", memberId);
       localStorage.setItem("buttonValue", JSON.stringify(game));
@@ -78,7 +80,9 @@ const Login = () => {
         banner: result?.result?.banner,
         bannerTitle: result?.result?.bannerTitle,
       };
-      localStorage.setItem("modal", JSON.stringify(modal));
+      if (modal?.banner) {
+        localStorage.setItem("modal", JSON.stringify(modal));
+      }
       dispatch(setUser({ user, token }));
       localStorage.setItem("buttonValue", JSON.stringify(game));
       localStorage.setItem("token", token);

@@ -84,7 +84,9 @@ const Register = () => {
           banner: data?.result?.banner,
           bannerTitle: data?.result?.bannerTitle,
         };
-        localStorage.setItem("modal", JSON.stringify(modal));
+        if (modal?.banner) {
+          localStorage.setItem("modal", JSON.stringify(modal));
+        }
         localStorage.setItem("memberId", memberId);
         localStorage.setItem("buttonValue", JSON.stringify(game));
         localStorage.setItem("token", token);
