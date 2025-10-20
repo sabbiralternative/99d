@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { FaQrcode } from "react-icons/fa";
 import { CiBank } from "react-icons/ci";
@@ -17,6 +17,7 @@ import { useBankAccountMutation } from "../../../redux/features/deposit/event.ap
 import images from "../../../assets/images";
 
 const BankAccountUploadTransaction = ({ setTab, amount }) => {
+  const paymentMethodRef = useRef();
   const [getPaymentMethod, { data }] = useBankAccountMutation();
   const [paymentId, setPaymentId] = useState(null);
   const [methodType, setMethodType] = useState(null);
@@ -106,7 +107,18 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
   //     .toString()
   //     .padStart(2, "0")}`;
   // };
-
+  useEffect(() => {
+    if (
+      paymentMethodRef &&
+      paymentMethodRef.current &&
+      methodType &&
+      methodType !== "pg"
+    ) {
+      paymentMethodRef.current.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  }, [methodType]);
   return (
     <div className="col-md-8">
       <div className="row">
@@ -127,9 +139,10 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
                   id="nav-tab"
                   role="tablist"
                   style={{
-                    overflow: "hidden",
-                    overflowX: "scroll",
                     display: "flex",
+                    flexDirection: "column",
+                    gap: "5px",
+                    borderBottom: "none",
                   }}
                 >
                   {data?.result?.length > 0 &&
@@ -150,7 +163,7 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
                                   ? "var(--theme2-bg)"
                                   : "transparent",
                               display: "flex",
-                              flexDirection: "column",
+
                               gap: "5px",
                               borderRadius: "5px",
                               alignItems: "center",
@@ -169,6 +182,24 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
                             data-original-title
                             title
                           >
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "start",
+                              }}
+                            >
+                              <span> {method?.title}</span>
+                              <span
+                                style={{
+                                  fontSize: "10px",
+                                  fontWeight: "normal",
+                                }}
+                              >
+                                {" "}
+                                {method?.type}
+                              </span>
+                            </div>
                             {method?.type == "qr" && (
                               <FaQrcode size={25} color="gray" />
                             )}
@@ -177,19 +208,31 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
                             )}
                             {method?.type == "upi" || method?.type == "pg" ? (
                               <img
-                                style={{ height: "25px", width: "25px" }}
+                                style={{
+                                  height: "25px",
+                                  width: "25px",
+                                  margin: "0px",
+                                }}
                                 src={images.upi}
                               />
                             ) : null}
                             {method?.type == "usdt" ? (
                               <img
-                                style={{ height: "25px", width: "25px" }}
+                                style={{
+                                  height: "25px",
+                                  width: "25px",
+                                  margin: "0px",
+                                }}
                                 src={images.trc}
                               />
                             ) : null}
                             {method?.type == "usdt_bep20" ? (
                               <img
-                                style={{ height: "25px", width: "25px" }}
+                                style={{
+                                  height: "25px",
+                                  width: "25px",
+                                  margin: "0px",
+                                }}
                                 src={images.bep}
                               />
                             ) : null}
@@ -199,11 +242,11 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
                                   height: "20px",
                                   width: "20px",
                                   filter: "none",
+                                  margin: "0px",
                                 }}
                                 src={images.whatsApp}
                               />
                             ) : null}
-                            <span> {method?.title}</span>
                           </button>
                         );
                       })}
@@ -228,7 +271,7 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
                           >
                             IMPS
                           </h5>
-                          <div className="row">
+                          <div className="row" ref={paymentMethodRef}>
                             {methodType === "bank" && (
                               <BankAccount depositData={depositData} />
                             )}
