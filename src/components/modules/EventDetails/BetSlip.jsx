@@ -182,7 +182,7 @@ const BetSlip = ({ profit }) => {
                         icon={faSpinner}
                         className=" fa-spin"
                       />
-                      <span
+                      {/* <span
                         style={{
                           position: "absolute",
                           left: "10px",
@@ -190,7 +190,7 @@ const BetSlip = ({ profit }) => {
                         }}
                       >
                         {betDelay}
-                      </span>
+                      </span> */}
                     </div>
                   </div>
                 )}
