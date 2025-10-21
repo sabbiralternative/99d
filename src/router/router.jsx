@@ -18,7 +18,8 @@ import PrivateRoute from "./PrivateRoute";
 import Withdraw from "../pages/Withdraw/Withdraw";
 import Rules from "../pages/Rules/Rules";
 import BonusStatement from "../pages/BonusStatement/BonusStatement";
-import DepositWithdrawReport from "../pages/DepositWithdrawReport/DepositWithdrawReport";
+import DepositReport from "../pages/DepositReport/DepositReport";
+import WithdrawReport from "../pages/WithdrawReport/WithdrawReport";
 import ReferralStatement from "../pages/ReferralStatement/ReferralStatement";
 import NotFound from "../pages/NotFound/NotFound";
 import MyBankDetails from "../pages/MyBankDetails/MyBankDetails";
@@ -87,8 +88,12 @@ export const router = createBrowserRouter(
           element: <ReferralStatement />,
         },
         {
-          path: "/deposit-withdraw-report",
-          element: <DepositWithdrawReport />,
+          path: "/deposit-report",
+          element: <DepositReport />,
+        },
+        {
+          path: "/withdraw-report",
+          element: <WithdrawReport />,
         },
         {
           path: "/my-bank-details",
