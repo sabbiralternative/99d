@@ -70,13 +70,13 @@ const Dropdown = ({ setShowReferral }) => {
       <li>
         <Link to="/change-password">Change Password</Link>
       </li>
-      {socialLink?.result?.whatsapplink && (
+      {/* {socialLink?.result?.whatsapplink && (
         <li
           onClick={() => handleOpenSocialLink(socialLink?.result?.whatsapplink)}
         >
           <Link>All Support</Link>
         </li>
-      )}
+      )} */}
       <li>
         <hr />
       </li>
