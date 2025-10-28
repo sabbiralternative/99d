@@ -227,6 +227,7 @@ const BetSlip = ({ profit }) => {
                         <td className="bet-odds">
                           <div className="form-group">
                             <input
+                              readOnly={placeBetValues?.cashout}
                               onChange={(e) =>
                                 dispatch(setPrice(e.target.value))
                               }
@@ -244,45 +245,48 @@ const BetSlip = ({ profit }) => {
                               value={price}
                             />
                             <div className="spinner-buttons input-group-btn btn-group-vertical">
-                              {!placeBetValues?.isWeak && (
-                                <button
-                                  onClick={() =>
-                                    handleIncreasePrice(
-                                      price,
-                                      placeBetValues,
-                                      dispatch,
-                                      setPrice
-                                    )
-                                  }
-                                  type="button"
-                                  className="custom-btn-spinner btn btn-xs btn-default"
-                                >
-                                  <FontAwesomeIcon icon={faAngleUp} />
-                                </button>
-                              )}
+                              {!placeBetValues?.isWeak &&
+                                !placeBetValues?.cashout && (
+                                  <button
+                                    onClick={() =>
+                                      handleIncreasePrice(
+                                        price,
+                                        placeBetValues,
+                                        dispatch,
+                                        setPrice
+                                      )
+                                    }
+                                    type="button"
+                                    className="custom-btn-spinner btn btn-xs btn-default"
+                                  >
+                                    <FontAwesomeIcon icon={faAngleUp} />
+                                  </button>
+                                )}
 
-                              {!placeBetValues?.isWeak && (
-                                <button
-                                  onClick={() =>
-                                    handleDecreasePrice(
-                                      price,
-                                      placeBetValues,
-                                      dispatch,
-                                      setPrice
-                                    )
-                                  }
-                                  type="button"
-                                  className="custom-btn-spinner btn btn-xs btn-default"
-                                >
-                                  <FontAwesomeIcon icon={faAngleDown} />
-                                </button>
-                              )}
+                              {!placeBetValues?.isWeak &&
+                                !placeBetValues?.cashout && (
+                                  <button
+                                    onClick={() =>
+                                      handleDecreasePrice(
+                                        price,
+                                        placeBetValues,
+                                        dispatch,
+                                        setPrice
+                                      )
+                                    }
+                                    type="button"
+                                    className="custom-btn-spinner btn btn-xs btn-default"
+                                  >
+                                    <FontAwesomeIcon icon={faAngleDown} />
+                                  </button>
+                                )}
                             </div>
                           </div>
                         </td>
                         <td className="bet-stakes">
                           <div className="form-group bet-stake">
                             <input
+                              readOnly={placeBetValues?.cashout}
                               value={stake !== null && stake}
                               maxLength={10}
                               required
@@ -320,6 +324,7 @@ const BetSlip = ({ profit }) => {
                           {parseButtonValues?.map((button, i) => {
                             return (
                               <button
+                                disabled={placeBetValues?.cashout}
                                 onClick={() =>
                                   dispatch(setStake(button?.value))
                                 }
@@ -333,6 +338,7 @@ const BetSlip = ({ profit }) => {
                           })}
 
                           <button
+                            disabled={placeBetValues?.cashout}
                             onClick={() => dispatch(setStake(100))}
                             type="button"
                             className="btn btn-secondary m-l-5 m-b-5 min-stake"
@@ -340,6 +346,7 @@ const BetSlip = ({ profit }) => {
                             min stake
                           </button>
                           <button
+                            disabled={placeBetValues?.cashout}
                             onClick={() =>
                               dispatch(
                                 setStake(
