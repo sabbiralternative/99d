@@ -3,10 +3,10 @@ import { useEffect, useRef, useState } from "react";
 import { FaQrcode } from "react-icons/fa";
 import { CiBank } from "react-icons/ci";
 import { AxiosSecure } from "../../../lib/AxiosSecure";
-import { API, Settings } from "../../../api";
+import { API } from "../../../api";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
-import useGetPGStatus from "../../../hooks/useGetPGStatus";
+// import { useNavigate } from "react-router-dom";
+// import useGetPGStatus from "../../../hooks/useGetPGStatus";
 import BankAccount from "./BankAccount";
 import PaymentProof from "./PaymentProof";
 import UPI from "./UPI";
@@ -23,11 +23,11 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
   const [methodType, setMethodType] = useState(null);
   // const [pgPaymentMethods, setPgPaymentMethods] = useState({});
   // const [qrcode, setQrcode] = useState("");
-  const [orderId, setOrderId] = useState("");
-  const [time, setTime] = useState(null);
+  // const [orderId, setOrderId] = useState("");
+  // const [time, setTime] = useState(null);
   const [depositData, setDepositData] = useState({});
-  const navigate = useNavigate();
-  const { pgStatus } = useGetPGStatus(orderId, methodType);
+  // const navigate = useNavigate();
+  // const { pgStatus } = useGetPGStatus(orderId, methodType);
 
   useEffect(() => {
     getPaymentMethod({
@@ -41,7 +41,7 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
     setMethodType(method?.type);
     setPaymentId(method?.paymentId);
 
-    if (method?.type === "pg") {
+    if (method?.type === "upigateway") {
       const depositDetailForPg = {
         paymentId: method?.paymentId,
         amount,
@@ -50,14 +50,13 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
       const data = res?.data;
 
       if (data?.success) {
-        if (Settings?.paymentIntent) {
-          // setPgPaymentMethods(data?.result);
-          setTime(60 * 20);
-          // setQrcode(data?.result?.upi);
-          setOrderId(data?.result?.orderId);
-        } else {
-          window.location.href = data?.result?.link;
-        }
+        // if (Settings?.paymentIntent) {
+        //   // setPgPaymentMethods(data?.result);
+        //   setTime(60 * 20);
+        //   // setQrcode(data?.result?.upi);
+        //   setOrderId(data?.result?.orderId);
+        // }
+        window.location.href = data?.result?.link;
       } else {
         toast.error(data?.result?.message);
       }
@@ -79,26 +78,26 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
       }
     }
   };
-  useEffect(() => {
-    if (time && methodType === "pg") {
-      const timer = setInterval(() => {
-        setTime((prevTime) => (prevTime > 0 ? prevTime - 1 : 0));
-      }, 1000);
+  // useEffect(() => {
+  //   if (time && methodType === "pg") {
+  //     const timer = setInterval(() => {
+  //       setTime((prevTime) => (prevTime > 0 ? prevTime - 1 : 0));
+  //     }, 1000);
 
-      return () => clearInterval(timer);
-    }
-  }, [time, methodType]);
+  //     return () => clearInterval(timer);
+  //   }
+  // }, [time, methodType]);
 
-  useEffect(() => {
-    if (time === 0) {
-      navigate("/account");
-    } else if (pgStatus?.success) {
-      setMethodType("");
-      setOrderId("");
-      toast.success(pgStatus?.result?.message);
-      navigate("/account");
-    }
-  }, [time, navigate, pgStatus]);
+  // useEffect(() => {
+  //   if (time === 0) {
+  //     navigate("/account");
+  //   } else if (pgStatus?.success) {
+  //     setMethodType("");
+  //     setOrderId("");
+  //     toast.success(pgStatus?.result?.message);
+  //     navigate("/account");
+  //   }
+  // }, [time, navigate, pgStatus]);
 
   // const formatTime = (time) => {
   //   const minutes = Math.floor(time / 60);
@@ -112,7 +111,7 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
       paymentMethodRef &&
       paymentMethodRef.current &&
       methodType &&
-      methodType !== "pg"
+      methodType !== "upigateway"
     ) {
       paymentMethodRef.current.scrollIntoView({
         behavior: "smooth",
@@ -245,6 +244,17 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
                                   margin: "0px",
                                 }}
                                 src={images.whatsApp}
+                              />
+                            ) : null}
+                            {method?.type == "upigateway" ? (
+                              <img
+                                style={{
+                                  height: "20px",
+                                  width: "20px",
+                                  filter: "none",
+                                  margin: "0px",
+                                }}
+                                src={images.upigateway}
                               />
                             ) : null}
                           </button>
