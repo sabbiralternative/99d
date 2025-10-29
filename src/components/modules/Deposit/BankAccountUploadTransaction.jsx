@@ -254,7 +254,7 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
                                   filter: "none",
                                   margin: "0px",
                                 }}
-                                src={images.upigateway}
+                                src={"/icon/bhim.png"}
                               />
                             ) : null}
                           </button>
