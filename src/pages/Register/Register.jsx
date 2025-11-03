@@ -73,6 +73,12 @@ const Register = () => {
 
       const { data } = await AxiosSecure.post(API.register, registerData);
       if (data?.success) {
+        if (window?.fbq) {
+          window.fbq("track", "CompleteRegistration", {
+            content_name: "User Signup",
+            status: "success",
+          });
+        }
         refetch();
         const token = data?.result?.token;
         const bonusToken = data?.result?.bonusToken;
