@@ -192,7 +192,9 @@ const AccountStatement = () => {
                                   role="cell"
                                   className="text-center"
                                 >
-                                  <span>{statement?.settledTime}</span>
+                                  <span>
+                                    {statement?.settledTime} {statement?.time}
+                                  </span>
                                 </td>
                                 <td
                                   aria-colindex={1}
