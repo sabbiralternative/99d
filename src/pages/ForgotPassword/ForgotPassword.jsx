@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { ApiContext } from "../../context/ApiProvider";
@@ -24,6 +24,7 @@ const Register = () => {
   const [getOTP] = useGetOtpMutation();
   const { register, handleSubmit } = useForm();
   const { logo } = useContext(ApiContext);
+  const [timer, setTimer] = useState(null);
 
   const handleMobileInputChange = (e) => {
     if (e.target.value.length <= 10) {
@@ -35,6 +36,7 @@ const Register = () => {
       const res = await getOTP({ mobile }).unwrap();
 
       if (res?.success) {
+        setTimer(60);
         setOTP({
           orderId: res?.result?.orderId,
           otpMethod: "sms",
@@ -65,6 +67,16 @@ const Register = () => {
       toast.error(result?.error?.loginName?.[0]?.description);
     }
   };
+
+  useEffect(() => {
+    if (timer > 0) {
+      setTimeout(() => {
+        setTimer((prev) => prev - 1);
+      }, 1000);
+    } else {
+      setTimer(null);
+    }
+  }, [timer]);
 
   return (
     <div className="login" style={{ minHeight: "100vh", height: "100%" }}>
@@ -115,13 +127,23 @@ const Register = () => {
                         }}
                         icon={faPhone}
                       />
-                      <button
-                        onClick={handleOTP}
-                        className="btn btn-primary btn-block"
-                        type="button"
-                      >
-                        Get OTP
-                      </button>
+                      {timer ? (
+                        <button
+                          style={{ cursor: "auto" }}
+                          className="btn btn-primary btn-block"
+                          type="button"
+                        >
+                          Retry in {timer}
+                        </button>
+                      ) : (
+                        <button
+                          onClick={handleOTP}
+                          className="btn btn-primary btn-block"
+                          type="button"
+                        >
+                          Get OTP
+                        </button>
+                      )}
                     </div>
                     <div className="form-group m-b-20">
                       <input

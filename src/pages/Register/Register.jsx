@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Fragment, useContext, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AxiosSecure } from "../../lib/AxiosSecure";
 import toast from "react-hot-toast";
@@ -22,6 +22,7 @@ const Register = () => {
   const dispatch = useDispatch();
   const referralCode = localStorage.getItem("referralCode");
   const { refetch, data } = useWhatsApp();
+  const [timer, setTimer] = useState(null);
   const [userData, setUserData] = useState({
     password: "",
     confirmPassword: "",
@@ -121,6 +122,7 @@ const Register = () => {
     const data = res.data;
 
     if (data?.success) {
+      setTimer(60);
       setOrder({
         orderId: data?.result?.orderId,
         otpMethod: "sms",
@@ -137,6 +139,16 @@ const Register = () => {
   const getWhatsappOTP = (link) => {
     window.open(link, "_blank");
   };
+
+  useEffect(() => {
+    if (timer > 0) {
+      setTimeout(() => {
+        setTimer((prev) => prev - 1);
+      }, 1000);
+    } else {
+      setTimer(null);
+    }
+  }, [timer]);
   return (
     <div className="login" style={{ minHeight: "100vh", height: "100%" }}>
       <div className="wrapper">
@@ -188,22 +200,34 @@ const Register = () => {
                         }}
                         icon={faMobile}
                       />
-                      <button
-                        onClick={getOtp}
-                        className="btn btn-primary btn-block"
-                        type="button"
-                      >
-                        Get OTP Message
-                      </button>
-                      {Settings.otpWhatsapp && (
+                      {timer ? (
                         <button
-                          onClick={handleGetOtpOnWhatsapp}
-                          disabled={userData?.mobileNo?.length < 10}
+                          style={{ cursor: "auto" }}
                           className="btn btn-primary btn-block"
                           type="button"
                         >
-                          Get OTP Whatsapp
+                          Retry in {timer}
                         </button>
+                      ) : (
+                        <Fragment>
+                          <button
+                            onClick={getOtp}
+                            className="btn btn-primary btn-block"
+                            type="button"
+                          >
+                            Get OTP Message
+                          </button>
+                          {Settings.otpWhatsapp && (
+                            <button
+                              onClick={handleGetOtpOnWhatsapp}
+                              disabled={userData?.mobileNo?.length < 10}
+                              className="btn btn-primary btn-block"
+                              type="button"
+                            >
+                              Get OTP Whatsapp
+                            </button>
+                          )}
+                        </Fragment>
                       )}
                     </div>
                     <div className="form-group m-b-20">
