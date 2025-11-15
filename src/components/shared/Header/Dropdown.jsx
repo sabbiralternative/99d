@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Settings } from "../../../api";
 import useWhatsApp from "../../../hooks/whatsapp";
 
-const Dropdown = ({ setShowReferral }) => {
+const Dropdown = () => {
   const { data: socialLink } = useWhatsApp();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -38,13 +38,15 @@ const Dropdown = ({ setShowReferral }) => {
         <Link to="/bonus-statement">Bonus Statement</Link>
       </li>
       {Settings.referral && (
-        <li onClick={() => setShowReferral(true)}>
-          <a style={{ color: "black" }}>Referral</a>
+        <li>
+          <Link to="/affiliate" style={{ color: "black" }}>
+            Affiliate
+          </Link>
         </li>
       )}
-      <li>
+      {/* <li>
         <Link to="/referral-statement">Referral Statement</Link>
-      </li>
+      </li> */}
 
       <li>
         <Link to="/deposit-report">Deposit Report</Link>
