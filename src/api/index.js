@@ -84,4 +84,6 @@ export const Settings = {
   b2c: "",
   otpWhatsapp: "",
   complaint: "",
+  sb_cashout: "",
+  fast_cashout: "",
 };

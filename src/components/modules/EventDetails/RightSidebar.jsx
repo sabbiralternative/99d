@@ -9,6 +9,7 @@ import MyBet from "./MyBet";
 const RightSidebar = ({ hasVideo, profit }) => {
   const { eventTypeId, eventId } = useParams();
   const [getIFrame, { data: IFrame }] = useAccessTokenMutation();
+
   const [showIFrame, setShowIFrame] = useState(false);
   useEffect(() => {
     if (showIFrame) {
