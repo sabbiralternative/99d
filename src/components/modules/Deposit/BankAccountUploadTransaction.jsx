@@ -41,7 +41,11 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
     setMethodType(method?.type);
     setPaymentId(method?.paymentId);
 
-    if (method?.type === "upigateway" || method?.type === "toitgateway") {
+    if (
+      method?.type === "upigateway" ||
+      method?.type === "toitgateway" ||
+      method?.type === "i100gateway"
+    ) {
       const depositDetailForPg = {
         paymentId: method?.paymentId,
         amount,
@@ -113,7 +117,8 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
       paymentMethodRef.current &&
       methodType &&
       methodType !== "upigateway" &&
-      methodType !== "toitgateway"
+      methodType !== "toitgateway" &&
+      methodType !== "i100gateway"
     ) {
       paymentMethodRef.current.scrollIntoView({
         behavior: "smooth",
@@ -249,7 +254,8 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
                               />
                             ) : null}
                             {method?.type == "upigateway" ||
-                            method?.type === "toitgateway" ? (
+                            method?.type === "toitgateway" ||
+                            method?.type === "i100gateway" ? (
                               <img
                                 style={{
                                   height: "20px",
