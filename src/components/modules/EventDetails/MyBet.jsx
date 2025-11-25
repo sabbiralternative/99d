@@ -102,9 +102,8 @@ const MyBet = () => {
                   });
 
                   const price = (
-                    0.92 *
-                    bet?.amount *
-                    (bet?.userRate / column?.Price)
+                    0.92 * bet?.amount * (bet?.userRate / column?.Price) -
+                    bet?.amount
                   )?.toFixed(2);
                   return (
                     <tr
@@ -116,7 +115,7 @@ const MyBet = () => {
                       <td style={{ width: "60%" }}>{bet?.nation}</td>
                       <td className="text-right">
                         {" "}
-                        {bet?.cashout && eventId && eventTypeId && (
+                        {bet?.cashout && eventId && eventTypeId && column && (
                           <button
                             onClick={() =>
                               handleCashOut({
