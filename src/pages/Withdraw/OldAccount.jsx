@@ -84,7 +84,12 @@ const OldAccount = ({ amount, bankAccounts, refetchBankAccounts }) => {
                         <span className="account-upi">{account?.upiId}</span>
                       </span>
                       <button
-                        style={{ justifyContent: "end" }}
+                        style={{
+                          justifyContent: "end",
+                          outline: "none",
+                          background: "none",
+                          width: "fit-content",
+                        }}
                         className="remove-btn"
                         type="button"
                       >

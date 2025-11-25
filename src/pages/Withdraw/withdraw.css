@@ -407,6 +407,7 @@
   align-items: center;
   border-radius: 9999px;
   background-color: transparent;
+  margin-bottom: 0px;
 }
 
 .withdraw-main-wrapper .checkbox-input {
@@ -541,7 +542,7 @@
 
 .account-card {
   cursor: pointer;
-  border: 2px solid transparent;
+  border: 1px solid rgb(212, 212, 212);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
   padding: 0.5rem;
@@ -555,7 +556,7 @@
 }
 
 .account-card.selected {
-  border-color: #16a34a;
+  border: 2px solid #16a34a;
 }
 
 .account-icon {
