@@ -1,7 +1,15 @@
+import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import useCloseModalClickOutside from "../../hooks/closeModal";
 
-const WithdrawSuccess = ({ setWithdrawSuccess }) => {
+const WithdrawSuccess = ({ setShowSuccessModal }) => {
+  const ref = useRef();
   const navigate = useNavigate();
+
+  useCloseModalClickOutside(ref, () => {
+    setShowSuccessModal(false);
+    navigate("/");
+  });
   return (
     <div className="Modal-Background ng-tns-c159-13 ng-star-inserted">
       <div className="depositpop ng-tns-c159-13" style={{ padding: "10px" }}>
@@ -10,7 +18,7 @@ const WithdrawSuccess = ({ setWithdrawSuccess }) => {
           <div
             style={{ cursor: "pointer" }}
             onClick={() => {
-              setWithdrawSuccess(false);
+              setShowSuccessModal(false);
               navigate("/");
             }}
             className="close-svg ng-tns-c159-13"
