@@ -47,22 +47,25 @@ const AddBankAccount = ({ setTab, refetchBankAccounts }) => {
       bankData.orderId = orderId;
     }
 
-    const res = await addNewBank(bankData).unwrap();
-    if (res?.success) {
-      setBankDetails({
-        accountName: "",
-        ifsc: "",
-        accountNumber: "",
-        confirmAccountNumber: "",
-        otp: "",
-      });
-      toast.success(res?.result?.message);
-      setTab("oldAccount");
-      refetchBankAccounts();
-      window.scrollTo(0, 0);
-    } else {
-      toast.error(res?.result?.message);
-    }
+    addNewBank(bankData, {
+      onSuccess: (data) => {
+        if (data?.success) {
+          setBankDetails({
+            accountName: "",
+            ifsc: "",
+            accountNumber: "",
+            confirmAccountNumber: "",
+            otp: "",
+          });
+          toast.success(data?.result?.message);
+          setTab("oldAccount");
+          refetchBankAccounts();
+          window.scrollTo(0, 0);
+        } else {
+          toast.error(data?.result?.message);
+        }
+      },
+    });
   };
 
   const validateForm = (bankDetails) => {
