@@ -12,7 +12,11 @@ const WithdrawSuccess = ({ setShowSuccessModal }) => {
   });
   return (
     <div className="Modal-Background ng-tns-c159-13 ng-star-inserted">
-      <div className="depositpop ng-tns-c159-13" style={{ padding: "10px" }}>
+      <div
+        ref={ref}
+        className="depositpop ng-tns-c159-13"
+        style={{ padding: "10px" }}
+      >
         <div className="depositbreak ng-tns-c159-13">
           <p className="ng-tns-c159-13">Congratulations!</p>
           <div
