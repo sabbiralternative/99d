@@ -5,7 +5,7 @@ import ColumnThree from "./ColumnThree";
 import ColumnTwo from "./ColumnTwo";
 import ColumnOne from "./ColumnOne";
 import { useSelector } from "react-redux";
-import BetSlip from "../../../components/shared/BetSlip/BetSlip";
+import BetSlip from "../../components/modules/EventDetails/BetSlip";
 
 const SportsBook = ({ sportsBook }) => {
   const { eventTypeId } = useParams();
