@@ -12,6 +12,7 @@ import Footer from "../../components/modules/Affiliate/Footer";
 
 const Affiliate = () => {
   const [tab, setTab] = useState("dashboard");
+
   return (
     <div className="col-md-10 featured-box">
       <div data-v-4c49d924 className="">

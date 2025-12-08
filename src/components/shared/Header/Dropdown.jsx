@@ -1,7 +1,6 @@
 import { useDispatch } from "react-redux";
 import { logout } from "../../../redux/features/auth/authSlice";
 import { Link, useNavigate } from "react-router-dom";
-import { Settings } from "../../../api";
 import useWhatsApp from "../../../hooks/whatsapp";
 
 const Dropdown = () => {
@@ -37,7 +36,7 @@ const Dropdown = () => {
       <li>
         <Link to="/bonus-statement">Bonus Statement</Link>
       </li>
-      {Settings.referral && (
+      {socialLink?.result?.referral && (
         <li>
           <Link to="/affiliate" style={{ color: "black" }}>
             Affiliate
