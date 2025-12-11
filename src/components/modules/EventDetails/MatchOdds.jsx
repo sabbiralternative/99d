@@ -11,8 +11,11 @@ import { Settings } from "../../../api";
 import { handleCashOutPlaceBet } from "../../../utils/handleCashoutPlaceBet";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import SpeedCashOut from "../../modals/SpeedCashOut/SpeedCashOut";
+import { isGameSuspended } from "../../../utils/isOddSuspended";
 
 const MatchOdds = ({ matchOdds }) => {
+  const [speedCashOut, setSpeedCashOut] = useState(null);
   const { eventId } = useParams();
   const [teamProfit, setTeamProfit] = useState([]);
   const navigate = useNavigate();
@@ -107,7 +110,12 @@ const MatchOdds = ({ matchOdds }) => {
     runner2,
     gameId
   ) => {
-    let runner, largerExposure, layValue, oppositeLayValue, lowerExposure;
+    let runner,
+      largerExposure,
+      layValue,
+      oppositeLayValue,
+      lowerExposure,
+      speedCashOut;
 
     const pnlArr = [exposureA, exposureB];
     const isOnePositiveExposure = onlyOnePositive(pnlArr);
@@ -126,6 +134,13 @@ const MatchOdds = ({ matchOdds }) => {
       layValue = runner2?.lay?.[0]?.price;
       oppositeLayValue = runner1?.lay?.[0]?.price;
       lowerExposure = exposureA;
+    }
+
+    if (exposureA > 0 && exposureB > 0) {
+      const difference = exposureA - exposureB;
+      if (difference <= 10) {
+        speedCashOut = true;
+      }
     }
 
     // Compute the absolute value of the lower exposure.
@@ -152,6 +167,11 @@ const MatchOdds = ({ matchOdds }) => {
       oppositeLayValue,
       gameId,
       isOnePositiveExposure,
+      exposureA,
+      exposureB,
+      runner1,
+      runner2,
+      speedCashOut,
     };
   };
   function onlyOnePositive(arr) {
@@ -204,12 +224,20 @@ const MatchOdds = ({ matchOdds }) => {
 
   return (
     <>
+      {speedCashOut && (
+        <SpeedCashOut
+          speedCashOut={speedCashOut}
+          setSpeedCashOut={setSpeedCashOut}
+        />
+      )}
       {matchOdds?.map((games) => {
         const teamProfitForGame = teamProfit?.find(
           (profit) =>
             profit?.gameId === games?.id && profit?.isOnePositiveExposure
         );
-
+        const speedCashOut = teamProfit?.find(
+          (profit) => profit?.gameId === games?.id && profit?.speedCashOut
+        );
         return (
           <div key={games?.id} className="main-market">
             <div>
@@ -218,7 +246,8 @@ const MatchOdds = ({ matchOdds }) => {
                   {games?.name?.toUpperCase()}
                   {Settings.betFairCashOut &&
                     games?.runners?.length !== 3 &&
-                    games?.status === "OPEN" && (
+                    games?.status === "OPEN" &&
+                    !speedCashOut && (
                       <button
                         onClick={() =>
                           handleCashOutPlaceBet(
@@ -236,6 +265,26 @@ const MatchOdds = ({ matchOdds }) => {
                         cashout{" "}
                         {teamProfitForGame?.profit &&
                           `(${teamProfitForGame.profit.toFixed(2)})`}
+                      </button>
+                    )}
+                  {Settings.betFairCashOut &&
+                    games?.runners?.length !== 3 &&
+                    games?.status === "OPEN" &&
+                    games?.name !== "toss" &&
+                    speedCashOut && (
+                      <button
+                        style={{
+                          backgroundColor: "#82371b",
+                          color: "#fff",
+                          border: "none",
+                          padding: "5px",
+                        }}
+                        onClick={() => setSpeedCashOut(speedCashOut)}
+                        disabled={isGameSuspended(games)}
+                        className="btn-cashout"
+                      >
+                        {" "}
+                        Speed Cashout
                       </button>
                     )}
                   <a
