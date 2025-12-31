@@ -15,6 +15,7 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import useWhatsApp from "../../hooks/whatsapp";
+import { GrAndroid } from "react-icons/gr";
 
 const Login = () => {
   const { token } = useSelector((state) => state.auth);
@@ -121,6 +122,17 @@ const Login = () => {
     }
   };
 
+  const handleDownload = (e) => {
+    e.preventDefault();
+    const fileUrl = Settings.apkLink;
+    const link = document.createElement("a");
+    link.href = fileUrl;
+    link.setAttribute("download", "site.apk");
+    document.body.appendChild(link);
+    link.click();
+    link.parentNode.removeChild(link);
+  };
+
   return (
     <div className="login" style={{ minHeight: "100vh", height: "100%" }}>
       <div className="wrapper">
@@ -211,7 +223,7 @@ const Login = () => {
                     )}
 
                     {Settings.registration && (
-                      <div className="form-group text-center mt-2">
+                      <div className="form-group text-center mt-2 mb-0">
                         <button
                           onClick={() => navigate("/register")}
                           type="button"
@@ -225,6 +237,22 @@ const Login = () => {
                         </button>
                       </div>
                     )}
+                    {Settings.apkLink && (
+                      <div className="form-group text-center mt-2">
+                        <button
+                          onClick={handleDownload}
+                          type="button"
+                          className="btn btn-submit btn-login"
+                        >
+                          <GrAndroid /> Download .apk
+                          <FontAwesomeIcon
+                            icon={faSignInAlt}
+                            className="ml-2"
+                          />
+                        </button>
+                      </div>
+                    )}
+
                     {/* {Settings.registrationWhatsapp &&
                       socialLink?.result?.whatsapplink && (
                         <div className="form-group text-center mt-2">

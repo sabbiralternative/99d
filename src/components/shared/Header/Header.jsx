@@ -1,11 +1,11 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ApiContext } from "../../../context/ApiProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import Notification from "./Notification";
 import useBalance from "../../../hooks/balance";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Dropdown from "./Dropdown";
 import images from "../../../assets/images";
 import HeaderBottomMenu from "./HeaderBottomMenu";
@@ -13,8 +13,13 @@ import { Settings } from "../../../api";
 import useWhatsApp from "../../../hooks/whatsapp";
 import Search from "./Search";
 import Referral from "../../modals/Referral/Referral";
+import { setShowAPKModal } from "../../../redux/features/global/globalSlice";
+import DownloadAPK from "../../modals/DownloadAPK/DownloadAPK";
 
 const Header = () => {
+  const { showAPKModal } = useSelector((state) => state?.global);
+  const dispatch = useDispatch();
+  const location = useLocation();
   const [showReferral, setShowReferral] = useState(false);
   const { user, token } = useSelector((state) => state.auth);
   const { data: balance } = useBalance();
@@ -29,9 +34,22 @@ const Header = () => {
     }
   };
 
+  useEffect(() => {
+    const apk_modal_shown = sessionStorage.getItem("apk_modal_shown");
+    if (location?.state?.pathname === "/apk" || location.pathname === "/apk") {
+      sessionStorage.setItem("apk_modal_shown", true);
+    } else {
+      if (!apk_modal_shown) {
+        dispatch(setShowAPKModal(true));
+      }
+    }
+  }, [dispatch, location?.state?.pathname, location.pathname]);
+
   return (
     <div>
       {showReferral && <Referral setShowReferral={setShowReferral} />}
+      {Settings?.apkLink && showAPKModal && <DownloadAPK />}
+
       <header className="header">
         <div className="container-fluid">
           <div className="row">

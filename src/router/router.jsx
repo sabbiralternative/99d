@@ -26,6 +26,7 @@ import MyBankDetails from "../pages/MyBankDetails/MyBankDetails";
 import Affiliate from "../pages/Affiliate/Affiliate";
 import AffiliateUserProfitLoss from "../pages/AffiliateUserProfitLoss/AffiliateUserProfitLoss";
 import AffiliateUserStatement from "../pages/AffiliateUserStatement/AffiliateUserStatement";
+import APK from "../pages/APK/APK";
 
 export const router = createBrowserRouter(
   [
@@ -136,6 +137,10 @@ export const router = createBrowserRouter(
     {
       path: "/casino/:name/:gameId",
       element: <CasinoIFrame />,
+    },
+    {
+      path: "/apk",
+      element: <APK />,
     },
   ],
   {
