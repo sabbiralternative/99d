@@ -1,8 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { ApiContext } from "../../../context/ApiProvider";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faSignInAlt } from "@fortawesome/free-solid-svg-icons";
 import Notification from "./Notification";
 import useBalance from "../../../hooks/balance";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,6 +17,7 @@ import { setShowAPKModal } from "../../../redux/features/global/globalSlice";
 import DownloadAPK from "../../modals/DownloadAPK/DownloadAPK";
 
 const Header = () => {
+  const navigate = useNavigate();
   const { showAPKModal } = useSelector((state) => state?.global);
   const dispatch = useDispatch();
   const location = useLocation();
@@ -70,20 +71,22 @@ const Header = () => {
                 </Link>
               </div>
               <ul className="float-right d-flex align-items-center">
-                <li className="btns__deposit_withdrawal">
-                  {Settings.deposit && (
-                    <Link to="/deposit" className="btn_deposit">
-                      <img src={images.deposit} className="img-fluid" />
-                      deposit{" "}
-                    </Link>
-                  )}
-                  {Settings.withdraw && (
-                    <Link to="/withdraw" className="btn_withdrawal">
-                      <img src={images.withdraw} className="img-fluid" />
-                      withdrawal
-                    </Link>
-                  )}
-                </li>
+                {token && (
+                  <li className="btns__deposit_withdrawal">
+                    {Settings.deposit && (
+                      <Link to="/deposit" className="btn_deposit">
+                        <img src={images.deposit} className="img-fluid" />
+                        deposit{" "}
+                      </Link>
+                    )}
+                    {Settings.withdraw && (
+                      <Link to="/withdraw" className="btn_withdrawal">
+                        <img src={images.withdraw} className="img-fluid" />
+                        withdrawal
+                      </Link>
+                    )}
+                  </li>
+                )}
 
                 <Search />
                 <li className="float-left download-apklink">
@@ -93,31 +96,67 @@ const Header = () => {
                     </Link>
                   </div>
                 </li>
-                <li className="ballance float-left">
-                  <div>
-                    <span>Balance: </span>
-                    <b>
-                      <span>{balance?.availBalance}</span>
-                    </b>
-                  </div>
-                  <div>
-                    <Link>
-                      <span className="t-underline">Exposure: </span>
-                      <b>
-                        <span className="t-underline">
-                          {balance?.deductedExposure}
-                        </span>
-                      </b>
-                    </Link>
-                  </div>
-                </li>
-                <li className="account float-left">
-                  <span>
-                    {user}
-                    <FontAwesomeIcon icon={faChevronDown} />
-                  </span>
-                  <Dropdown setShowReferral={setShowReferral} />
-                </li>
+                {!token && (
+                  <li className="btns__deposit_withdrawal">
+                    <button
+                      style={{
+                        backgroundColor: "var(--theme2-bg85)",
+                        color: "white",
+                        marginLeft: "10px",
+                      }}
+                      onClick={() => navigate("/login")}
+                      type="button"
+                      className="btn btn-submit btn-login"
+                    >
+                      Login
+                      <FontAwesomeIcon icon={faSignInAlt} className="ml-2" />
+                    </button>
+                    {Settings.registration && (
+                      <button
+                        style={{
+                          backgroundColor: "var(--theme2-bg85)",
+                          marginLeft: "10px",
+                          color: "white",
+                        }}
+                        onClick={() => navigate("/register")}
+                        type="button"
+                        className="btn btn-submit btn-login"
+                      >
+                        Register
+                        <FontAwesomeIcon icon={faSignInAlt} className="ml-2" />
+                      </button>
+                    )}
+                  </li>
+                )}
+                {token && (
+                  <Fragment>
+                    <li className="ballance float-left">
+                      <div>
+                        <span>Balance: </span>
+                        <b>
+                          <span>{balance?.availBalance}</span>
+                        </b>
+                      </div>
+                      <div>
+                        <Link>
+                          <span className="t-underline">Exposure: </span>
+                          <b>
+                            <span className="t-underline">
+                              {balance?.deductedExposure}
+                            </span>
+                          </b>
+                        </Link>
+                      </div>
+                    </li>
+                    <li className="account float-left">
+                      <span>
+                        {user}
+                        <FontAwesomeIcon icon={faChevronDown} />
+                      </span>
+                      <Dropdown setShowReferral={setShowReferral} />
+                    </li>
+                  </Fragment>
+                )}
               </ul>
               <Notification />
             </div>
