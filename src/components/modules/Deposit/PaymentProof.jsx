@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API } from "../../../api";
 import { useSelector } from "react-redux";
@@ -7,10 +7,11 @@ import toast from "react-hot-toast";
 import { useBankAccountMutation } from "../../../redux/features/deposit/event.api";
 import { useAccountStatement } from "../../../hooks/accountStatement";
 import useUTR from "../../../hooks/utr";
+import ImageUploadMessage from "../../modals/ImageUploadMessage/ImageUploadMessage";
 
 const PaymentProof = ({ paymentId, amount, methodType }) => {
   const { mutate: getUTR } = useUTR();
-
+  const [imageUploadMessage, setImageUploadMessage] = useState(null);
   const { refetch } = useAccountStatement();
   const [handlePayment] = useBankAccountMutation();
   const { token } = useSelector((state) => state.auth);
@@ -25,6 +26,7 @@ const PaymentProof = ({ paymentId, amount, methodType }) => {
   useEffect(() => {
     if (image) {
       setLoading(true);
+      setImageUploadMessage("Uploading Image");
       const handleSubmitImage = async () => {
         const formData = new FormData();
         formData.append("image", image);
@@ -36,21 +38,30 @@ const PaymentProof = ({ paymentId, amount, methodType }) => {
         });
         const data = res.data;
         if (data?.success) {
+          setImageUploadMessage("Image uploaded, Fetching UTR");
           getUTR(data?.filePath, {
             onSuccess: (data) => {
+              setImageUploadMessage(null);
               if (data?.success) {
+                toast.success(data?.message);
                 if (data?.utr !== null) {
                   setUtr(data?.utr);
                 }
+              } else {
+                toast.error(data?.message);
+                setImageUploadMessage(null);
               }
+            },
+            onError: () => {
+              setImageUploadMessage(null);
             },
           });
           setLoading(false);
           setUploadedImage(data?.fileName);
-
           setFilePath(data?.filePath);
           setImage(null);
         } else {
+          setImageUploadMessage(null);
           setLoading(false);
           setUtr(null);
           setImage(null);
@@ -109,34 +120,37 @@ const PaymentProof = ({ paymentId, amount, methodType }) => {
     setUtr(value);
   };
 
-  console.log(image);
   return (
-    <div className="col-md-6">
-      <form onSubmit={handleDepositSubmit}>
-        <div className="modal-body">
-          <div className="form-group">
-            <label htmlFor="transactionId">
-              {methodType === "usdt" || methodType === "usdt_bep20"
-                ? "Hash Code"
-                : "Unique Transaction Reference"}
+    <Fragment>
+      {imageUploadMessage && (
+        <ImageUploadMessage imageUploadMessage={imageUploadMessage} />
+      )}
+      <div className="col-md-6">
+        <form onSubmit={handleDepositSubmit}>
+          <div className="modal-body">
+            <div className="form-group">
+              <label htmlFor="transactionId">
+                {methodType === "usdt" || methodType === "usdt_bep20"
+                  ? "Hash Code"
+                  : "Unique Transaction Reference"}
 
-              <small style={{ color: "red" }}>*</small>
-            </label>
-            <input
-              onChange={handleUTRChange}
-              type="text"
-              className="form-control"
-              name="transaction_id"
-              id="transactionId"
-              placeholder={
-                methodType === "usdt" || methodType === "usdt_bep20"
-                  ? "Enter Hash code"
-                  : "6 to 12 Digit UTR Number"
-              }
-              value={utr !== null ? utr : null}
-            />
-          </div>
-          {/* {methodType === "usdt" || methodType === "usdt_bep20" ? (
+                <small style={{ color: "red" }}>*</small>
+              </label>
+              <input
+                onChange={handleUTRChange}
+                type="text"
+                className="form-control"
+                name="transaction_id"
+                id="transactionId"
+                placeholder={
+                  methodType === "usdt" || methodType === "usdt_bep20"
+                    ? "Enter Hash code"
+                    : "6 to 12 Digit UTR Number"
+                }
+                value={utr !== null ? utr : null}
+              />
+            </div>
+            {/* {methodType === "usdt" || methodType === "usdt_bep20" ? (
             <div className="form-group">
               <label htmlFor="transactionId">Receipt Number</label>
               <input
@@ -149,98 +163,102 @@ const PaymentProof = ({ paymentId, amount, methodType }) => {
             </div>
           ) : null} */}
 
-          {!filePath && !loading && (
-            <div className="form-group">
-              <label htmlFor="proofOfDeposit128375">
-                Upload Your Payment Proof{" "}
-                <small style={{ color: "red" }}>[Required]</small>
-              </label>
-              <input
-                onChange={(e) => handleImageChange(e)}
-                type="file"
-                className="form-control"
-                name="deposit_proof"
-                id="proofOfDeposit128375"
-              />
-            </div>
-          )}
+            {!filePath && !loading && (
+              <div className="form-group">
+                <label htmlFor="proofOfDeposit128375">
+                  Upload Your Payment Proof{" "}
+                  <small style={{ color: "red" }}>[Required]</small>
+                </label>
+                <input
+                  onChange={(e) => handleImageChange(e)}
+                  type="file"
+                  className="form-control"
+                  name="deposit_proof"
+                  id="proofOfDeposit128375"
+                />
+              </div>
+            )}
 
-          {filePath && !loading && (
-            <div
-              className="form-group"
-              style={{
-                position: "relative",
-                marginTop: "10px",
-                marginBottom: "10px",
-              }}
-            >
-              <button
-                style={{ position: "absolute", top: "0px", right: "0px" }}
-                onClick={() => {
-                  setFilePath("");
-                  setUploadedImage(null);
-                  setImage(null);
+            {filePath && !loading && (
+              <div
+                className="form-group"
+                style={{
+                  position: "relative",
+                  marginTop: "10px",
+                  marginBottom: "10px",
                 }}
               >
-                X
-              </button>
-              <img style={{ width: "100%" }} src={filePath} alt="" />
+                <button
+                  style={{ position: "absolute", top: "0px", right: "0px" }}
+                  onClick={() => {
+                    setFilePath("");
+                    setUploadedImage(null);
+                    setImage(null);
+                  }}
+                >
+                  X
+                </button>
+                <img style={{ width: "100%" }} src={filePath} alt="" />
+              </div>
+            )}
+
+            <div className="form-group">
+              <label htmlFor="exampleFormControlInput1">
+                Amount
+                <small style={{ color: "red" }}>*</small>
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                name="amount"
+                readOnly
+                value={amount}
+                id="amount128375Input"
+                placeholder="Enter amount"
+              />
             </div>
-          )}
 
-          <div className="form-group">
-            <label htmlFor="exampleFormControlInput1">
-              Amount
-              <small style={{ color: "red" }}>*</small>
-            </label>
-            <input
-              type="number"
-              className="form-control"
-              name="amount"
-              readOnly
-              value={amount}
-              id="amount128375Input"
-              placeholder="Enter amount"
-            />
-          </div>
-
-          <div
-            className="custom-control custom-checkbox"
-            style={{ marginTop: "10px" }}
-          >
-            <input
-              type="checkbox"
-              className="custom-control-input"
-              name="terms_condition"
-              id="termsCheck128375"
-              defaultChecked
-            />
-            <label className="custom-control-label" htmlFor="termsCheck128375">
-              I have read and agree with{" "}
-              <a
-                data-toggle="modal"
-                data-target="#termsAndCondition"
-                className="terms-condition"
+            <div
+              className="custom-control custom-checkbox"
+              style={{ marginTop: "10px" }}
+            >
+              <input
+                type="checkbox"
+                className="custom-control-input"
+                name="terms_condition"
+                id="termsCheck128375"
+                defaultChecked
+              />
+              <label
+                className="custom-control-label"
+                htmlFor="termsCheck128375"
               >
-                the terms of payment and withdrawal policy.
-              </a>
-            </label>
+                I have read and agree with{" "}
+                <a
+                  data-toggle="modal"
+                  data-target="#termsAndCondition"
+                  className="terms-condition"
+                >
+                  the terms of payment and withdrawal policy.
+                </a>
+              </label>
+            </div>
           </div>
-        </div>
-        <div className="modal-footer">
-          <button
-            disabled={!filePath || !utr ? true : false}
-            style={{
-              cursor: `${!filePath || !utr ? "not-allowed" : "pointer"}`,
-            }}
-            type="submit"
-            className="btn btn-info depositBtn"
-          >
-            Submit
-          </button>
-        </div>
-      </form>
-    </div>
+          <div className="modal-footer">
+            <button
+              disabled={!filePath || !utr ? true : false}
+              style={{
+                cursor: `${!filePath || !utr ? "not-allowed" : "pointer"}`,
+              }}
+              type="submit"
+              className="btn btn-info depositBtn"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </Fragment>
   );
 };
 
