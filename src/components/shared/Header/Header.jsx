@@ -15,8 +15,11 @@ import Search from "./Search";
 import Referral from "../../modals/Referral/Referral";
 import { setShowAPKModal } from "../../../redux/features/global/globalSlice";
 import DownloadAPK from "../../modals/DownloadAPK/DownloadAPK";
+import BuildVersion from "../../modals/BuildVersion/BuildVersion";
 
 const Header = () => {
+  const [showBuildVersion, setShowBuildVersion] = useState(false);
+  const stored_build_version = localStorage.getItem("build_version");
   const navigate = useNavigate();
   const { showAPKModal } = useSelector((state) => state?.global);
   const dispatch = useDispatch();
@@ -46,10 +49,31 @@ const Header = () => {
     }
   }, [dispatch, location?.state?.pathname, location.pathname]);
 
+  useEffect(() => {
+    const newVersion = socialLink?.result?.build_version;
+    if (!stored_build_version) {
+      if (newVersion) {
+        setShowBuildVersion(true);
+      }
+    }
+    if (stored_build_version && newVersion) {
+      const parseVersion = JSON.parse(stored_build_version);
+      if (newVersion > parseVersion) {
+        setShowBuildVersion(true);
+      }
+    }
+  }, [socialLink?.result?.build_version, stored_build_version]);
+
   return (
     <div>
       {showReferral && <Referral setShowReferral={setShowReferral} />}
       {Settings?.apkLink && showAPKModal && <DownloadAPK />}
+      {showBuildVersion && !showAPKModal && (
+        <BuildVersion
+          build_version={socialLink?.result?.build_version}
+          setShowBuildVersion={setShowBuildVersion}
+        />
+      )}
 
       <header className="header">
         <div className="container-fluid">

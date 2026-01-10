@@ -203,7 +203,11 @@ const EventDetails = () => {
                 </div>
               </div>
             </div>
-            <RightSidebar profit={profit} hasVideo={data?.score?.hasVideo} />
+            <RightSidebar
+              profit={profit}
+              hasVideo={data?.score?.hasVideo}
+              data={data?.result}
+            />
           </div>
         </div>
       </div>

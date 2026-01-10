@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import BetSlip from "./BetSlip";
 import MyBet from "./MyBet";
 
-const RightSidebar = ({ hasVideo, profit }) => {
+const RightSidebar = ({ hasVideo, profit, data }) => {
   const { eventTypeId, eventId } = useParams();
   const [getIFrame, { data: IFrame }] = useAccessTokenMutation();
 
@@ -63,7 +63,7 @@ const RightSidebar = ({ hasVideo, profit }) => {
               </div>
             )}
           </div>
-          <BetSlip profit={profit} />
+          <BetSlip profit={profit} data={data} />
           <MyBet />
         </div>
       </div>

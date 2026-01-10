@@ -26,7 +26,7 @@ import {
   handleIncreasePrice,
 } from "../../../utils/editBetSlipPrice";
 
-const BetSlip = ({ profit }) => {
+const BetSlip = ({ profit, data }) => {
   const [isCashOut, setIsCashOut] = useState(false);
   const { eventTypeId } = useParams();
   const dispatch = useDispatch();
@@ -36,6 +36,10 @@ const BetSlip = ({ profit }) => {
   const { refetch: refetchBalance } = useBalance();
   const { refetch: refetchExposure } = useExposure(eventId);
   const { placeBetValues, price, stake } = useSelector((state) => state?.event);
+  const currentPlaceBetEvent = data?.find(
+    (item) => item?.id === placeBetValues?.marketId
+  );
+
   const [createOrder] = useOrderMutation();
   const buttonValues = localStorage.getItem("buttonValue");
   let parseButtonValues = [];
@@ -67,7 +71,7 @@ const BetSlip = ({ profit }) => {
         btype: placeBetValues?.btype,
         placeName: placeBetValues?.placeName,
         eventTypeId: placeBetValues?.eventTypeId,
-        betDelay: placeBetValues?.betDelay,
+        betDelay: currentPlaceBetEvent?.betDelay,
         marketId: placeBetValues?.marketId,
         maxLiabilityPerMarket: placeBetValues?.maxLiabilityPerMarket,
         maxLiabilityPerBet: placeBetValues?.maxLiabilityPerBet,
@@ -79,7 +83,7 @@ const BetSlip = ({ profit }) => {
       };
     } else {
       payload = {
-        betDelay: placeBetValues?.betDelay,
+        betDelay: currentPlaceBetEvent?.betDelay,
         btype: placeBetValues?.btype,
         eventTypeId: placeBetValues?.eventTypeId,
         marketId: placeBetValues?.marketId,
@@ -126,8 +130,8 @@ const BetSlip = ({ profit }) => {
     ) {
       delay = 9000;
     } else {
-      setBetDelay(placeBetValues?.betDelay);
-      delay = Settings.betDelay ? placeBetValues?.betDelay * 1000 : 0;
+      setBetDelay(currentPlaceBetEvent?.betDelay);
+      delay = Settings.betDelay ? currentPlaceBetEvent?.betDelay * 1000 : 0;
     }
     // Introduce a delay before calling the API
     setTimeout(async () => {
