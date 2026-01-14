@@ -43,6 +43,16 @@ const Dropdown = () => {
           </Link>
         </li>
       )}
+      <li>
+        <Link to="/promotions" style={{ color: "black" }}>
+          Promos & Bonus
+        </Link>
+      </li>
+      <li>
+        <Link to="/lossback-claims" style={{ color: "black" }}>
+          Loss Back Claims
+        </Link>
+      </li>
       {/* <li>
         <Link to="/referral-statement">Referral Statement</Link>
       </li> */}
