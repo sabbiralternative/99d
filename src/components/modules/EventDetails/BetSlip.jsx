@@ -4,14 +4,14 @@ import { useParams } from "react-router-dom";
 import { useCurrentBets } from "../../../hooks/currentBets";
 import useBalance from "../../../hooks/balance";
 import { useExposure } from "../../../hooks/exposure";
-import { useOrderMutation } from "../../../redux/features/events/events";
+
 import {
   setPlaceBetValues,
   setPrice,
   setRunnerId,
   setStake,
 } from "../../../redux/features/events/eventSlice";
-import { Settings } from "../../../api";
+import { API, Settings } from "../../../api";
 import { v4 as uuidv4 } from "uuid";
 import toast from "react-hot-toast";
 import {
@@ -26,6 +26,7 @@ import {
   handleIncreasePrice,
 } from "../../../utils/editBetSlipPrice";
 import useWhatsApp from "../../../hooks/whatsapp";
+import { AxiosJSEncrypt } from "../../../lib/AxiosJSEncrypt";
 
 const BetSlip = ({ profit, data }) => {
   const [isCashOut, setIsCashOut] = useState(false);
@@ -39,10 +40,9 @@ const BetSlip = ({ profit, data }) => {
   const { refetch: refetchExposure } = useExposure(eventId);
   const { placeBetValues, price, stake } = useSelector((state) => state?.event);
   const currentPlaceBetEvent = data?.find(
-    (item) => item?.id === placeBetValues?.marketId
+    (item) => item?.id === placeBetValues?.marketId,
   );
 
-  const [createOrder] = useOrderMutation();
   const buttonValues = localStorage.getItem("buttonValue");
   let parseButtonValues = [];
   if (buttonValues) {
@@ -57,8 +57,8 @@ const BetSlip = ({ profit, data }) => {
       setStake(
         placeBetValues?.totalSize > 0
           ? placeBetValues?.totalSize?.toFixed(2)
-          : null
-      )
+          : null,
+      ),
     );
     setIsCashOut(placeBetValues?.cashout || false);
   }, [placeBetValues, dispatch]);
@@ -139,8 +139,8 @@ const BetSlip = ({ profit, data }) => {
     }
     // Introduce a delay before calling the API
     setTimeout(async () => {
-      const res = await createOrder(payloadData).unwrap();
-      if (res?.success) {
+      const { data } = await AxiosJSEncrypt.post(API.order, payloadData);
+      if (data?.success) {
         setLoading(false);
         refetchExposure();
         refetchBalance();
@@ -148,11 +148,11 @@ const BetSlip = ({ profit, data }) => {
         refetchCurrentBets();
         setBetDelay("");
         dispatch(setStake(null));
-        toast.success(res?.result?.result?.placed?.[0]?.message);
+        toast.success(data?.result?.result?.placed?.[0]?.message);
       } else {
         setLoading(false);
         toast.error(
-          res?.error?.status?.[0]?.description || res?.error?.errorMessage
+          data?.error?.status?.[0]?.description || data?.error?.errorMessage,
         );
         setBetDelay("");
       }
@@ -274,7 +274,7 @@ const BetSlip = ({ profit, data }) => {
                                       price,
                                       placeBetValues,
                                       dispatch,
-                                      setPrice
+                                      setPrice,
                                     );
                                     setIsCashOut(false);
                                   }}
@@ -292,7 +292,7 @@ const BetSlip = ({ profit, data }) => {
                                       price,
                                       placeBetValues,
                                       dispatch,
-                                      setPrice
+                                      setPrice,
                                     );
                                     setIsCashOut(false);
                                   }}
@@ -375,8 +375,8 @@ const BetSlip = ({ profit, data }) => {
                                 setStake(
                                   parseButtonValues[
                                     parseButtonValues?.length - 1
-                                  ]?.value
-                                )
+                                  ]?.value,
+                                ),
                               );
                               setIsCashOut(false);
                             }}
