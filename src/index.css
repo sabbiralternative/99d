@@ -656,3 +656,50 @@ html * {
   margin-right: 10px;
 }
 /*! Download apk css end  */
+
+.latest-event {
+  overflow-y: hidden;
+  overflow-x: overlay;
+  display: block;
+  white-space: nowrap;
+}
+.latest-event-item {
+  min-width: fit-content;
+  justify-content: start;
+  align-items: center;
+  padding: 3px 5px;
+  background: var(--theme2-bg);
+  margin-right: 5px;
+  border-radius: 4px;
+  color: var(--white-color);
+  margin-bottom: 5px;
+  display: inline-flex;
+}
+.latest-event-item a {
+  padding: 0 1px;
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+
+.latest-event-item a {
+  color: var(--white-color);
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: capitalize;
+}
+.latest-event-item a span {
+  margin-left: 3px;
+  vertical-align: middle;
+}
+.new-launch-text div b {
+  display: block;
+  color: #fff;
+  font-size: 12px;
+  background: #167122;
+  width: 110px;
+  text-align: center;
+  border-radius: 5px;
+  padding: 2px;
+}

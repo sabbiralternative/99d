@@ -13,8 +13,14 @@ const LatestEvent = () => {
                 to={`/event-details/${event?.eventTypeId}/${event?.eventId}`}
                 className="new-launch-text"
               >
-                <img alt="" src={`/src/assets/img/${event?.eventTypeId}.png`} />
-                <span>{event?.eventName}</span>
+                <img
+                  alt=""
+                  src={`/d/src/assets/img/${event?.eventTypeId}.png`}
+                />
+                <div>
+                  <span>{event?.eventName}</span>
+                  <b>{event?.date}</b>
+                </div>
               </Link>
             </div>
           );
