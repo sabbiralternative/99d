@@ -1,4 +1,4 @@
-const Score = ({ score2 }) => {
+const ScoreCard = ({ score2 }) => {
   if (!score2) {
     return null;
   }
@@ -428,4 +428,4 @@ const Score = ({ score2 }) => {
   );
 };
 
-export default Score;
+export default ScoreCard;

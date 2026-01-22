@@ -27,7 +27,7 @@ const LossBackClaims = () => {
       },
     );
   };
-  console.log(data);
+
   return (
     <div className="lossback-wrapper col-md-10 featured-box">
       {data?.result?.length > 0 && (
