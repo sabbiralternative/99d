@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Tab from "./Tab";
 import Tab2 from "./Tab2";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -76,6 +76,10 @@ const Casino = () => {
   ]);
 
   console.log(data);
+
+  useEffect(() => {
+    setSelectedSubCategory("All");
+  }, [selectedCategory]);
 
   return (
     <div className="col-md-10 featured-box">
