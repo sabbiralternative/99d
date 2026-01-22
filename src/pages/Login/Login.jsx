@@ -18,6 +18,7 @@ import useWhatsApp from "../../hooks/whatsapp";
 import { GrAndroid } from "react-icons/gr";
 
 const Login = () => {
+  const closePopupForForever = localStorage.getItem("closePopupForForever");
   const { token } = useSelector((state) => state.auth);
   const { data: socialLink } = useWhatsApp();
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ const Login = () => {
       username: username,
       password: password,
       b2c: Settings.b2c,
+      apk: closePopupForForever ? true : false,
     };
     const data = await handleLogin(loginData).unwrap();
 
@@ -70,6 +72,7 @@ const Login = () => {
       username: "demo",
       password: "",
       b2c: Settings.b2c,
+      apk: closePopupForForever ? true : false,
     };
     const result = await handleLogin(loginData).unwrap();
     if (result.success) {
@@ -346,7 +349,7 @@ const Login = () => {
                               style={{ marginRight: "3px" }}
                               onClick={() =>
                                 handleOpenSocialLink(
-                                  socialLink?.result?.instagramLink
+                                  socialLink?.result?.instagramLink,
                                 )
                               }
                               title="Instagram"
@@ -400,7 +403,7 @@ const Login = () => {
                               style={{ marginRight: "3px" }}
                               onClick={() =>
                                 handleOpenSocialLink(
-                                  socialLink?.result?.telegramLink
+                                  socialLink?.result?.telegramLink,
                                 )
                               }
                               title="Telegram"
