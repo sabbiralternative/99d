@@ -25,7 +25,8 @@
 
 @font-face {
   font-family: "CasinoNumFont";
-  src: url("fonts/casino3dmarquee-webfont.woff2") format("woff2"),
+  src:
+    url("fonts/casino3dmarquee-webfont.woff2") format("woff2"),
     url("fonts/casino3dmarquee-webfont.woff") format("woff");
   font-weight: normal;
   font-style: normal;
@@ -246,8 +247,10 @@ p {
   ) !important;
   width: 100% !important;
   border-radius: 4px !important;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-    0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2) !important;
+  box-shadow:
+    0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.12),
+    0 1px 5px 0 rgba(0, 0, 0, 0.2) !important;
   border: 0 !important;
   padding: 8px 10px !important;
   cursor: pointer !important;
@@ -1996,8 +1999,8 @@ footer {
 
 .nav-tabs .nav-link {
   border-radius: 0;
-  color: var(--secondary-color);
-  background: var(--theme2-bg85);
+  color: var(--site-color);
+  background: var(--grey-bg);
   /*    border-right: 1px solid var(--theme2-bg) !important;*/
   border: 0;
 }
@@ -2030,7 +2033,9 @@ footer {
   padding: 0;
   max-width: 31.33%;
   float: left;
-  box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow:
+    0 10px 16px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background: #000;
 }
 
@@ -2722,7 +2727,8 @@ footer {
 .animation-iframe {
   height: 235px;
   width: 100%;
-  background-image: url(../../animation_banner.png),
+  background-image:
+    url(../../animation_banner.png),
     linear-gradient(var(--theme1-bg), var(--theme2-bg));
   background-repeat: no-repeat;
   background-position: center;
@@ -3082,7 +3088,8 @@ footer {
   height: 1px;
   width: 20px;
   background-color: red;
-  animation: pulse 4s ease infinite alternate,
+  animation:
+    pulse 4s ease infinite alternate,
     nudge 0.5s linear infinite alternate;
   border-radius: 100%;
   position: absolute;
@@ -3957,7 +3964,8 @@ search-game-ul {
 
 @font-face {
   font-family: "CasinoNumFont";
-  src: url("fonts/casino3dmarquee-webfont.woff2") format("woff2"),
+  src:
+    url("fonts/casino3dmarquee-webfont.woff2") format("woff2"),
     url("fonts/casino3dmarquee-webfont.woff") format("woff");
   font-weight: normal;
   font-style: normal;

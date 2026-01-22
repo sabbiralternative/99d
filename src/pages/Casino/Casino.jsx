@@ -1,90 +1,108 @@
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import Tab from "./Tab";
 import Tab2 from "./Tab2";
-import { useMac88AllQuery } from "../../redux/features/casino/casino.api";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useGetIndex } from "../../hooks";
+import images from "../../assets/images";
+import { FaSearch } from "react-icons/fa";
 
 const Casino = () => {
+  const { data } = useGetIndex({
+    type: "99_all_casino",
+  });
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const category = params.get("category");
   const navigate = useNavigate();
-  const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("MAC88");
-  const [subCategories, setSubCategories] = useState([]);
+  const [search, setSearch] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedSubCategory, setSelectedSubCategory] = useState("All");
-  const [filterCategoryData, setFilterCategoryData] = useState([]);
-  const { data } = useMac88AllQuery();
-
-  /* tables key data */
+  const allTables = data?.data?.allTables;
   const tables = data?.data?.tables?.[100000];
-
-  useEffect(() => {
-    const getCategory = () => {
-      if (tables) {
-        /* Get only four key */
-        const {
-          MAC88,
-          ["Mac88 Virtuals"]: mac88Virtuals,
-          ["Color Prediction"]: colorPrediction,
-          ["Fun Games"]: funGames,
-        } = tables;
-        /* Make a object of four key */
-        const filteredData = {
-          MAC88,
-          mac88Virtuals,
-          colorPrediction,
-          funGames,
-        };
-        /* Get data in a single array from four object */
-        const tableKeyData =
-          filteredData &&
-          Object.values(filteredData)
-            .flatMap((obj) => Object.values(obj))
-            .flat();
-
-        /*get category for first tab */
-        const categories = Array.from(
-          new Set(tableKeyData.map((item) => item.product))
-        );
-        setCategories(categories);
-        /* get category for first tab */
-
-        /* get sub category for first tabt */
-        const filterCasinoByProduct = tableKeyData?.filter(
-          (item) => item?.product === selectedCategory
-        );
-        const subCategory = Array.from(
-          new Set(filterCasinoByProduct.map((item) => item.category))
-        );
-
-        setSubCategories(subCategory);
-        /*get sub category for first tab*/
-
-        /* Get actual data by  category */
-        if (selectedSubCategory !== "All") {
-          const filterCasinoByCategory = filterCasinoByProduct?.filter(
-            (item) => item?.category === selectedSubCategory
-          );
-          setFilterCategoryData(filterCasinoByCategory);
-        } else {
-          setFilterCategoryData(filterCasinoByProduct);
-        }
-      }
-    };
-    getCategory();
-  }, [tables, selectedCategory, selectedSubCategory]);
-
-  useEffect(() => {
-    setSelectedSubCategory("All");
-  }, [selectedCategory]);
 
   const handleNavigateToIFrame = (casino) => {
     navigate(`/casino/${casino?.name?.replace(/ /g, "")}/${casino?.id}`);
   };
+
+  const allGames =
+    allTables &&
+    Object.values(allTables).flatMap((provider) =>
+      Object.values(provider).flat(),
+    );
+
+  const categories =
+    allGames && Array.from(new Set(allGames?.map((game) => game?.product)));
+
+  const subCategories = useMemo(() => {
+    if (allGames && categories && selectedCategory === "All") {
+      return Array.from(new Set(allGames?.map((game) => game?.category)));
+    }
+    if (allGames && categories && selectedCategory !== "All") {
+      const allCategory = allGames?.filter(
+        (game) => game?.product === selectedCategory,
+      );
+      return Array.from(new Set(allCategory?.map((game) => game?.category)));
+    }
+  }, [categories, allGames, selectedCategory]);
+
+  const filteredData = useMemo(() => {
+    if (allGames && categories && subCategories) {
+      if (search) {
+        return allGames?.filter((game) => game?.category?.includes(search));
+      }
+      if (!search) {
+        if (selectedCategory === "All" && selectedSubCategory === "All") {
+          return allGames;
+        }
+        if (selectedCategory !== "All" && selectedSubCategory === "All") {
+          return allGames?.filter((game) => game?.product === selectedCategory);
+        }
+        if (selectedCategory !== "All" && selectedSubCategory !== "All") {
+          return allGames?.filter(
+            (game) =>
+              game?.product === selectedCategory &&
+              game?.category === selectedSubCategory,
+          );
+        }
+      }
+    }
+  }, [
+    allGames,
+    categories,
+    selectedSubCategory,
+    subCategories,
+    selectedCategory,
+    search,
+  ]);
+
+  console.log(data);
 
   return (
     <div className="col-md-10 featured-box">
       <div>
         <div>
           <div className="home-products-container mt-1">
+            <div className="casino-title">
+              <img
+                src={images.casino}
+                className="=img-fluid"
+                style={{ width: "14px", height: "auto", marginRight: "1px" }}
+              />{" "}
+              Casino{" "}
+              <div className="casino_searchbar">
+                <div className="input-group">
+                  <input
+                    onChange={(e) => setSearch(e.target.value)}
+                    type="text"
+                    placeholder="Search Game..."
+                    className="ng-untouched ng-pristine ng-valid"
+                  />
+                  <span className="input-group-text">
+                    <FaSearch color="#fff" />
+                  </span>
+                </div>
+              </div>
+            </div>
             <div className="row row5">
               <div className="col-md-12">
                 <div className="casino_tabs_ul tab-container">
@@ -104,7 +122,7 @@ const Casino = () => {
                           <Tab2
                             setSelectedSubCategory={setSelectedSubCategory}
                             selectedSubCategory={selectedSubCategory}
-                            categories={subCategories}
+                            subCategories={subCategories}
                           />
 
                           <div className="tab-content">
@@ -115,7 +133,7 @@ const Casino = () => {
                               className="tab-pane active"
                             >
                               <div className="row row-casino">
-                                {filterCategoryData?.map((casino) => {
+                                {filteredData?.map((casino) => {
                                   return (
                                     <div
                                       onClick={() =>

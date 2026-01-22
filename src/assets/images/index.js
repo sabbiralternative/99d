@@ -41,8 +41,10 @@ import promotionBanner from "../img/promotionBanner.webp";
 import cashBundle from "../img/cash-bundle.webp";
 import giftCard from "../img/giftCard.webp";
 import redeemCardGift from "../img/redeemCardGift.svg";
+import casino from "../img/99998.png";
 
 export default {
+  casino,
   cashBundle,
   giftCard,
   redeemCardGift,

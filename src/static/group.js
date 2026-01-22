@@ -147,12 +147,12 @@ export const headerTab = [
     group: null,
     path: "/casino",
   },
-  {
-    id: 5,
-    name: "Int Casino",
-    group: null,
-    path: "/int-casino",
-  },
+  // {
+  //   id: 5,
+  //   name: "Int Casino",
+  //   group: null,
+  //   path: "/int-casino",
+  // },
 
   {
     id: 7,

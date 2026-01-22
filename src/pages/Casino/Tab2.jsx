@@ -1,4 +1,8 @@
-const Tab2 = ({ categories, setSelectedSubCategory, selectedSubCategory }) => {
+const Tab2 = ({
+  subCategories,
+  setSelectedSubCategory,
+  selectedSubCategory,
+}) => {
   return (
     <ul className="nav nav-tabs">
       <li
@@ -24,7 +28,7 @@ const Tab2 = ({ categories, setSelectedSubCategory, selectedSubCategory }) => {
           </span>
         </a>
       </li>
-      {categories?.map((category) => {
+      {subCategories?.map((category) => {
         return (
           <li
             style={{
@@ -46,7 +50,7 @@ const Tab2 = ({ categories, setSelectedSubCategory, selectedSubCategory }) => {
               <span>
                 <img
                   className="img-fluid"
-                  src={`/icon/${category
+                  src={`/d/icon/${category
                     ?.split(" ")
                     .join("")
                     .toLowerCase()}.svg`}
