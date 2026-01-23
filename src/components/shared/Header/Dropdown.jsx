@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import useWhatsApp from "../../../hooks/whatsapp";
 
 const Dropdown = () => {
+  const closePopupForForever = localStorage.getItem("closePopupForForever");
   const { data: socialLink } = useWhatsApp();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -49,10 +50,18 @@ const Dropdown = () => {
         </Link>
       </li>
       <li>
-        <Link to="/lossback-claims" style={{ color: "black" }}>
-          Loss Back Claims
+        <Link to="/lossback-bonus" style={{ color: "black" }}>
+          Lossback Bonus
         </Link>
       </li>
+      {closePopupForForever && (
+        <li>
+          <Link to="/app-only-bonus" style={{ color: "black" }}>
+            App Only Bonus
+          </Link>
+        </li>
+      )}
+
       {/* <li>
         <Link to="/referral-statement">Referral Statement</Link>
       </li> */}

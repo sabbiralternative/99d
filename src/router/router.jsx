@@ -29,6 +29,7 @@ import AffiliateUserStatement from "../pages/AffiliateUserStatement/AffiliateUse
 import APK from "../pages/APK/APK";
 import Promotions from "../pages/Promotions/Promotions";
 import LossBackClaims from "../pages/LossBackClaims/LossBackClaims";
+import AppOnlyBonus from "../pages/AppOnlyBonus/AppOnlyBonus";
 
 export const router = createBrowserRouter(
   [
@@ -122,8 +123,12 @@ export const router = createBrowserRouter(
           element: <Promotions />,
         },
         {
-          path: "/lossback-claims",
+          path: "/lossback-bonus",
           element: <LossBackClaims />,
+        },
+        {
+          path: "/app-only-bonus",
+          element: <AppOnlyBonus />,
         },
       ],
     },
@@ -155,5 +160,5 @@ export const router = createBrowserRouter(
   ],
   {
     basename: import.meta.env.BASE_URL ?? "/",
-  }
+  },
 );
