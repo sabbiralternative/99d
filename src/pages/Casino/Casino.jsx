@@ -12,13 +12,15 @@ const Casino = () => {
   });
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const category = params.get("category");
+  const name = params.get("name");
+  const gameName = params.get("gameName");
+
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedSubCategory, setSelectedSubCategory] = useState("All");
   const allTables = data?.data?.allTables;
-  const tables = data?.data?.tables?.[100000];
+  // const tables = data?.data?.tables?.[100000];
 
   const handleNavigateToIFrame = (casino) => {
     navigate(`/casino/${casino?.name?.replace(/ /g, "")}/${casino?.id}`);
@@ -29,6 +31,10 @@ const Casino = () => {
     Object.values(allTables).flatMap((provider) =>
       Object.values(provider).flat(),
     );
+
+  // const tablesGames =
+  //   tables &&
+  //   Object.values(tables).flatMap((provider) => Object.values(provider).flat());
 
   const categories =
     allGames && Array.from(new Set(allGames?.map((game) => game?.product)));
@@ -54,6 +60,11 @@ const Casino = () => {
         if (selectedCategory === "All" && selectedSubCategory === "All") {
           return allGames;
         }
+        if (selectedCategory === "All" && selectedSubCategory !== "All") {
+          return allGames?.filter(
+            (game) => game?.category === selectedSubCategory,
+          );
+        }
         if (selectedCategory !== "All" && selectedSubCategory === "All") {
           return allGames?.filter((game) => game?.product === selectedCategory);
         }
@@ -75,11 +86,18 @@ const Casino = () => {
     search,
   ]);
 
-  console.log(data);
-
   useEffect(() => {
     setSelectedSubCategory("All");
   }, [selectedCategory]);
+
+  useEffect(() => {
+    if (allGames) {
+      if (name && gameName) {
+        setSelectedCategory(name);
+        setSelectedSubCategory(gameName);
+      }
+    }
+  }, [allGames, gameName, name]);
 
   return (
     <div className="col-md-10 featured-box">

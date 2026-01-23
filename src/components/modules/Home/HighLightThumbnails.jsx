@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 const HighLightThumbnails = ({ highlight_casino }) => {
   const navigate = useNavigate();
   const handleNavigateToIFrame = (casino) => {
-    navigate(`/casino?category=${casino?.category}`);
+    navigate(`/casino?name=${casino?.product}&gameName=${casino?.category}`);
   };
 
   return (

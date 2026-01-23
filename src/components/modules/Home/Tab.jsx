@@ -13,7 +13,7 @@ const Tab = () => {
         {homeTab.map((tab) => {
           return (
             <li
-              style={{ color: "white" }}
+              style={{ color: group === tab.group ? "white" : "black" }}
               key={tab.id}
               className={` nav-item ${group === tab.group ? "active" : ""}`}
             >

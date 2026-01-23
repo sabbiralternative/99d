@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 const OurProviders = ({ our_provider }) => {
   const navigate = useNavigate();
   const handleNavigateToIFrame = (casino) => {
-    navigate(`/casino/${casino?.name?.replace(/ /g, "")}/${casino?.id}`);
+    navigate(`/casino?name=${casino?.product}&gameName=${casino?.category}`);
   };
   return (
     <div className="row mx-0 mt-0">
