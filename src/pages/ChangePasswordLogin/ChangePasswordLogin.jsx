@@ -10,8 +10,11 @@ import {
   faSignInAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { useChangePasswordMutation } from "../../redux/features/auth/authApi";
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/features/auth/authSlice";
 
 const ChangePasswordLogin = () => {
+  const dispatch = useDispatch();
   const { logo } = useContext(ApiContext);
   const navigate = useNavigate();
   const [handleChangePassword] = useChangePasswordMutation();
@@ -27,8 +30,7 @@ const ChangePasswordLogin = () => {
     const data = await handleChangePassword(payload).unwrap();
     if (data.success) {
       toast.success(data?.result?.message);
-      localStorage.removeItem("changePassword");
-      localStorage.clear();
+      dispatch(logout());
       navigate("/login");
     } else {
       toast.error(data?.error?.errorMessage);

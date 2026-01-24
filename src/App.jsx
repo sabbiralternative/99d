@@ -2,9 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import disableDevtool from "disable-devtool";
-
 import MainLayout from "./layout/MainLayout";
-import { Settings } from "./api";
 import { logout } from "./redux/features/auth/authSlice";
 import useWhatsApp from "./hooks/whatsapp";
 
@@ -16,7 +14,7 @@ let metaPixelInitialized = false;
 
 function App() {
   const { data } = useWhatsApp();
-  const disabledDevtool = Settings.disabledDevtool;
+  const disabledDevtool = data?.result?.disabledDevtool;
 
   const navigate = useNavigate();
   const location = useLocation();
