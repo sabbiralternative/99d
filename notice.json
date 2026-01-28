@@ -43,7 +43,8 @@
       "build": "development",
       "betDelay": false,
       "otp": true,
-      "otpWhatsapp": true
+      "otpWhatsapp": true,
+      "appOnly": false
     },
 
     "endpoint": {

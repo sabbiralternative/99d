@@ -18,7 +18,7 @@ import useWhatsApp from "../../hooks/whatsapp";
 import { GrAndroid } from "react-icons/gr";
 
 const Login = () => {
-  const closePopupForForever = localStorage.getItem("closePopupForForever");
+  const { closePopupForForever } = useSelector((state) => state?.global);
   const { token } = useSelector((state) => state.auth);
   const { data: socialLink } = useWhatsApp();
   const navigate = useNavigate();

@@ -1,10 +1,10 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../redux/features/auth/authSlice";
 import { Link, useNavigate } from "react-router-dom";
 import useWhatsApp from "../../../hooks/whatsapp";
 
 const Dropdown = () => {
-  const closePopupForForever = localStorage.getItem("closePopupForForever");
+  const { closePopupForForever } = useSelector((state) => state?.global);
   const { data: socialLink } = useWhatsApp();
   const dispatch = useDispatch();
   const navigate = useNavigate();

@@ -13,15 +13,21 @@ import { Settings } from "../../../api";
 import useWhatsApp from "../../../hooks/whatsapp";
 import Search from "./Search";
 import Referral from "../../modals/Referral/Referral";
-import { setShowAPKModal } from "../../../redux/features/global/globalSlice";
+import {
+  setClosePopUpForForever,
+  setShowAPKModal,
+} from "../../../redux/features/global/globalSlice";
 import DownloadAPK from "../../modals/DownloadAPK/DownloadAPK";
 import BuildVersion from "../../modals/BuildVersion/BuildVersion";
+import Error from "../../modals/Error/Error";
 
 const Header = () => {
   const [showBuildVersion, setShowBuildVersion] = useState(false);
   const stored_build_version = localStorage.getItem("build_version");
   const navigate = useNavigate();
-  const { showAPKModal } = useSelector((state) => state?.global);
+  const { showAPKModal, closePopupForForever } = useSelector(
+    (state) => state?.global,
+  );
   const dispatch = useDispatch();
   const location = useLocation();
   const [showReferral, setShowReferral] = useState(false);
@@ -39,9 +45,13 @@ const Header = () => {
   };
 
   useEffect(() => {
+    const closePopupForForever = localStorage.getItem("closePopupForForever");
+    dispatch(setClosePopUpForForever(closePopupForForever ? true : false));
     const apk_modal_shown = sessionStorage.getItem("apk_modal_shown");
     if (location?.state?.pathname === "/apk" || location.pathname === "/apk") {
       sessionStorage.setItem("apk_modal_shown", true);
+      localStorage.setItem("closePopupForForever", true);
+      dispatch(setClosePopUpForForever(true));
     } else {
       if (!apk_modal_shown) {
         dispatch(setShowAPKModal(true));
@@ -64,6 +74,9 @@ const Header = () => {
     }
   }, [socialLink?.result?.build_version, stored_build_version]);
 
+  if (Settings.appOnly && !closePopupForForever) {
+    return <Error />;
+  }
   return (
     <div>
       {showReferral && <Referral setShowReferral={setShowReferral} />}

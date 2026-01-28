@@ -27,6 +27,7 @@ function App() {
 
   // Disable devtools
   useEffect(() => {
+    if (window.location.hostname === "localhost") return;
     if (!disabledDevtool) return;
 
     disableDevtool({

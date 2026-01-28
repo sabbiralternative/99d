@@ -86,4 +86,5 @@ export const Settings = {
   complaint: "",
   sb_cashout: "",
   fast_cashout: "",
+  appOnly: "",
 };
