@@ -14,13 +14,11 @@ import {
   faSignInAlt,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import useWhatsApp from "../../hooks/whatsapp";
 import { GrAndroid } from "react-icons/gr";
 
 const Login = () => {
   const { closePopupForForever } = useSelector((state) => state?.global);
   const { token } = useSelector((state) => state.auth);
-  const { data: socialLink } = useWhatsApp();
   const navigate = useNavigate();
   const { logo } = useContext(ApiContext);
   const dispatch = useDispatch();
@@ -106,8 +104,8 @@ const Login = () => {
   };
 
   // const openWhatsapp = () => {
-  //   if (socialLink?.result?.whatsapplink) {
-  //     window.open(socialLink?.result?.whatsapplink, "_blank");
+  //   if (Settings.whatsapplink) {
+  //     window.open(Settings.whatsapplink, "_blank");
   //   }
   // };
 
@@ -118,10 +116,10 @@ const Login = () => {
   };
 
   const handleOpenWhatsapp = () => {
-    if (token && socialLink?.result?.branchWhatsapplink) {
-      window.open(socialLink?.result?.branchWhatsapplink, "_blank");
+    if (token && Settings.branchWhatsapplink) {
+      window.open(Settings.branchWhatsapplink, "_blank");
     } else {
-      window.open(socialLink?.result?.whatsapplink, "_blank");
+      window.open(Settings.whatsapplink, "_blank");
     }
   };
 
@@ -257,7 +255,7 @@ const Login = () => {
                     )}
 
                     {/* {Settings.registrationWhatsapp &&
-                      socialLink?.result?.whatsapplink && (
+                      Settings.whatsapplink && (
                         <div className="form-group text-center mt-2">
                           <button
                             onClick={openWhatsapp}
@@ -287,9 +285,9 @@ const Login = () => {
                         </button>
                       </div>
                     )}
-                    {socialLink?.result?.whatsapplink ||
-                    socialLink?.result?.instagramLink ||
-                    socialLink?.result?.telegramLink ? (
+                    {Settings.whatsapplink ||
+                    Settings.instagramLink ||
+                    Settings.telegramLink ? (
                       <div
                         style={{
                           display: "flex",
@@ -301,8 +299,8 @@ const Login = () => {
                       >
                         <span style={{ marginBottom: "5px" }}>Contact Us</span>
                         <div>
-                          {socialLink?.result?.whatsapplink ||
-                          socialLink?.result?.branchWhatsapplink ? (
+                          {Settings.whatsapplink ||
+                          Settings.branchWhatsapplink ? (
                             <a
                               onClick={handleOpenWhatsapp}
                               title="whatsapp"
@@ -344,13 +342,11 @@ const Login = () => {
                             </a>
                           ) : null}
 
-                          {socialLink?.result?.instagramLink && (
+                          {Settings.instagramLink && (
                             <a
                               style={{ marginRight: "3px" }}
                               onClick={() =>
-                                handleOpenSocialLink(
-                                  socialLink?.result?.instagramLink,
-                                )
+                                handleOpenSocialLink(Settings.instagramLink)
                               }
                               title="Instagram"
                               target="_blank"
@@ -398,13 +394,11 @@ const Login = () => {
                             </a>
                           )}
 
-                          {socialLink?.result?.telegramLink && (
+                          {Settings.telegramLink && (
                             <a
                               style={{ marginRight: "3px" }}
                               onClick={() =>
-                                handleOpenSocialLink(
-                                  socialLink?.result?.telegramLink,
-                                )
+                                handleOpenSocialLink(Settings.telegramLink)
                               }
                               title="Telegram"
                               target="_blank"

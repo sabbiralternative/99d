@@ -10,7 +10,6 @@ import Dropdown from "./Dropdown";
 import images from "../../../assets/images";
 import HeaderBottomMenu from "./HeaderBottomMenu";
 import { Settings } from "../../../api";
-import useWhatsApp from "../../../hooks/whatsapp";
 import Search from "./Search";
 import Referral from "../../modals/Referral/Referral";
 import {
@@ -34,13 +33,12 @@ const Header = () => {
   const { user, token } = useSelector((state) => state.auth);
   const { data: balance } = useBalance();
   const { logo } = useContext(ApiContext);
-  const { data: socialLink } = useWhatsApp();
 
   const navigateWhatsApp = () => {
-    if (token && socialLink?.result?.branchWhatsapplink) {
-      window.open(socialLink?.result?.branchWhatsapplink, "_blank");
+    if (token && Settings.branchWhatsapplink) {
+      window.open(Settings.branchWhatsapplink, "_blank");
     } else {
-      window.open(socialLink?.result?.whatsapplink, "_blank");
+      window.open(Settings.whatsapplink, "_blank");
     }
   };
 
@@ -60,7 +58,7 @@ const Header = () => {
   }, [dispatch, location?.state?.pathname, location.pathname]);
 
   useEffect(() => {
-    const newVersion = socialLink?.result?.build_version;
+    const newVersion = Settings.build_version;
     if (!stored_build_version) {
       if (newVersion) {
         localStorage.setItem("build_version", newVersion);
@@ -72,7 +70,7 @@ const Header = () => {
         setShowBuildVersion(true);
       }
     }
-  }, [socialLink?.result?.build_version, stored_build_version]);
+  }, [stored_build_version]);
 
   if (Settings.appOnly && !closePopupForForever) {
     return <Error />;
@@ -83,7 +81,7 @@ const Header = () => {
       {Settings?.apkLink && showAPKModal && <DownloadAPK />}
       {showBuildVersion && !showAPKModal && (
         <BuildVersion
-          build_version={socialLink?.result?.build_version}
+          build_version={Settings.build_version}
           setShowBuildVersion={setShowBuildVersion}
         />
       )}
@@ -202,13 +200,11 @@ const Header = () => {
         </div>
         <div />
       </header>
-      {socialLink?.result?.instagramLink ? (
+      {Settings.instagramLink ? (
         <a
           style={{ background: "none", bottom: "30%", right: "4.5%" }}
           className="whatsapp_link"
-          onClick={() =>
-            window.open(socialLink?.result?.instagramLink, "_blank")
-          }
+          onClick={() => window.open(Settings.instagramLink, "_blank")}
         >
           <img
             style={{ filter: "none", height: "60px", width: "60px" }}
@@ -216,13 +212,11 @@ const Header = () => {
           />
         </a>
       ) : null}
-      {socialLink?.result?.telegramLink ? (
+      {Settings.telegramLink ? (
         <a
           style={{ background: "none", bottom: "17%", right: "4.5%" }}
           className="whatsapp_link"
-          onClick={() =>
-            window.open(socialLink?.result?.telegramLink, "_blank")
-          }
+          onClick={() => window.open(Settings.telegramLink, "_blank")}
         >
           <img
             style={{ filter: "none", height: "60px", width: "60px" }}
@@ -230,8 +224,7 @@ const Header = () => {
           />
         </a>
       ) : null}
-      {socialLink?.result?.whatsapplink ||
-      socialLink?.result?.branchWhatsapplink ? (
+      {Settings.whatsapplink || Settings.branchWhatsapplink ? (
         <a
           style={{ background: "none" }}
           className="whatsapp_link"

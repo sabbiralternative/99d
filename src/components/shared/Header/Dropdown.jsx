@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../redux/features/auth/authSlice";
 import { Link, useNavigate } from "react-router-dom";
-import useWhatsApp from "../../../hooks/whatsapp";
+import { Settings } from "../../../api";
 
 const Dropdown = () => {
   const { closePopupForForever } = useSelector((state) => state?.global);
-  const { data: socialLink } = useWhatsApp();
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -21,12 +21,8 @@ const Dropdown = () => {
 
   return (
     <ul>
-      {socialLink?.result?.branchWhatsapplink && (
-        <li
-          onClick={() =>
-            handleOpenSocialLink(socialLink?.result?.branchWhatsapplink)
-          }
-        >
+      {Settings.branchWhatsapplink && (
+        <li onClick={() => handleOpenSocialLink(Settings.branchWhatsapplink)}>
           <Link>Deposit Support</Link>
         </li>
       )}
@@ -37,7 +33,7 @@ const Dropdown = () => {
       <li>
         <Link to="/bonus-statement">Bonus Statement</Link>
       </li>
-      {socialLink?.result?.referral && (
+      {Settings.referral && (
         <li>
           <Link to="/affiliate" style={{ color: "black" }}>
             Affiliate
@@ -90,9 +86,9 @@ const Dropdown = () => {
       <li>
         <Link to="/change-password">Change Password</Link>
       </li>
-      {/* {socialLink?.result?.whatsapplink && (
+      {/* {Settings.whatsapplink && (
         <li
-          onClick={() => handleOpenSocialLink(socialLink?.result?.whatsapplink)}
+          onClick={() => handleOpenSocialLink(Settings.whatsapplink)}
         >
           <Link>All Support</Link>
         </li>

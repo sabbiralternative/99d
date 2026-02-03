@@ -25,7 +25,6 @@ import {
   handleDecreasePrice,
   handleIncreasePrice,
 } from "../../../utils/editBetSlipPrice";
-import useWhatsApp from "../../../hooks/whatsapp";
 import { AxiosJSEncrypt } from "../../../lib/AxiosJSEncrypt";
 
 const BetSlip = ({ profit, data }) => {
@@ -35,7 +34,6 @@ const BetSlip = ({ profit, data }) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const { eventId } = useParams();
-  const { data: socialLink } = useWhatsApp();
   const { refetch: refetchCurrentBets } = useCurrentBets(eventId);
   const { refetch: refetchBalance } = useBalance();
   const { refetch: refetchExposure } = useExposure(eventId);
@@ -112,7 +110,7 @@ const BetSlip = ({ profit, data }) => {
         ...payload,
         site: Settings.siteUrl,
         nounce: uuidv4(),
-        isbetDelay: socialLink?.result?.bet_delay,
+        isbetDelay: Settings.bet_delay,
         apk: closePopupForForever ? true : false,
       },
     ];
@@ -135,9 +133,7 @@ const BetSlip = ({ profit, data }) => {
       delay = 9000;
     } else {
       setBetDelay(currentPlaceBetEvent?.betDelay);
-      delay = socialLink?.result?.bet_delay
-        ? currentPlaceBetEvent?.betDelay * 1000
-        : 0;
+      delay = Settings.bet_delay ? currentPlaceBetEvent?.betDelay * 1000 : 0;
     }
     // Introduce a delay before calling the API
     setTimeout(async () => {
