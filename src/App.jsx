@@ -5,6 +5,7 @@ import disableDevtool from "disable-devtool";
 import MainLayout from "./layout/MainLayout";
 import { logout } from "./redux/features/auth/authSlice";
 import { Settings } from "./api";
+import MaintenanceMessage from "./components/UI/MaintenanceMessage/MaintenanceMessage";
 
 /**
  * GLOBAL META PIXEL GUARD
@@ -80,6 +81,10 @@ function App() {
 
     metaPixelInitialized = true;
   }, []);
+
+  if (Settings.maintenance_message) {
+    return <MaintenanceMessage />;
+  }
 
   return <MainLayout />;
 }
