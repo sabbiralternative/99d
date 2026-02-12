@@ -78,7 +78,7 @@ const Header = () => {
   return (
     <div>
       {showReferral && <Referral setShowReferral={setShowReferral} />}
-      {Settings?.apkLink && showAPKModal && <DownloadAPK />}
+      {Settings.apk_link && showAPKModal && <DownloadAPK />}
       {showBuildVersion && !showAPKModal && (
         <BuildVersion
           build_version={Settings.build_version}
