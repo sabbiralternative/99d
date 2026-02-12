@@ -12,12 +12,12 @@ const ApiProvider = ({ children }) => {
   const baseUrl = notice?.result?.settings?.baseUrl;
 
   useEffect(() => {
-    const fetchAPI = () => {
-      getSetApis(setNoticeLoaded, baseUrl);
-    };
-    fetchAPI();
-    const interval = setInterval(fetchAPI, 300000);
-    return () => clearInterval(interval);
+    if (!noticeLoaded) {
+      const fetchAPI = () => {
+        getSetApis(setNoticeLoaded, baseUrl);
+      };
+      fetchAPI();
+    }
   }, [noticeLoaded, baseUrl]);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const ApiProvider = ({ children }) => {
         document.title = Settings.siteTitle;
       }
     }
-  }, [noticeLoaded]);
+  }, [noticeLoaded, closePopupForForever]);
 
   if (!noticeLoaded) {
     return;
