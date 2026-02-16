@@ -244,7 +244,7 @@ const Bookmaker = ({ bookmaker }) => {
               <div>
                 <div className="market-title mt-1">
                   {games?.name?.toUpperCase()}
-                  {Settings.betFairCashOut &&
+                  {Settings.cashout &&
                     games?.runners?.length !== 3 &&
                     games?.status === "OPEN" &&
                     !speedCashOut && (
@@ -267,7 +267,7 @@ const Bookmaker = ({ bookmaker }) => {
                           `(${teamProfitForGame.profit.toFixed(2)})`}
                       </button>
                     )}
-                  {Settings.betFairCashOut &&
+                  {Settings.cashout &&
                     games?.runners?.length !== 3 &&
                     games?.status === "OPEN" &&
                     games?.name !== "toss" &&

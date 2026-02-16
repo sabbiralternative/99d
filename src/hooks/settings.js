@@ -23,10 +23,10 @@ export const useSettingsMutation = () => {
           });
         }
         if (Settings.build === "production") {
-          const logo = `${API.assets}/${Settings.siteUrl}/logo.${Settings.logoFormat}`;
+          const logo = `${API.assets}/${Settings.siteUrl}/logo.${Settings.logo_format}`;
           setLogo(logo);
         } else {
-          setLogo(`/src/assets/img/gold365/logo.${Settings.logoFormat}`);
+          setLogo(`/src/assets/img/gold365/logo.${Settings.logo_format}`);
         }
 
         const link = document.createElement("link");

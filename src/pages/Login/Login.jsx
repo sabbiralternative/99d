@@ -144,8 +144,8 @@ const Login = () => {
                 <div className="log-logo m-b-20 text-center">
                   <img
                     style={{
-                      height: `${Settings.logoHeight}`,
-                      width: `${Settings.logoWidth}`,
+                      height: `${Settings.logo_height}`,
+                      width: `${Settings.logo_width}`,
                     }}
                     className="logo-login"
                     src={logo}
@@ -207,7 +207,7 @@ const Login = () => {
                         <FontAwesomeIcon icon={faSignInAlt} className="ml-2" />
                       </button>
                     </div>
-                    {Settings.demoLogin && (
+                    {Settings.demo_login && (
                       <div className="form-group text-center mb-0">
                         <button
                           onClick={loginWithDemo}
@@ -254,7 +254,7 @@ const Login = () => {
                       </div>
                     )}
 
-                    {/* {Settings.registrationWhatsapp &&
+                    {/* {Settings.registration_whatsapp &&
                       Settings.whatsapplink && (
                         <div className="form-group text-center mt-2">
                           <button

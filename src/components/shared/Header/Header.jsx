@@ -72,7 +72,7 @@ const Header = () => {
     }
   }, [stored_build_version]);
 
-  if (Settings.appOnly && !closePopupForForever) {
+  if (Settings.app_only && !closePopupForForever) {
     return <Error />;
   }
   return (
@@ -97,8 +97,8 @@ const Header = () => {
                 >
                   <img
                     style={{
-                      height: `${Settings.logoHeight}`,
-                      width: `${Settings.logoWidth}`,
+                      height: `${Settings.logo_height}`,
+                      width: `${Settings.logo_width}`,
                     }}
                     className="logo-icon"
                     src={logo}

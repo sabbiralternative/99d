@@ -92,8 +92,8 @@ const Register = () => {
                 >
                   <img
                     style={{
-                      height: `${Settings.logoHeight}`,
-                      width: `${Settings.logoWidth}`,
+                      height: `${Settings.logo_height}`,
+                      width: `${Settings.logo_width}`,
                     }}
                     className="logo-login"
                     src={logo}

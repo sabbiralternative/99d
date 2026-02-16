@@ -46,14 +46,13 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
       const data = res?.data;
 
       if (data?.success) {
-        if (Settings?.paymentIntent) {
-          setPgPaymentMethods(data?.result);
-          setTime(60 * 20);
-          setQrcode(data?.result?.upi);
-          setOrderId(data?.result?.orderId);
-        } else {
-          window.location.href = data?.result?.link;
-        }
+        // if (Settings?.paymentIntent) {
+        //   setPgPaymentMethods(data?.result);
+        //   setTime(60 * 20);
+        //   setQrcode(data?.result?.upi);
+        //   setOrderId(data?.result?.orderId);
+        // }
+        window.location.href = data?.result?.link;
       } else {
         toast.error(data?.result?.message);
       }
@@ -256,7 +255,8 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
                     balance.{" "}
                   </p>
                   <p>
-                    5. NEFT receiving time varies from 40 minutes to 2 hours.{" "}
+                    5. NEFT receiving time varies from 40 minutes to 2
+                    hours.{" "}
                   </p>
                   <p>
                     6. In case of account modification: payment valid for 1 hour

@@ -15,7 +15,7 @@ import {
 
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../redux/features/auth/authSlice";
-import getOtpOnWhatsapp from "../../utils/getOtpOnWhatsapp";
+// import getOtpOnWhatsapp from "../../utils/getOtpOnWhatsapp";
 import images from "../../assets/images";
 const Register = () => {
   const { token } = useSelector((state) => state.auth);
@@ -133,9 +133,9 @@ const Register = () => {
     }
   };
 
-  const handleGetOtpOnWhatsapp = async () => {
-    await getOtpOnWhatsapp(userData.mobileNo, setOrder);
-  };
+  // const handleGetOtpOnWhatsapp = async () => {
+  //   await getOtpOnWhatsapp(userData.mobileNo, setOrder);
+  // };
   const getWhatsappOTP = (link) => {
     window.open(link, "_blank");
   };
@@ -163,8 +163,8 @@ const Register = () => {
                 >
                   <img
                     style={{
-                      height: `${Settings.logoHeight}`,
-                      width: `${Settings.logoWidth}`,
+                      height: `${Settings.logo_height}`,
+                      width: `${Settings.logo_width}`,
                     }}
                     className="logo-login"
                     src={logo}
@@ -217,7 +217,7 @@ const Register = () => {
                           >
                             Get OTP Message
                           </button>
-                          {Settings.otpWhatsapp && (
+                          {/* {Settings.otpWhatsapp && (
                             <button
                               onClick={handleGetOtpOnWhatsapp}
                               disabled={userData?.mobileNo?.length < 10}
@@ -226,7 +226,7 @@ const Register = () => {
                             >
                               Get OTP Whatsapp
                             </button>
-                          )}
+                          )} */}
                         </Fragment>
                       )}
                     </div>
@@ -336,7 +336,7 @@ const Register = () => {
                     </div>
                     {!token &&
                       Settings.whatsapplink &&
-                      Settings.registrationWhatsapp && (
+                      Settings.registration_whatsapp && (
                         <Fragment>
                           <div
                             style={{
