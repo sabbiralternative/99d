@@ -19,8 +19,6 @@ const Casino = () => {
 
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
-  // const [name, setSelectedCategory] = useState("All");
-  // const [gameName, setSelectedSubCategory] = useState("All");
   const allTables = data?.data?.allTables;
   // const tables = data?.data?.tables?.[100000];
 
@@ -80,19 +78,6 @@ const Casino = () => {
       }
     }
   }, [allGames, categories, category, subCategories, product, search]);
-
-  // useEffect(() => {
-  //   setSelectedSubCategory("All");
-  // }, [name]);
-
-  // useEffect(() => {
-  //   if (allGames) {
-  //     if (name && gameName) {
-  //       setSelectedCategory(name);
-  //       setSelectedSubCategory(gameName);
-  //     }
-  //   }
-  // }, [allGames, gameName, name]);
 
   return (
     <div className="col-md-10 featured-box">
