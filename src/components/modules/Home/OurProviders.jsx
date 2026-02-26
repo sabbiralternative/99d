@@ -5,7 +5,7 @@ const OurProviders = ({ our_provider }) => {
   const { token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const handleNavigateToIFrame = (casino) => {
-    // if (!token) return navigate("/login");
+    if (!token) return navigate("/login");
     navigate(`/casino?product=${casino?.product}&category=${casino?.category}`);
   };
 
