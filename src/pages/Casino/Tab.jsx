@@ -1,4 +1,8 @@
-const Tab = ({ categories, setSelectedCategory, selectedCategory }) => {
+import { useNavigate } from "react-router-dom";
+
+const Tab = ({ categories, selectedCategory }) => {
+  const navigate = useNavigate();
+
   return (
     <ul
       role="tablist"
@@ -11,7 +15,9 @@ const Tab = ({ categories, setSelectedCategory, selectedCategory }) => {
           color: selectedCategory === "All" ? "white" : "black",
           borderRight: "1px solid var(--theme2-bg)",
         }}
-        onClick={() => setSelectedCategory("All")}
+        onClick={() => {
+          navigate(`/casino?product=All&category=All`);
+        }}
         className={` nav-item ${selectedCategory === "All" ? "active" : ""}`}
       >
         <a className={`nav-link ${selectedCategory === "All" ? "active" : ""}`}>
@@ -25,7 +31,9 @@ const Tab = ({ categories, setSelectedCategory, selectedCategory }) => {
               color: selectedCategory === category ? "white" : "black",
               borderRight: "1px solid var(--theme2-bg)",
             }}
-            onClick={() => setSelectedCategory(category)}
+            onClick={() => {
+              navigate(`/casino?product=${category}&category=All`);
+            }}
             key={category}
             className={` nav-item ${
               selectedCategory === category ? "active" : ""

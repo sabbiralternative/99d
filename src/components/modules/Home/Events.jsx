@@ -13,7 +13,7 @@ const Events = () => {
     { sportsType: group },
     {
       pollingInterval: 1000,
-    }
+    },
   );
 
   const filterSports =
@@ -24,6 +24,12 @@ const Events = () => {
 
   const navigateGameList = (keys) => {
     navigate(`/event-details/${data[keys]?.eventTypeId}/${keys}`);
+  };
+
+  const eventIcon = {
+    1: images.football,
+    2: images.tennis,
+    4: images.cricket,
   };
 
   return (
@@ -74,7 +80,7 @@ const Events = () => {
                                   <span className="sport-icon">
                                     <img
                                       alt=""
-                                      src={`/src/assets/img/${data?.[key]?.eventTypeId}.png`}
+                                      src={eventIcon[data?.[key]?.eventTypeId]}
                                     />
                                   </span>
                                   <a className="text-dark">

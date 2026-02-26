@@ -145,7 +145,7 @@ export const headerTab = [
     id: 4,
     name: "Casino",
     group: null,
-    path: "/casino",
+    path: "/casino?product=All&category=All",
   },
   // {
   //   id: 5,

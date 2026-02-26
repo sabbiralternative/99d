@@ -1,15 +1,17 @@
-const Tab2 = ({
-  subCategories,
-  setSelectedSubCategory,
-  selectedSubCategory,
-}) => {
+import { useNavigate } from "react-router-dom";
+
+const Tab2 = ({ subCategories, product, selectedSubCategory }) => {
+  const navigate = useNavigate();
+
   return (
     <ul className="nav nav-tabs">
       <li
         style={{
           background: selectedSubCategory === "All" ? "var(--theme2-bg)" : "",
         }}
-        onClick={() => setSelectedSubCategory("All")}
+        onClick={() => {
+          navigate(`/casino?product=${product}&category=All`);
+        }}
         className={` nav-item ${
           selectedSubCategory === "All" ? "active " : ""
         }`}
@@ -35,7 +37,9 @@ const Tab2 = ({
               background:
                 selectedSubCategory === category ? "var(--theme2-bg)" : "",
             }}
-            onClick={() => setSelectedSubCategory(category)}
+            onClick={() => {
+              navigate(`/casino?product=${product}&category=${category}`);
+            }}
             key={category}
             className={`nav-item  ${
               selectedSubCategory === category ? "active" : ""

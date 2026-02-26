@@ -1,10 +1,14 @@
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const OurProviders = ({ our_provider }) => {
+  const { token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const handleNavigateToIFrame = (casino) => {
-    navigate(`/casino?name=${casino?.product}&gameName=${casino?.category}`);
+    // if (!token) return navigate("/login");
+    navigate(`/casino?product=${casino?.product}&category=${casino?.category}`);
   };
+
   return (
     <div className="row mx-0 mt-0">
       <h2 className="newheading">

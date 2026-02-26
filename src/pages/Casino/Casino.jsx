@@ -1,28 +1,31 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Tab from "./Tab";
 import Tab2 from "./Tab2";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useGetIndex } from "../../hooks";
 import images from "../../assets/images";
 import { FaSearch } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const Casino = () => {
+  const { token } = useSelector((state) => state.auth);
   const { data } = useGetIndex({
     type: "99_all_casino",
   });
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const name = params.get("name");
-  const gameName = params.get("gameName");
+  const product = params.get("product");
+  const category = params.get("category");
 
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [selectedSubCategory, setSelectedSubCategory] = useState("All");
+  // const [name, setSelectedCategory] = useState("All");
+  // const [gameName, setSelectedSubCategory] = useState("All");
   const allTables = data?.data?.allTables;
   // const tables = data?.data?.tables?.[100000];
 
   const handleNavigateToIFrame = (casino) => {
+    if (!token) return navigate("/login");
     navigate(`/casino/${casino?.name?.replace(/ /g, "")}/${casino?.id}`);
   };
 
@@ -39,17 +42,20 @@ const Casino = () => {
   const categories =
     allGames && Array.from(new Set(allGames?.map((game) => game?.product)));
 
+  // const a =
+  //   allGames && allGames?.find((game) => game.product === "BIKINI GAMES");
+  // console.log(a);
+  // console.log(categories);
+
   const subCategories = useMemo(() => {
-    if (allGames && categories && selectedCategory === "All") {
+    if (allGames && categories && product === "All") {
       return Array.from(new Set(allGames?.map((game) => game?.category)));
     }
-    if (allGames && categories && selectedCategory !== "All") {
-      const allCategory = allGames?.filter(
-        (game) => game?.product === selectedCategory,
-      );
+    if (allGames && categories && product !== "All") {
+      const allCategory = allGames?.filter((game) => game?.product === product);
       return Array.from(new Set(allCategory?.map((game) => game?.category)));
     }
-  }, [categories, allGames, selectedCategory]);
+  }, [categories, allGames, product]);
 
   const filteredData = useMemo(() => {
     if (allGames && categories && subCategories) {
@@ -57,47 +63,36 @@ const Casino = () => {
         return allGames?.filter((game) => game?.category?.includes(search));
       }
       if (!search) {
-        if (selectedCategory === "All" && selectedSubCategory === "All") {
+        if (product === "All" && category === "All") {
           return allGames;
         }
-        if (selectedCategory === "All" && selectedSubCategory !== "All") {
-          return allGames?.filter(
-            (game) => game?.category === selectedSubCategory,
-          );
+        if (product === "All" && category !== "All") {
+          return allGames?.filter((game) => game?.category === category);
         }
-        if (selectedCategory !== "All" && selectedSubCategory === "All") {
-          return allGames?.filter((game) => game?.product === selectedCategory);
+        if (product !== "All" && category === "All") {
+          return allGames?.filter((game) => game?.product === product);
         }
-        if (selectedCategory !== "All" && selectedSubCategory !== "All") {
+        if (product !== "All" && category !== "All") {
           return allGames?.filter(
-            (game) =>
-              game?.product === selectedCategory &&
-              game?.category === selectedSubCategory,
+            (game) => game?.product === product && game?.category === category,
           );
         }
       }
     }
-  }, [
-    allGames,
-    categories,
-    selectedSubCategory,
-    subCategories,
-    selectedCategory,
-    search,
-  ]);
+  }, [allGames, categories, category, subCategories, product, search]);
 
-  useEffect(() => {
-    setSelectedSubCategory("All");
-  }, [selectedCategory]);
+  // useEffect(() => {
+  //   setSelectedSubCategory("All");
+  // }, [name]);
 
-  useEffect(() => {
-    if (allGames) {
-      if (name && gameName) {
-        setSelectedCategory(name);
-        setSelectedSubCategory(gameName);
-      }
-    }
-  }, [allGames, gameName, name]);
+  // useEffect(() => {
+  //   if (allGames) {
+  //     if (name && gameName) {
+  //       setSelectedCategory(name);
+  //       setSelectedSubCategory(gameName);
+  //     }
+  //   }
+  // }, [allGames, gameName, name]);
 
   return (
     <div className="col-md-10 featured-box">
@@ -128,11 +123,7 @@ const Casino = () => {
             <div className="row row5">
               <div className="col-md-12">
                 <div className="casino_tabs_ul tab-container">
-                  <Tab
-                    categories={categories}
-                    selectedCategory={selectedCategory}
-                    setSelectedCategory={setSelectedCategory}
-                  />
+                  <Tab categories={categories} selectedCategory={product} />
                   <div className="tab-content">
                     <div
                       role="tabpanel"
@@ -142,8 +133,8 @@ const Casino = () => {
                       <div className="icasino_ul_tabs">
                         <div className="tab-container">
                           <Tab2
-                            setSelectedSubCategory={setSelectedSubCategory}
-                            selectedSubCategory={selectedSubCategory}
+                            product={product}
+                            selectedSubCategory={category}
                             subCategories={subCategories}
                           />
 

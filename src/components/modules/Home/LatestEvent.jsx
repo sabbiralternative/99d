@@ -1,8 +1,15 @@
 import { Link } from "react-router-dom";
 import { useLatestEvent } from "../../../hooks/latestEvent";
+import images from "../../../assets/images";
 
 const LatestEvent = () => {
   const { data: latestEvent } = useLatestEvent();
+
+  const eventIcon = {
+    1: images.football,
+    2: images.tennis,
+    4: images.cricket,
+  };
   return (
     <div>
       <div className="latest-event d-none d-xl-flex">
@@ -13,10 +20,7 @@ const LatestEvent = () => {
                 to={`/event-details/${event?.eventTypeId}/${event?.eventId}`}
                 className="new-launch-text"
               >
-                <img
-                  alt=""
-                  src={`/d/src/assets/img/${event?.eventTypeId}.png`}
-                />
+                <img alt="" src={eventIcon[event?.eventTypeId]} />
                 <div>
                   <span>{event?.eventName}</span>
                   <b>{event?.date}</b>

@@ -1,8 +1,11 @@
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const NewLaunch = ({ new_launch }) => {
+  const { token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const handleNavigateToIFrame = (casino) => {
+    if (!token) return navigate("/login");
     navigate(`/casino/${casino?.name?.replace(/ /g, "")}/${casino?.id}`);
   };
 
