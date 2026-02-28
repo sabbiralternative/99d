@@ -24,7 +24,7 @@ const WithdrawReport = () => {
   useEffect(() => {
     if (data?.length > 0) {
       const categories = Array.from(
-        new Set(data?.map((item) => item?.date?.split(" ")?.[0]))
+        new Set(data?.map((item) => item?.date?.split(" ")?.[0])),
       );
       setCategory(categories);
     }
@@ -125,10 +125,10 @@ const WithdrawReport = () => {
                               data?.status === "APPROVED"
                                 ? "#3fae52"
                                 : data?.status === "REJECTED"
-                                ? "#e7234e"
-                                : data?.status === "PENDING"
-                                ? "#FFD700"
-                                : "#FFF",
+                                  ? "#e7234e"
+                                  : data?.status === "PENDING"
+                                    ? "#FFD700"
+                                    : "#FFF",
                           }}
                         >
                           {data?.status}
@@ -192,6 +192,7 @@ const WithdrawReport = () => {
                           }}
                         >
                           <span> ₹ {data?.amount}</span>
+
                           {Settings.complaint && (
                             <button
                               style={{
