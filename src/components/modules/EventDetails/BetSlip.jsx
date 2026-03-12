@@ -108,7 +108,7 @@ const BetSlip = ({ profit, data }) => {
     const payloadData = [
       {
         ...payload,
-        site: Settings.siteUrl,
+
         nounce: uuidv4(),
         isbetDelay: Settings.bet_delay,
         apk: closePopupForForever ? true : false,
