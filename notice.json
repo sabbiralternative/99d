@@ -5,8 +5,7 @@
   },
   "result": {
     "settings": {
-      "siteUrl": "a23money.com",
-      "build": "development"
+      "siteUrl": "a23money.com"
     },
 
     "endpoint": {
