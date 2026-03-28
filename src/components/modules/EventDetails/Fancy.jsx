@@ -59,7 +59,7 @@ const Fancy = ({ fancy }) => {
         eventTypeId = games?.marketId;
         games?.runners?.forEach((runner) => {
           const pnl = pnlBySelection?.find(
-            (p) => p?.RunnerId === runner?.selectionId
+            (p) => p?.RunnerId === runner?.selectionId,
           );
           if (pnl) {
             updatedPnl.push(pnl?.pnl);
@@ -89,6 +89,9 @@ const Fancy = ({ fancy }) => {
         eventId: games?.eventId,
         totalSize: 0,
       };
+      if (games?.eventTypeId == "4") {
+        betData["isBetDelay"] = false;
+      }
       if (games?.btype == "FANCY") {
         dispatch(setRunnerId(games?.id));
       } else if (games?.btype && games?.btype !== "FANCY") {
@@ -272,7 +275,7 @@ const Fancy = ({ fancy }) => {
                                     {fancy?.map((games) => {
                                       const pnl =
                                         pnlBySelection?.find(
-                                          (pnl) => pnl?.MarketId === games?.id
+                                          (pnl) => pnl?.MarketId === games?.id,
                                         ) || {};
 
                                       return (
@@ -315,7 +318,7 @@ const Fancy = ({ fancy }) => {
                                                         }}
                                                         onClick={() =>
                                                           handleGetLadder(
-                                                            pnl?.MarketId
+                                                            pnl?.MarketId,
                                                           )
                                                         }
                                                         className={` ${
@@ -338,7 +341,7 @@ const Fancy = ({ fancy }) => {
                                                           games,
                                                           games?.runners?.[0],
                                                           games?.runners?.[0]
-                                                            ?.lay?.[0]?.line
+                                                            ?.lay?.[0]?.line,
                                                         )
                                                       }
                                                       className="betting-disabled box-1 float-left lay text-center"
@@ -363,7 +366,7 @@ const Fancy = ({ fancy }) => {
                                                           games,
                                                           games?.runners?.[0],
                                                           games?.runners?.[0]
-                                                            ?.back?.[0]?.line
+                                                            ?.back?.[0]?.line,
                                                         )
                                                       }
                                                       className="back betting-disabled box-1 float-left lay text-center"
