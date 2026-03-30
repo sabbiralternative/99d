@@ -264,7 +264,7 @@ const MatchOdds = ({ matchOdds }) => {
                       >
                         cashout{" "}
                         {teamProfitForGame?.profit &&
-                          `(${teamProfitForGame.profit.toFixed(2)})`}
+                          `(${teamProfitForGame.profit.toFixed(0)})`}
                       </button>
                     )}
                   {Settings.cashout &&
