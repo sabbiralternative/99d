@@ -23,7 +23,7 @@ const Dropdown = () => {
     <ul>
       {Settings.branchWhatsapplink && (
         <li onClick={() => handleOpenSocialLink(Settings.branchWhatsapplink)}>
-          <Link>Deposit Support</Link>
+          <Link>Customer Support</Link>
         </li>
       )}
 
