@@ -19,7 +19,7 @@ const Casino = () => {
 
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
-  console.log(data);
+
   const allTables = data?.data?.allTables;
   // const tables = data?.data?.tables?.[100000];
 
@@ -28,12 +28,17 @@ const Casino = () => {
     navigate(`/casino/${casino?.name?.replace(/ /g, "")}/${casino?.id}`);
   };
 
-  const allGames =
-    allTables &&
-    Object.values(allTables).flatMap((provider) =>
+  // const allGames =
+  //   allTables &&
+  //   Object.values(allTables).flatMap((provider) =>
+  //     Object.values(provider).flat(),
+  //   );
+  const allGames = useMemo(() => {
+    if (!allTables) return [];
+    return Object.values(allTables).flatMap((provider) =>
       Object.values(provider).flat(),
     );
-
+  }, [allTables]);
   // const tablesGames =
   //   tables &&
   //   Object.values(tables).flatMap((provider) => Object.values(provider).flat());
@@ -66,12 +71,15 @@ const Casino = () => {
           return allGames;
         }
         if (product === "All" && category !== "All") {
+          console.log("1", category);
           return allGames?.filter((game) => game?.category === category);
         }
         if (product !== "All" && category === "All") {
+          console.log("2", category);
           return allGames?.filter((game) => game?.product === product);
         }
         if (product !== "All" && category !== "All") {
+          console.log("3", category);
           return allGames?.filter(
             (game) => game?.product === product && game?.category === category,
           );
@@ -82,6 +90,8 @@ const Casino = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
+
+  console.log(filteredData);
 
   return (
     <div className="col-md-10 featured-box">
@@ -135,13 +145,13 @@ const Casino = () => {
                               className="tab-pane active"
                             >
                               <div className="row row-casino">
-                                {filteredData?.map((casino) => {
+                                {filteredData?.map((casino, i) => {
                                   return (
                                     <div
                                       onClick={() =>
                                         handleNavigateToIFrame(casino)
                                       }
-                                      key={casino?.id}
+                                      key={`${casino?.id}-${casino?.category}-${casino?.product}-${i}`}
                                       className="col-md-2 col-3"
                                     >
                                       <div className="d-inline-block casinoicons">

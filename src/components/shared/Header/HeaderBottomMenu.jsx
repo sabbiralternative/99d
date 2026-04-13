@@ -36,7 +36,7 @@ const HeaderBottomMenu = () => {
                 <li
                   onClick={() => handleNavigate(tab)}
                   key={tab?.id}
-                  className="nav-item active"
+                  className={`nav-item active ${tab.className}`}
                 >
                   <a className="router-link-exact-active router-link-active">
                     <b>{tab?.name}</b>

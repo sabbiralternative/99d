@@ -121,6 +121,13 @@ export const headerTab = [
     group: 0,
   },
   {
+    id: 222,
+    name: "IPL 2026",
+    group: null,
+    path: "/event-details/4/28127348",
+    className: "new-launch-text",
+  },
+  {
     id: 1,
     name: "Cricket",
     group: 4,
