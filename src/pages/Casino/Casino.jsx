@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Tab from "./Tab";
 import Tab2 from "./Tab2";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -19,6 +19,7 @@ const Casino = () => {
 
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
+  console.log(data);
   const allTables = data?.data?.allTables;
   // const tables = data?.data?.tables?.[100000];
 
@@ -78,6 +79,9 @@ const Casino = () => {
       }
     }
   }, [allGames, categories, category, subCategories, product, search]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   return (
     <div className="col-md-10 featured-box">
