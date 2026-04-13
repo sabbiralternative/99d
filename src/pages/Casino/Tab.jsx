@@ -1,16 +1,28 @@
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Tab = ({ categories, selectedCategory }) => {
   const navigate = useNavigate();
+  const activeRef = useRef(null);
 
+  useEffect(() => {
+    if (activeRef.current) {
+      activeRef.current.scrollIntoView({
+        behavior: "smooth",
+        inline: "center", // key part
+        block: "nearest",
+      });
+    }
+  }, [selectedCategory, categories]);
   return (
     <ul
+      style={{ scrollBehavior: "smooth", paddingBottom: "0px" }}
       role="tablist"
       className="nav nav-tabs"
       aria-label="Tabs"
-      style={{ paddingBottom: "0px" }}
     >
       <li
+        ref={selectedCategory === "All" ? activeRef : null}
         style={{
           color: selectedCategory === "All" ? "white" : "black",
           borderRight: "1px solid var(--theme2-bg)",
@@ -27,6 +39,7 @@ const Tab = ({ categories, selectedCategory }) => {
       {categories?.map((category) => {
         return (
           <li
+            ref={category === selectedCategory ? activeRef : null}
             style={{
               color: selectedCategory === category ? "white" : "black",
               borderRight: "1px solid var(--theme2-bg)",

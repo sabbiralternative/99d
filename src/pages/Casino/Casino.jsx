@@ -71,15 +71,12 @@ const Casino = () => {
           return allGames;
         }
         if (product === "All" && category !== "All") {
-          console.log("1", category);
           return allGames?.filter((game) => game?.category === category);
         }
         if (product !== "All" && category === "All") {
-          console.log("2", category);
           return allGames?.filter((game) => game?.product === product);
         }
         if (product !== "All" && category !== "All") {
-          console.log("3", category);
           return allGames?.filter(
             (game) => game?.product === product && game?.category === category,
           );
@@ -90,8 +87,6 @@ const Casino = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
-
-  console.log(filteredData);
 
   return (
     <div className="col-md-10 featured-box">
