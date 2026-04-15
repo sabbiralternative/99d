@@ -18,6 +18,7 @@ import { setUser } from "../../redux/features/auth/authSlice";
 // import getOtpOnWhatsapp from "../../utils/getOtpOnWhatsapp";
 import images from "../../assets/images";
 const Register = () => {
+  const affnook_token = localStorage.getItem("affnook_token");
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const referralCode = localStorage.getItem("referralCode");
@@ -70,6 +71,7 @@ const Register = () => {
         referralCode: referralCode || userData.referralCode,
         orderId: order.orderId,
         otpMethod: order.otpMethod,
+        affnook_token: affnook_token || null,
       };
 
       const { data } = await AxiosSecure.post(API.register, registerData);
