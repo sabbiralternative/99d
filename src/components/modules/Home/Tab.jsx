@@ -7,6 +7,22 @@ const Tab = () => {
   const { group } = useSelector((state) => state.global);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { token } = useSelector((state) => state.auth);
+  const handleGroupType = (item) => {
+    if (item?.path) {
+      navigate(item?.path);
+    }
+    if (item?.group) {
+      dispatch(setGroup(item?.group));
+    }
+    if (item?.eventId) {
+      if (token) {
+        navigate(`/casino/cock-fight/${item?.eventId}`);
+      } else {
+        navigate("/login");
+      }
+    }
+  };
   return (
     <>
       <ul role="tablist" className="nav nav-tabs" aria-label="Tabs">
@@ -18,9 +34,7 @@ const Tab = () => {
               className={` nav-item ${group === tab.group ? "active" : ""}`}
             >
               <a
-                onClick={() =>
-                  tab.path ? navigate(tab.path) : dispatch(setGroup(tab.group))
-                }
+                onClick={() => handleGroupType(tab)}
                 role="tab"
                 className={`nav-link  ${group === tab.group ? "active" : ""}`}
                 aria-controls

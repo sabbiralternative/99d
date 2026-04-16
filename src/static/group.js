@@ -23,6 +23,11 @@ export const homeTab = [
     group: 2,
   },
   {
+    id: 3,
+    name: "Cock Fight",
+    eventId: 400332,
+  },
+  {
     id: 499,
     name: "Sportsbook",
     group: null,
