@@ -49,19 +49,19 @@ export const homeTab = [
     id: 6,
     name: "Binary",
 
-    group: 5,
+    group: 56666,
   },
   {
     id: 7,
     name: "Kabaddi",
 
-    group: 6,
+    group: 5,
   },
   {
     id: 8,
     name: "Politics",
 
-    group: 17,
+    group: 6,
   },
   {
     id: 9,
