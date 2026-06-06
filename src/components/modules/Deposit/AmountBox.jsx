@@ -21,7 +21,7 @@ const AmountBox = ({ setTab, setAmount, amount }) => {
               setTab("bankAccount");
             }
           },
-        }
+        },
       );
     } else {
       return toast.error("Amount is required");
@@ -48,7 +48,13 @@ const AmountBox = ({ setTab, setAmount, amount }) => {
                     <label>Amount</label>
                     <div className="input-group">
                       <input
-                        onChange={(e) => setAmount(e.target.value)}
+                        onChange={(e) =>
+                          setAmount(
+                            e.target.value <= 10000000
+                              ? e.target.value
+                              : 10000000,
+                          )
+                        }
                         value={amount}
                         type="number"
                         className="form-control"
@@ -101,7 +107,8 @@ const AmountBox = ({ setTab, setAmount, amount }) => {
                     balance.{" "}
                   </p>
                   <p>
-                    5. NEFT receiving time varies from 40 minutes to 2 hours.{" "}
+                    5. NEFT receiving time varies from 40 minutes to 2
+                    hours.{" "}
                   </p>
                   <p>
                     6. In case of account modification: payment valid for 1 hour
