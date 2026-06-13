@@ -125,13 +125,13 @@ export const headerTab = [
     name: "Home",
     group: 0,
   },
-  // {
-  //   id: 222,
-  //   name: "IPL 2026",
-  //   group: null,
-  //   path: "/event-details/4/28127348",
-  //   className: "new-launch-text",
-  // },
+  {
+    id: 222,
+    name: "Women's T20 WC",
+    group: null,
+    path: "/event-details/4/33439203",
+    className: "new-launch-text",
+  },
   {
     id: 1,
     name: "Cricket",
