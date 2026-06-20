@@ -133,6 +133,13 @@ export const headerTab = [
     className: "new-launch-text",
   },
   {
+    id: 22244,
+    name: "FIFA 2026",
+    group: null,
+    path: "/event-details/4/1780591416",
+    className: "new-launch-text",
+  },
+  {
     id: 1,
     name: "Cricket",
     group: 4,
