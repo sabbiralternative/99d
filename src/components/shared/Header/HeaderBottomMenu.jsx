@@ -1,9 +1,12 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setGroup } from "../../../redux/features/global/globalSlice";
-import { headerTab } from "../../../static/group";
+import useLanguage from "../../../hooks/useLanguage";
+import { languageValue } from "../../../utils/language";
+import { LanguageKey } from "../../../const";
 
 const HeaderBottomMenu = () => {
+  const { valueByLanguage } = useLanguage();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -15,6 +18,133 @@ const HeaderBottomMenu = () => {
       navigate("/");
     }
   };
+
+  const headerTab = [
+    {
+      id: 0,
+      name: languageValue(valueByLanguage, LanguageKey.HOME),
+      group: 0,
+    },
+    {
+      id: 222,
+      name: "Women's T20 WC",
+      group: null,
+      path: "/event-details/4/33439203",
+      className: "new-launch-text",
+    },
+    {
+      id: 22244,
+      name: "FIFA 2026",
+      group: null,
+      path: "/event-details/4/1780591416",
+      className: "new-launch-text",
+    },
+    {
+      id: 1,
+      name: languageValue(valueByLanguage, LanguageKey.CRICKET),
+      group: 4,
+    },
+    {
+      id: 2,
+      name: languageValue(valueByLanguage, LanguageKey.FOOTBALL),
+      group: 1,
+    },
+    {
+      id: 3,
+      name: languageValue(valueByLanguage, LanguageKey.TENNIS),
+      group: 2,
+    },
+    {
+      id: 6,
+      name: "Sports book",
+      group: null,
+      path: "/casino/sportsbook/550000",
+    },
+    {
+      id: 4,
+      name: "Casino",
+      group: null,
+      path: "/casino?product=All&category=All",
+    },
+    // {
+    //   id: 5,
+    //   name: "Int Casino",
+    //   group: null,
+    //   path: "/int-casino",
+    // },
+
+    {
+      id: 7,
+      name: languageValue(valueByLanguage, LanguageKey.HORSE),
+      group: 7,
+    },
+    {
+      id: 8,
+      name: languageValue(valueByLanguage, LanguageKey.GREYHOUND),
+      group: 4339,
+    },
+    {
+      id: 9,
+      name: "Binary",
+      group: 5,
+    },
+    {
+      id: 10,
+      name: languageValue(valueByLanguage, LanguageKey.KABADDI),
+      group: 6,
+    },
+    {
+      id: 11,
+      name: "Politics",
+      group: 17,
+    },
+    {
+      id: 12,
+      name: "Basketball",
+      group: 8,
+    },
+    {
+      id: 13,
+      name: "Baseball",
+      group: 9,
+    },
+    {
+      id: 14,
+      name: "Table Tennis",
+      group: 10,
+    },
+    {
+      id: 15,
+      name: "Volleyball",
+      group: 11,
+    },
+    {
+      id: 16,
+      name: "Ice Hockey",
+      group: 12,
+    },
+    {
+      id: 17,
+      name: "Rugby",
+      group: 13,
+    },
+    {
+      id: 18,
+      name: "Mixed Martial Arts",
+      group: 14,
+    },
+    {
+      id: 19,
+      name: "Darts",
+      group: 15,
+    },
+    {
+      id: 20,
+      name: "Futsal",
+      group: 16,
+    },
+  ];
+
   return (
     <div className="header-bottom m-t-10 col-md-12">
       <nav className="navbar navbar-expand-md btco-hover-menu">

@@ -2,8 +2,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../redux/features/auth/authSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { Settings } from "../../../api";
+import useLanguage from "../../../hooks/useLanguage";
+import { languageValue } from "../../../utils/language";
+import { LanguageKey } from "../../../const";
 
 const Dropdown = () => {
+  const { valueByLanguage } = useLanguage();
   const { closePopupForForever } = useSelector((state) => state?.global);
 
   const dispatch = useDispatch();
@@ -69,7 +73,9 @@ const Dropdown = () => {
         <Link to="/withdraw-report">Withdraw Report</Link>
       </li>
       <li>
-        <Link to="/my-bank-details">My Bank Details</Link>
+        <Link to="/my-bank-details">
+          {languageValue(valueByLanguage, LanguageKey.MY_BANK_DETAILS)}
+        </Link>
       </li>
       <li>
         <Link to="/reports/profit-loss">Profit Loss Report</Link>
@@ -84,7 +90,9 @@ const Dropdown = () => {
         <Link to="/change-btn-value">Set Button Values</Link>
       </li>
       <li>
-        <Link to="/change-password">Change Password</Link>
+        <Link to="/change-password">
+          {languageValue(valueByLanguage, LanguageKey.CHANGE_PASSWORD)}
+        </Link>
       </li>
       {/* {Settings.whatsapplink && (
         <li
@@ -97,7 +105,7 @@ const Dropdown = () => {
         <hr />
       </li>
       <li style={{ color: "black" }} onClick={handleLogout}>
-        <a>signout</a>
+        <a>{languageValue(valueByLanguage, LanguageKey.LOGOUT)}</a>
       </li>
     </ul>
   );

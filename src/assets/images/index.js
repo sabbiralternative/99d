@@ -42,8 +42,10 @@ import cashBundle from "../img/cash-bundle.webp";
 import giftCard from "../img/giftCard.webp";
 import redeemCardGift from "../img/redeemCardGift.svg";
 import casino from "../img/99998.png";
+import globe from "../img/globe.gif";
 
 export default {
+  globe,
   casino,
   cashBundle,
   giftCard,

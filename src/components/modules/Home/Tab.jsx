@@ -1,9 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setGroup } from "../../../redux/features/global/globalSlice";
-import { homeTab } from "../../../static/group";
 import { useNavigate } from "react-router-dom";
+import useLanguage from "../../../hooks/useLanguage";
+import { languageValue } from "../../../utils/language";
+import { LanguageKey } from "../../../const";
 
 const Tab = () => {
+  const { valueByLanguage } = useLanguage();
   const { group } = useSelector((state) => state.global);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -23,6 +26,128 @@ const Tab = () => {
       }
     }
   };
+
+  const homeTab = [
+    {
+      id: 0,
+      name: "Inplay",
+      group: 0,
+    },
+    {
+      id: 1,
+      name: languageValue(valueByLanguage, LanguageKey.CRICKET),
+
+      group: 4,
+    },
+    {
+      id: 2,
+      name: languageValue(valueByLanguage, LanguageKey.FOOTBALL),
+
+      group: 1,
+    },
+    {
+      id: 3,
+      name: languageValue(valueByLanguage, LanguageKey.TENNIS),
+
+      group: 2,
+    },
+    {
+      id: 3,
+      name: "Cock Fight",
+      eventId: 400332,
+    },
+    {
+      id: 499,
+      name: "Sportsbook",
+      group: null,
+      path: "/casino/sportsbook/550000",
+    },
+    {
+      id: 4,
+      name: languageValue(valueByLanguage, LanguageKey.HORSE),
+
+      group: 7,
+    },
+    {
+      id: 5,
+      name: languageValue(valueByLanguage, LanguageKey.GREYHOUND),
+
+      group: 4339,
+    },
+    {
+      id: 6,
+      name: "Binary",
+
+      group: 56666,
+    },
+    {
+      id: 7,
+      name: languageValue(valueByLanguage, LanguageKey.KABADDI),
+
+      group: 5,
+    },
+    {
+      id: 8,
+      name: "Politics",
+
+      group: 6,
+    },
+    {
+      id: 9,
+      name: "Basketball",
+
+      group: 8,
+    },
+    {
+      id: 10,
+      name: "Baseball",
+
+      group: 9,
+    },
+    {
+      id: 11,
+      name: "Table Tennis",
+
+      group: 10,
+    },
+    {
+      id: 12,
+      name: "Volleyball",
+
+      group: 11,
+    },
+    {
+      id: 13,
+      name: "Ice Hockey",
+
+      group: 12,
+    },
+    {
+      id: 14,
+      name: "Rugby",
+
+      group: 13,
+    },
+    {
+      id: 15,
+      name: "Mixed Martial Arts",
+
+      group: 14,
+    },
+    {
+      id: 16,
+      name: "Darts",
+
+      group: 15,
+    },
+    {
+      id: 17,
+      name: "Futsal",
+
+      group: 16,
+    },
+  ];
+
   return (
     <>
       <ul role="tablist" className="nav nav-tabs" aria-label="Tabs">

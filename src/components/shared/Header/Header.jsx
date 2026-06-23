@@ -19,8 +19,14 @@ import {
 import DownloadAPK from "../../modals/DownloadAPK/DownloadAPK";
 import BuildVersion from "../../modals/BuildVersion/BuildVersion";
 import Error from "../../modals/Error/Error";
+import useLanguage from "../../../hooks/useLanguage";
+import Language from "../../modals/Language";
+import { languageValue } from "../../../utils/language";
+import { LanguageKey } from "../../../const";
 
 const Header = () => {
+  const { language, valueByLanguage, setLanguage } = useLanguage();
+  const [showLanguage, setShowLanguage] = useState(false);
   const [showBuildVersion, setShowBuildVersion] = useState(false);
   const stored_build_version = localStorage.getItem("build_version");
   const navigate = useNavigate();
@@ -71,6 +77,9 @@ const Header = () => {
       }
     }
   }, [stored_build_version]);
+  useEffect(() => {
+    setLanguage(localStorage.getItem("language") || "english");
+  }, [setLanguage]);
 
   if (Settings.app_only && !closePopupForForever) {
     return <Error />;
@@ -111,13 +120,16 @@ const Header = () => {
                     {Settings.deposit && (
                       <Link to="/deposit" className="btn_deposit">
                         <img src={images.deposit} className="img-fluid" />
-                        deposit{" "}
+                        {languageValue(
+                          valueByLanguage,
+                          LanguageKey.DEPOSIT,
+                        )}{" "}
                       </Link>
                     )}
                     {Settings.withdraw && (
                       <Link to="/withdraw" className="btn_withdrawal">
                         <img src={images.withdraw} className="img-fluid" />
-                        withdrawal
+                        {languageValue(valueByLanguage, LanguageKey.WITHDRAW)}
                       </Link>
                     )}
                   </li>
@@ -143,7 +155,7 @@ const Header = () => {
                       type="button"
                       className="btn btn-submit btn-login"
                     >
-                      Login
+                      {languageValue(valueByLanguage, LanguageKey.LOGIN)}
                       <FontAwesomeIcon icon={faSignInAlt} className="ml-2" />
                     </button>
                     {Settings.registration && (
@@ -157,10 +169,50 @@ const Header = () => {
                         type="button"
                         className="btn btn-submit btn-login"
                       >
-                        Register
+                        {languageValue(valueByLanguage, LanguageKey.REGISTER)}
                         <FontAwesomeIcon icon={faSignInAlt} className="ml-2" />
                       </button>
                     )}
+                    <div style={{ position: "relative", padding: "1px 4px" }}>
+                      {Settings.language && (
+                        <button
+                          onClick={() => setShowLanguage((prev) => !prev)}
+                        >
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                              alignItems: "center",
+                              justifyContent: "end",
+                              background: "transparent",
+                              border: "none",
+                            }}
+                          >
+                            <img
+                              style={{
+                                height: "20px",
+                                width: "20px",
+                                filter: "invert(1)",
+                              }}
+                              src={images.globe}
+                              alt=""
+                            />
+                            <b
+                              style={{
+                                margin: "0px",
+                                fontSize: "10px",
+                                textTransform: "capitalize",
+                              }}
+                            >
+                              {language || "EN"}
+                            </b>
+                          </div>
+                        </button>
+                      )}
+                      {showLanguage && (
+                        <Language setShowLanguage={setShowLanguage} />
+                      )}
+                    </div>
                   </li>
                 )}
                 {token && (
@@ -189,6 +241,48 @@ const Header = () => {
                         <FontAwesomeIcon icon={faChevronDown} />
                       </span>
                       <Dropdown setShowReferral={setShowReferral} />
+                    </li>
+                    <li className="account float-left">
+                      <div style={{ position: "relative", padding: "1px 4px" }}>
+                        {Settings.language && (
+                          <button
+                            onClick={() => setShowLanguage((prev) => !prev)}
+                          >
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "center",
+                                justifyContent: "end",
+                                background: "transparent",
+                                border: "none",
+                              }}
+                            >
+                              <img
+                                style={{
+                                  height: "20px",
+                                  width: "20px",
+                                  filter: "invert(1)",
+                                }}
+                                src={images.globe}
+                                alt=""
+                              />
+                              <b
+                                style={{
+                                  margin: "0px",
+                                  fontSize: "10px",
+                                  textTransform: "capitalize",
+                                }}
+                              >
+                                {language || "EN"}
+                              </b>
+                            </div>
+                          </button>
+                        )}
+                        {showLanguage && (
+                          <Language setShowLanguage={setShowLanguage} />
+                        )}
+                      </div>
                     </li>
                   </Fragment>
                 )}
