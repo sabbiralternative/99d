@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useAccountStatementMutation } from "../../redux/features/events/events";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import SettledBet from "../../components/modals/SettledBet/SettledBet";
 
 const AccountStatement = () => {
   const [marketId, setMarketId] = useState("");
@@ -22,6 +23,7 @@ const AccountStatement = () => {
 
   return (
     <div className="col-md-10 featured-box">
+      {marketId && <SettledBet marketId={marketId} setMarketId={setMarketId} />}
       <div>
         <div>
           <div className="card">
@@ -42,7 +44,7 @@ const AccountStatement = () => {
                             {...register("from", { required: true })}
                             defaultValue={
                               new Date(
-                                new Date().setDate(new Date().getDate() - 7)
+                                new Date().setDate(new Date().getDate() - 7),
                               )
                                 .toISOString()
                                 .split("T")[0]
@@ -248,6 +250,9 @@ const AccountStatement = () => {
                                   <span>N/A</span>
                                 </td>
                                 <td
+                                  onClick={() =>
+                                    setMarketId(statement?.marketId)
+                                  }
                                   aria-colindex={1}
                                   role="cell"
                                   className="text-center"
