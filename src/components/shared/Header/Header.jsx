@@ -176,6 +176,10 @@ const Header = () => {
                     <div style={{ position: "relative", padding: "1px 4px" }}>
                       {Settings.language && (
                         <button
+                          style={{
+                            background: "transparent",
+                            border: "none",
+                          }}
                           onClick={() => setShowLanguage((prev) => !prev)}
                         >
                           <div
@@ -192,7 +196,7 @@ const Header = () => {
                               style={{
                                 height: "20px",
                                 width: "20px",
-                                filter: "invert(1)",
+                                // filter: "invert(1)",
                               }}
                               src={images.globe}
                               alt=""
@@ -202,6 +206,7 @@ const Header = () => {
                                 margin: "0px",
                                 fontSize: "10px",
                                 textTransform: "capitalize",
+                                color: "white",
                               }}
                             >
                               {language || "EN"}
@@ -246,6 +251,10 @@ const Header = () => {
                       <div style={{ position: "relative", padding: "1px 4px" }}>
                         {Settings.language && (
                           <button
+                            style={{
+                              background: "transparent",
+                              border: "none",
+                            }}
                             onClick={() => setShowLanguage((prev) => !prev)}
                           >
                             <div
@@ -262,7 +271,7 @@ const Header = () => {
                                 style={{
                                   height: "20px",
                                   width: "20px",
-                                  filter: "invert(1)",
+                                  // filter: "invert(1)",
                                 }}
                                 src={images.globe}
                                 alt=""
@@ -272,6 +281,7 @@ const Header = () => {
                                   margin: "0px",
                                   fontSize: "10px",
                                   textTransform: "capitalize",
+                                  color: "white",
                                 }}
                               >
                                 {language || "EN"}
