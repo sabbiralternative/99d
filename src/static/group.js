@@ -125,13 +125,7 @@ export const headerTab = [
     name: "Home",
     group: 0,
   },
-  {
-    id: 222,
-    name: "Women's T20 WC",
-    group: null,
-    path: "/event-details/4/33439203",
-    className: "new-launch-text",
-  },
+
   {
     id: 22244,
     name: "FIFA 2026",
