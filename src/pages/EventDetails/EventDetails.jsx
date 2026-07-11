@@ -11,6 +11,7 @@ import HorseGreyhound from "../../components/modules/EventDetails/HorseGreyhound
 import SportsBook from "./SportsBook/SportsBook";
 // import CricketScore from "../../components/modules/EventDetails/CricketScore";
 import Score from "../../components/modules/EventDetails/Score";
+import Premium from "../../components/modules/EventDetails/Premium";
 // import ScoreCard from "../../components/modules/EventDetails/ScoreCard";
 
 const EventDetails = () => {
@@ -182,6 +183,9 @@ const EventDetails = () => {
                     )} */}
                     {matchOdds && matchOdds?.length > 0 && (
                       <MatchOdds matchOdds={matchOdds} />
+                    )}
+                    {data?.premium && data?.premium?.eventId && (
+                      <Premium premium={data?.premium} />
                     )}
                     {bookmaker && bookmaker?.length > 0 && (
                       <Bookmaker bookmaker={bookmaker} />
