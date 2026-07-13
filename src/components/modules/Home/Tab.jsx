@@ -74,12 +74,12 @@ const Tab = () => {
 
       group: 4339,
     },
-    {
-      id: 6,
-      name: "Binary",
+    // {
+    //   id: 6,
+    //   name: "Binary",
 
-      group: 56666,
-    },
+    //   group: 56666,
+    // },
     {
       id: 7,
       name: languageValue(valueByLanguage, LanguageKey.KABADDI),
@@ -96,55 +96,55 @@ const Tab = () => {
       id: 9,
       name: "Basketball",
 
-      group: 8,
+      group: 7522,
     },
     {
       id: 10,
       name: "Baseball",
 
-      group: 9,
+      group: 7511,
     },
     {
       id: 11,
       name: "Table Tennis",
 
-      group: 10,
+      group: 20,
     },
     {
       id: 12,
       name: "Volleyball",
 
-      group: 11,
+      group: 998917,
     },
     {
       id: 13,
       name: "Ice Hockey",
 
-      group: 12,
+      group: 7524,
     },
     {
       id: 14,
       name: "Rugby",
 
-      group: 13,
+      group: 5,
     },
     {
       id: 15,
       name: "Mixed Martial Arts",
 
-      group: 14,
+      group: 26420387,
     },
     {
       id: 16,
       name: "Darts",
 
-      group: 15,
+      group: 3503,
     },
     {
       id: 17,
       name: "Futsal",
 
-      group: 16,
+      group: 29,
     },
   ];
 
