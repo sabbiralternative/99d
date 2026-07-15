@@ -184,9 +184,7 @@ const EventDetails = () => {
                     {matchOdds && matchOdds?.length > 0 && (
                       <MatchOdds matchOdds={matchOdds} />
                     )}
-                    {data?.premium && data?.premium?.eventId && (
-                      <Premium premium={data?.premium} />
-                    )}
+
                     {bookmaker && bookmaker?.length > 0 && (
                       <Bookmaker bookmaker={bookmaker} />
                     )}
@@ -204,6 +202,9 @@ const EventDetails = () => {
                   )}
                   {tiedMatch && tiedMatch?.length > 0 && (
                     <MatchOdds matchOdds={tiedMatch} />
+                  )}
+                  {data?.premium && data?.premium?.eventId && (
+                    <Premium premium={data?.premium} />
                   )}
                 </div>
               </div>
