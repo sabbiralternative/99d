@@ -23,8 +23,10 @@ import useLanguage from "../../../hooks/useLanguage";
 import Language from "../../modals/Language";
 import { languageValue } from "../../../utils/language";
 import { LanguageKey } from "../../../const";
+import MiniGames from "../../modals/MiniGames/MiniGames";
 
 const Header = () => {
+  const [showMiniGamesModal, setShowMiniGamesModal] = useState(false);
   const { language, valueByLanguage, setLanguage } = useLanguage();
   const [showLanguage, setShowLanguage] = useState(false);
   const [showBuildVersion, setShowBuildVersion] = useState(false);
@@ -304,39 +306,67 @@ const Header = () => {
         </div>
         <div />
       </header>
-      {Settings.instagramLink ? (
-        <a
-          style={{ background: "none", bottom: "30%", right: "4.5%" }}
-          className="whatsapp_link"
-          onClick={() => window.open(Settings.instagramLink, "_blank")}
-        >
-          <img
-            style={{ filter: "none", height: "60px", width: "60px" }}
-            src={images.instagram}
-          />
-        </a>
-      ) : null}
-      {Settings.telegramLink ? (
-        <a
-          style={{ background: "none", bottom: "17%", right: "4.5%" }}
-          className="whatsapp_link"
-          onClick={() => window.open(Settings.telegramLink, "_blank")}
-        >
-          <img
-            style={{ filter: "none", height: "60px", width: "60px" }}
-            src={images.telegram}
-          />
-        </a>
-      ) : null}
-      {Settings.whatsapplink || Settings.branchWhatsapplink ? (
+      <a
+        className="whatsapp_link"
+        style={{
+          position: "fixed",
+          bottom: "6%",
+          right: "10px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "10px",
+          background: "none",
+        }}
+      >
+        {Settings.instagramLink ? (
+          <a
+            style={{ background: "none" }}
+            onClick={() => window.open(Settings.instagramLink, "_blank")}
+          >
+            <img
+              style={{ height: "50px", width: "50px", filter: "none" }}
+              src={images.instagram}
+            />
+          </a>
+        ) : null}
+        {Settings.telegramLink ? (
+          <a
+            style={{ background: "none" }}
+            onClick={() => window.open(Settings.telegramLink, "_blank")}
+          >
+            <img
+              style={{ height: "50px", width: "50px", filter: "none" }}
+              src={images.telegram}
+            />
+          </a>
+        ) : null}
+        {Settings.whatsapplink || Settings.branchWhatsapplink ? (
+          <a style={{ background: "none" }} onClick={navigateWhatsApp}>
+            <img
+              style={{ height: "50px", width: "50px", filter: "none" }}
+              src={images.whatsApp}
+            />
+          </a>
+        ) : null}
+
         <a
           style={{ background: "none" }}
-          className="whatsapp_link"
-          onClick={navigateWhatsApp}
+          onClick={() => setShowMiniGamesModal(true)}
         >
-          <img src={images.whatsapp} />
+          <img
+            style={{
+              height: "70px",
+              width: "70px",
+              filter: "none",
+            }}
+            src="/d/icon/uv_games-CkYT1PYz.gif"
+          />
         </a>
-      ) : null}
+      </a>
+      {showMiniGamesModal && (
+        <MiniGames setShowMiniGamesModal={setShowMiniGamesModal} />
+      )}
     </div>
   );
 };
