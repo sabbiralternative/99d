@@ -27,7 +27,7 @@ import MiniGames from "../../modals/MiniGames/MiniGames";
 
 const Header = () => {
   const [showMiniGamesModal, setShowMiniGamesModal] = useState(false);
-  const { language, valueByLanguage, setLanguage } = useLanguage();
+  const { valueByLanguage, setLanguage } = useLanguage();
   const [showLanguage, setShowLanguage] = useState(false);
   const [showBuildVersion, setShowBuildVersion] = useState(false);
   const stored_build_version = localStorage.getItem("build_version");
@@ -211,7 +211,7 @@ const Header = () => {
                                 color: "white",
                               }}
                             >
-                              {language || "EN"}
+                              {/* {language || "EN"} */}
                             </b>
                           </div>
                         </button>
@@ -286,7 +286,7 @@ const Header = () => {
                                   color: "white",
                                 }}
                               >
-                                {language || "EN"}
+                                {/* {language || "EN"} */}
                               </b>
                             </div>
                           </button>
