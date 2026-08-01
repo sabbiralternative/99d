@@ -126,7 +126,7 @@ const Fancy = ({ fancy }) => {
         <Ladder ladderData={ladderData} setLadderData={setLadderData} />
       )}
       <div className="newtab_collect tab-container">
-        <ul role="tablist" className="nav nav-tabs" aria-label="Tabs">
+        {/* <ul role="tablist" className="nav nav-tabs" aria-label="Tabs">
           <li className="active nav-item">
             <a
               href="javascript:void(0);"
@@ -154,12 +154,12 @@ const Fancy = ({ fancy }) => {
               <em className="blink-soft">new</em>
             </a>
           </li>
-        </ul>
+        </ul> */}
         <div className="tab-content">
           <tab role="tabpanel" aria-labelledby className="tab-pane active">
             <div className="fancy-tab">
               <div className="tab-container">
-                <ul role="tablist" className="nav nav-tabs" aria-label="Tabs">
+                {/* <ul role="tablist" className="nav nav-tabs" aria-label="Tabs">
                   <li className="active nav-item">
                     <a
                       href="javascript:void(0);"
@@ -233,7 +233,7 @@ const Fancy = ({ fancy }) => {
                       </span>
                     </a>
                   </li>
-                </ul>
+                </ul> */}
 
                 {/* Content */}
                 <div className="tab-content">
@@ -249,7 +249,7 @@ const Fancy = ({ fancy }) => {
                           <div>
                             <div>
                               <div className="market-title mt-1">
-                                <span>sessions</span>
+                                <span>Fancy</span>
                                 <a
                                   href="javascript:void(0)"
                                   className="m-r-5 game-rules-icon"
