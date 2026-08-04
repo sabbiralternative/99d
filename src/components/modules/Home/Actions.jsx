@@ -1,24 +1,63 @@
-const Actions = () => {
+import { useSelector } from "react-redux";
+
+const Actions = ({ setLiveVirtual, liveVirtual }) => {
+  const { group } = useSelector((state) => state.global);
+  const onChangeLiveVirtual = (type, eventTypeId, isChecked) => {
+    const obj = { type, eventTypeId, isChecked };
+
+    setLiveVirtual((prev) => {
+      const index = prev.findIndex(
+        (item) => item.eventTypeId === eventTypeId && item.type === type,
+      );
+
+      if (index !== -1) {
+        const updated = [...prev];
+        updated[index] = {
+          ...updated[index],
+          isChecked,
+        };
+        return updated;
+      }
+
+      return [...prev, obj];
+    });
+  };
   return (
     <div style={{ position: "relative" }}>
       <ul className="live_virtual">
         <li>
           <input
+            onChange={(e) =>
+              onChangeLiveVirtual("live", group, e.target?.checked)
+            }
+            checked={
+              liveVirtual?.find(
+                (item) => item.eventTypeId == group && item.type === "live",
+              )?.isChecked ?? false
+            }
             type="checkbox"
             defaultValue="Order one"
-            id="checkboxOnein_play-inplay"
+            id={`checkboxOnein_play-inplay-${group}`}
             className="ng-untouched ng-pristine ng-valid"
           />
-          <label htmlFor="checkboxOnein_play-inplay">LIVE</label>
+          <label htmlFor={`checkboxOnein_play-inplay-${group}`}>LIVE</label>
         </li>
         <li>
           <input
+            onChange={(e) =>
+              onChangeLiveVirtual("virtual", group, e.target?.checked)
+            }
+            checked={
+              liveVirtual?.find(
+                (item) => item.eventTypeId == group && item.type === "virtual",
+              )?.isChecked ?? false
+            }
             type="checkbox"
             defaultValue="Order Two"
-            id="checkboxTwoin_play-inplay"
+            id={`checkboxTwoin_play-inplay-${group}`}
             className="ng-untouched ng-pristine ng-valid"
           />
-          <label htmlFor="checkboxTwoin_play-inplay">VIRTUAL</label>
+          <label htmlFor={`checkboxTwoin_play-inplay-${group}`}>VIRTUAL</label>
         </li>
       </ul>
       <div className="filter-ct">

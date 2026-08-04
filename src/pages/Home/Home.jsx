@@ -7,8 +7,10 @@ import NewLaunch from "../../components/modules/Home/NewLaunch";
 import Tab from "../../components/modules/Home/Tab";
 import { useGetIndex } from "../../hooks";
 import OurProviders from "../../components/modules/Home/OurProviders";
+import { useState } from "react";
 
 const Home = () => {
+  const [liveVirtual, setLiveVirtual] = useState([]);
   const { data } = useGetIndex({
     type: "99_casino_dashboard",
   });
@@ -23,9 +25,12 @@ const Home = () => {
               <div className="tab-container">
                 <Tab />
                 <div className="tab-content">
-                  <Actions />
+                  <Actions
+                    setLiveVirtual={setLiveVirtual}
+                    liveVirtual={liveVirtual}
+                  />
 
-                  <Events />
+                  <Events liveVirtual={liveVirtual} />
                 </div>
               </div>
             </div>
