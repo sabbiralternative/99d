@@ -16,7 +16,10 @@ import {
   useForgotPasswordMutation,
   useGetOtpMutation,
 } from "../../redux/features/auth/authApi";
+import useLanguage from "../../hooks/use-language";
+import { LanguageKey } from "../../const";
 const Register = () => {
+  const { getLanguage } = useLanguage();
   const navigate = useNavigate();
   const [handleForgotPassword] = useForgotPasswordMutation();
   const [mobile, setMobile] = useState("");
@@ -101,7 +104,7 @@ const Register = () => {
                 </div>
                 <div className="featured-box-login featured-box-secundary default">
                   <h4 className="text-center">
-                    Forgot Password
+                    {getLanguage(LanguageKey.FORGOT_PASSWORD)}
                     <FontAwesomeIcon icon={faHandPointDown} className="ml-2" />
                   </h4>
                   <form
@@ -133,7 +136,7 @@ const Register = () => {
                           className="btn btn-primary btn-block"
                           type="button"
                         >
-                          Retry in {timer}
+                          {getLanguage(LanguageKey.RETRY_IN)} {timer}
                         </button>
                       ) : (
                         <button
@@ -141,7 +144,7 @@ const Register = () => {
                           className="btn btn-primary btn-block"
                           type="button"
                         >
-                          Get OTP
+                          {getLanguage(LanguageKey.GET_OTP)}
                         </button>
                       )}
                     </div>
@@ -206,7 +209,7 @@ const Register = () => {
                         type="submit"
                         className="btn btn-submit btn-login"
                       >
-                        Change Password
+                        {getLanguage(LanguageKey.CHANGE_PASSWORD)}
                         <FontAwesomeIcon icon={faSignInAlt} className="ml-2" />
                       </button>
                     </div>

@@ -3,8 +3,11 @@ import { useCurrentBets } from "../../../hooks/currentBets";
 import useSBCashOut from "../../../hooks/sb_cashout";
 import { useGetEventDetailsQuery } from "../../../redux/features/events/events";
 import toast from "react-hot-toast";
+import useLanguage from "../../../hooks/use-language";
+import { LanguageKey } from "../../../const";
 
 const MyBet = () => {
+  const { getLanguage } = useLanguage();
   const { eventId, eventTypeId } = useParams();
   const { data: currentBet, refetch } = useCurrentBets(eventId);
   const { mutate: cashOut } = useSBCashOut();
@@ -12,7 +15,7 @@ const MyBet = () => {
     { eventTypeId, eventId },
     {
       pollingInterval: 1000,
-    }
+    },
   );
 
   const sportsBook = eventData?.sportsbook?.Result;
@@ -22,7 +25,7 @@ const MyBet = () => {
       (group) =>
         group?.Name !== "Bet Builder" &&
         group?.Name !== "Fast Markets" &&
-        group?.Name !== "Player Specials"
+        group?.Name !== "Player Specials",
     );
 
   const handleCashOut = ({ betHistory, sportsBook, price, cashout_value }) => {
@@ -36,7 +39,7 @@ const MyBet = () => {
     });
 
     const column = item?.Items?.find(
-      (col) => col?.Id === betHistory?.selectionId
+      (col) => col?.Id === betHistory?.selectionId,
     );
 
     const payload = {
@@ -74,17 +77,23 @@ const MyBet = () => {
   return (
     <div className="card m-b-10 my-bet">
       <div className="card-header">
-        <h6 className="card-title d-inline-block">My Bet</h6>
+        <h6 className="card-title d-inline-block">
+          {getLanguage(LanguageKey.MY_BET)}
+        </h6>
       </div>
       <div className="card-body">
         <div>
           <table className="coupon-table table table-borderedless">
             <thead>
               <tr>
-                <th style={{ width: "60%" }}>Nation</th>
+                <th style={{ width: "60%" }}>
+                  {getLanguage(LanguageKey.NATION)}
+                </th>
                 <th className="text-right"></th>
-                <th className="text-right">Odds</th>
-                <th className="text-center">Stake</th>
+                <th className="text-right">{getLanguage(LanguageKey.ODDS)}</th>
+                <th className="text-center">
+                  {getLanguage(LanguageKey.STAKE)}
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -95,7 +104,7 @@ const MyBet = () => {
                     group?.Items?.forEach((data) => {
                       if (bet?.marketId == data?.Id) {
                         column = data?.Items?.find(
-                          (col) => col?.Id === bet?.selectionId
+                          (col) => col?.Id === bet?.selectionId,
                         );
                       }
                     });
@@ -140,7 +149,7 @@ const MyBet = () => {
                             }}
                           >
                             <span style={{ fontSize: "10px", color: "black" }}>
-                              Cashout
+                              {getLanguage(LanguageKey.CASHOUT)}
                             </span>
                             {price && (
                               <span
@@ -171,7 +180,7 @@ const MyBet = () => {
               ) : (
                 <tr>
                   <td colSpan="3" className="text-center">
-                    No records Found
+                    {getLanguage(LanguageKey.NO_RECORD_FOUND)}
                   </td>
                 </tr>
               )}

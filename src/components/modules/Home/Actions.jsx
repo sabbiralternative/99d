@@ -1,6 +1,9 @@
 import { useSelector } from "react-redux";
+import useLanguage from "../../../hooks/use-language";
+import { LanguageKey } from "../../../const";
 
 const Actions = ({ setLiveVirtual, liveVirtual }) => {
+  const { getLanguage } = useLanguage();
   const { group } = useSelector((state) => state.global);
   const onChangeLiveVirtual = (type, eventTypeId, isChecked) => {
     const obj = { type, eventTypeId, isChecked };
@@ -40,7 +43,9 @@ const Actions = ({ setLiveVirtual, liveVirtual }) => {
             id={`checkboxOnein_play-inplay-${group}`}
             className="ng-untouched ng-pristine ng-valid"
           />
-          <label htmlFor={`checkboxOnein_play-inplay-${group}`}>LIVE</label>
+          <label htmlFor={`checkboxOnein_play-inplay-${group}`}>
+            {getLanguage(LanguageKey.LIVE)}
+          </label>
         </li>
         <li>
           <input
@@ -57,7 +62,9 @@ const Actions = ({ setLiveVirtual, liveVirtual }) => {
             id={`checkboxTwoin_play-inplay-${group}`}
             className="ng-untouched ng-pristine ng-valid"
           />
-          <label htmlFor={`checkboxTwoin_play-inplay-${group}`}>VIRTUAL</label>
+          <label htmlFor={`checkboxTwoin_play-inplay-${group}`}>
+            {getLanguage(LanguageKey.VIRTUAL)}
+          </label>
         </li>
       </ul>
       <div className="filter-ct">

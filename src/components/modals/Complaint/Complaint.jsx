@@ -4,8 +4,11 @@ import { useForm } from "react-hook-form";
 import { AxiosSecure } from "../../../lib/AxiosSecure";
 import { API } from "../../../api";
 import toast from "react-hot-toast";
+import useLanguage from "../../../hooks/use-language";
+import { LanguageKey } from "../../../const";
 
 const Complaint = ({ setComplaintId, method, complaintId }) => {
+  const { getLanguage } = useLanguage();
   const complaintRef = useRef();
   const { register, handleSubmit } = useForm();
 
@@ -62,7 +65,7 @@ const Complaint = ({ setComplaintId, method, complaintId }) => {
                       style={{ textAlign: "start", fontSize: "18px" }}
                       className="mb-0"
                     >
-                      Raised Complaint
+                      {getLanguage(LanguageKey.RAISE_COMPLAINT)}
                     </h4>
                     <button
                       onClick={closeModal}
@@ -105,7 +108,7 @@ const Complaint = ({ setComplaintId, method, complaintId }) => {
                             type="submit"
                             className="btn btn-primary btn-block"
                           >
-                            Submit
+                            {getLanguage(LanguageKey.SUBMIT)}
                           </button>
                         </div>
                       </div>

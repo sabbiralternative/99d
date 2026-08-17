@@ -5,8 +5,11 @@ import { useAccessTokenMutation } from "../../../redux/features/casino/casino.ap
 import { useEffect, useState } from "react";
 import BetSlip from "./BetSlip";
 import MyBet from "./MyBet";
+import useLanguage from "../../../hooks/use-language";
+import { LanguageKey } from "../../../const";
 
 const RightSidebar = ({ hasVideo, profit, data }) => {
+  const { getLanguage } = useLanguage();
   const { eventTypeId, eventId } = useParams();
   const [getIFrame, { data: IFrame }] = useAccessTokenMutation();
 
@@ -36,7 +39,7 @@ const RightSidebar = ({ hasVideo, profit, data }) => {
                 className="card-header"
               >
                 <h6 className="card-title">
-                  Live Match
+                  {getLanguage(LanguageKey.LIVE_STREAM)}
                   <span
                     aria-controls="collapseBasic"
                     className="float-right"

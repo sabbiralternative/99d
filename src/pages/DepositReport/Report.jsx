@@ -3,8 +3,11 @@ import { useAccountStatement } from "../../hooks/accountStatement";
 import ShowImage from "./ShowImage";
 import Complaint from "../../components/modals/Complaint/Complaint";
 import { Settings } from "../../api";
+import useLanguage from "../../hooks/use-language";
+import { LanguageKey } from "../../const";
 
 const Report = () => {
+  const { getLanguage } = useLanguage();
   const [complaintId, setComplaintId] = useState(null);
   const [image, setImage] = useState("");
   const fromDate = new Date(new Date().setDate(new Date().getDate() - 7))
@@ -24,7 +27,7 @@ const Report = () => {
   useEffect(() => {
     if (data?.length > 0) {
       const categories = Array.from(
-        new Set(data?.map((item) => item?.date?.split(" ")?.[0]))
+        new Set(data?.map((item) => item?.date?.split(" ")?.[0])),
       );
       setCategory(categories);
     }
@@ -112,7 +115,7 @@ const Report = () => {
                             padding: "8px 12px",
                           }}
                         >
-                          Deposit
+                          {getLanguage(LanguageKey.DEPOSIT)}
                         </div>
                         <div
                           style={{
@@ -125,10 +128,10 @@ const Report = () => {
                               data?.status === "APPROVED"
                                 ? "#3fae52"
                                 : data?.status === "REJECTED"
-                                ? "#e7234e"
-                                : data?.status === "PENDING"
-                                ? "#FFD700"
-                                : "#FFF",
+                                  ? "#e7234e"
+                                  : data?.status === "PENDING"
+                                    ? "#FFD700"
+                                    : "#FFF",
                           }}
                         >
                           {data?.status}
@@ -212,7 +215,7 @@ const Report = () => {
                               onClick={() => setComplaintId(data?.referenceNo)}
                               className="px-2 py-1  text-white   "
                             >
-                              Report Issue
+                              {getLanguage(LanguageKey.REPORT_ISSUE)}
                             </div>
                           )}
                         </span>
@@ -244,7 +247,7 @@ const Report = () => {
               paddingTop: "80px",
             }}
           >
-            <p>No transaction yet!</p>
+            <p>{getLanguage(LanguageKey.NO_TRANSACTION_YET)}!</p>
           </div>
         )}
       </div>

@@ -1,7 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useCurrentBets } from "../../hooks/currentBets";
+import useLanguage from "../../hooks/use-language";
+import { LanguageKey } from "../../const";
 
 const UnSettledBet = () => {
+  const { getLanguage } = useLanguage();
   const navigate = useNavigate();
   const { data: currentBets } = useCurrentBets();
 
@@ -15,7 +18,9 @@ const UnSettledBet = () => {
         <div>
           <div className="card">
             <div className="card-header">
-              <h4 className="mb-0">Un-Setteled Bet</h4>
+              <h4 className="mb-0">
+                {getLanguage(LanguageKey.UNSETTLED_BETS)}
+              </h4>
             </div>
             <div className="card-body container-fluid container-fluid-5 unsetteledbet">
               <div className="row row5 mt-2">
@@ -44,7 +49,7 @@ const UnSettledBet = () => {
                             aria-colindex={2}
                             className="text-center"
                           >
-                            Event Name
+                            {getLanguage(LanguageKey.EVENT_NAME)}
                           </th>
                           <th
                             role="columnheader"
@@ -52,7 +57,7 @@ const UnSettledBet = () => {
                             aria-colindex={3}
                             className="text-center"
                           >
-                            Nation
+                            {getLanguage(LanguageKey.NATION)}
                           </th>
                           <th
                             role="columnheader"
@@ -60,7 +65,7 @@ const UnSettledBet = () => {
                             aria-colindex={4}
                             className="text-center"
                           >
-                            Event Type
+                            {getLanguage(LanguageKey.EVENT_TYPE)}
                           </th>
                           <th
                             role="columnheader"
@@ -68,7 +73,7 @@ const UnSettledBet = () => {
                             aria-colindex={5}
                             className="text-center"
                           >
-                            Market Name
+                            {getLanguage(LanguageKey.MARKET_NAME)}
                           </th>
                           <th
                             role="columnheader"
@@ -76,7 +81,7 @@ const UnSettledBet = () => {
                             aria-colindex={6}
                             className="text-center"
                           >
-                            Side
+                            {getLanguage(LanguageKey.SIDE)}
                           </th>
                           <th
                             role="columnheader"
@@ -84,7 +89,7 @@ const UnSettledBet = () => {
                             aria-colindex={7}
                             className="text-center"
                           >
-                            Rate
+                            {getLanguage(LanguageKey.RATE)}
                           </th>
                           <th
                             role="columnheader"
@@ -92,7 +97,7 @@ const UnSettledBet = () => {
                             aria-colindex={8}
                             className="text-right"
                           >
-                            Amount
+                            {getLanguage(LanguageKey.AMOUNT)}
                           </th>
                           <th
                             role="columnheader"
@@ -100,14 +105,14 @@ const UnSettledBet = () => {
                             aria-colindex={9}
                             className="text-center"
                           >
-                            Place Date
+                            {getLanguage(LanguageKey.PLACE_DATE)}
                           </th>
                           <th
                             role="columnheader"
                             scope="col"
                             aria-colindex={10}
                           >
-                            Match Date
+                            {getLanguage(LanguageKey.MATCH_DATE)}
                           </th>
                         </tr>
                       </thead>

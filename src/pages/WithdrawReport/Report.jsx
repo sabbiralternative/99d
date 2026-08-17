@@ -5,8 +5,11 @@ import Complaint from "../../components/modals/Complaint/Complaint";
 import { Settings } from "../../api";
 import { useBankAccountMutation } from "../../redux/features/deposit/event.api";
 import toast from "react-hot-toast";
+import useLanguage from "../../hooks/use-language";
+import { LanguageKey } from "../../const";
 
 const Report = () => {
+  const { getLanguage } = useLanguage();
   const [deleteWithdraw] = useBankAccountMutation();
   const [complaintId, setComplaintId] = useState(null);
   const [image, setImage] = useState("");
@@ -130,7 +133,7 @@ const Report = () => {
                             padding: "8px 12px",
                           }}
                         >
-                          Withdraw
+                          {getLanguage(LanguageKey.WITHDRAW)}
                         </div>
                         <div
                           style={{
@@ -240,7 +243,7 @@ const Report = () => {
                                   }
                                   className="px-2 py-1  text-white   "
                                 >
-                                  Cancel Withdraw
+                                  {getLanguage(LanguageKey.CANCEL_WITHDRAWAL)}
                                 </button>
                               )}
 
@@ -254,7 +257,10 @@ const Report = () => {
                                   }}
                                   className="px-2 py-1  text-black   "
                                 >
-                                  Withdraw delete request sent.
+                                  {getLanguage(
+                                    LanguageKey.WITHDRAW_DELETE_REQUEST_SENT,
+                                  )}
+                                  .
                                 </p>
                               )}
                             {Settings.complaint && (
@@ -273,7 +279,7 @@ const Report = () => {
                                 }
                                 className="px-2 py-1  text-white   "
                               >
-                                Report Issue
+                                {getLanguage(LanguageKey.REPORT_ISSUE)}
                               </div>
                             )}
                           </div>
@@ -306,7 +312,7 @@ const Report = () => {
               paddingTop: "80px",
             }}
           >
-            <p>No transaction yet!</p>
+            <p>{getLanguage(LanguageKey.NO_TRANSACTION_YET)}!</p>
           </div>
         )}
       </div>

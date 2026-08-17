@@ -6,8 +6,11 @@ import { faTv } from "@fortawesome/free-solid-svg-icons";
 import images from "../../../assets/images";
 import HorseGreyhound from "./HorseGreyhound";
 import { FilterLiveVirtual } from "../../../utils/filter-live-virtual";
+import useLanguage from "../../../hooks/use-language";
+import { LanguageKey } from "../../../const";
 
 const Events = ({ liveVirtual }) => {
+  const { getLanguage } = useLanguage();
   const navigate = useNavigate();
   const { group } = useSelector((state) => state.global);
   const { data } = useGroupQuery(
@@ -178,7 +181,10 @@ const Events = ({ liveVirtual }) => {
                     ) : (
                       <div>
                         <div>
-                          <span> No events available right now</span>
+                          <span>
+                            {" "}
+                            {getLanguage(LanguageKey.NO_RECORD_FOUND)}
+                          </span>
                         </div>
                       </div>
                     )}

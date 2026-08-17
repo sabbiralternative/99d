@@ -15,8 +15,11 @@ import USDT from "./USDT";
 import PG from "./PG";
 import { useBankAccountMutation } from "../../../redux/features/deposit/event.api";
 import images from "../../../assets/images";
+import useLanguage from "../../../hooks/use-language";
+import { LanguageKey } from "../../../const";
 
 const BankAccountUploadTransaction = ({ setTab, amount }) => {
+  const { getLanguage } = useLanguage();
   const paymentMethodRef = useRef();
   const [getPaymentMethod, { data }] = useBankAccountMutation();
   const [paymentId, setPaymentId] = useState(null);
@@ -141,7 +144,7 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
                   data-original-title
                   title
                 >
-                  &lt; Back
+                  &lt; {getLanguage(LanguageKey.BACK)}
                 </button>
                 <div
                   className="nav nav-tabs"

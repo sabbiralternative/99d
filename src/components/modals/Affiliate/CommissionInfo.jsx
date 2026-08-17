@@ -1,7 +1,10 @@
 import { useRef } from "react";
 import useCloseModalClickOutside from "../../../hooks/closeModal";
+import useLanguage from "../../../hooks/use-language";
+import { LanguageKey } from "../../../const";
 
 const CommissionInfo = ({ setOpenCommissionModal }) => {
+  const { getLanguage } = useLanguage();
   const ref = useRef();
   useCloseModalClickOutside(ref, () => {
     setOpenCommissionModal(false);
@@ -37,7 +40,9 @@ const CommissionInfo = ({ setOpenCommissionModal }) => {
               data-v-4c49d924
               className="affi-how-bonus-list affi-how-to-get-bonus"
             >
-              <h5 data-v-4c49d924>💸 How You Earn Commission</h5>
+              <h5 data-v-4c49d924>
+                💸 {getLanguage(LanguageKey.HOW_TO_GET_COMMISSION)}
+              </h5>
               <li data-v-4c49d924>
                 You get bonus of the total amount your users lose every day
                 based on below slabs.

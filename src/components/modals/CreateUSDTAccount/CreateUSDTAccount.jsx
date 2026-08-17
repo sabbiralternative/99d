@@ -5,8 +5,11 @@ import { useSelector } from "react-redux";
 import useCloseModalClickOutside from "../../../hooks/closeModal";
 import { API, Settings } from "../../../api";
 import { AxiosSecure } from "../../../lib/AxiosSecure";
+import useLanguage from "../../../hooks/use-language";
+import { LanguageKey } from "../../../const";
 
 const CreateUSDTAccount = ({ refetchBankData, setShowUSDTModal }) => {
+  const { getLanguage } = useLanguage();
   const [mobile, setMobile] = useState(null);
   const { token } = useSelector((state) => state.auth);
   const [orderId, setOrderId] = useState(null);
@@ -135,7 +138,9 @@ const CreateUSDTAccount = ({ refetchBankData, setShowUSDTModal }) => {
           style={{ maxWidth: "600px", borderRadius: "6px" }}
         >
           <div className="card-header">
-            <h2 style={{ color: "black" }}>Add USDT Account</h2>
+            <h2 style={{ color: "black" }}>
+              {getLanguage(LanguageKey.ADD_USDT_ACCOUNT)}
+            </h2>
             <div
               onClick={() => setShowUSDTModal(false)}
               style={{ cursor: "pointer" }}
@@ -243,7 +248,7 @@ const CreateUSDTAccount = ({ refetchBankData, setShowUSDTModal }) => {
                           marginRight: "10px",
                         }}
                       >
-                        Retry in {timer}
+                        {getLanguage(LanguageKey.RETRY_IN)} {timer}
                       </div>
                     ) : (
                       <div
@@ -285,7 +290,7 @@ const CreateUSDTAccount = ({ refetchBankData, setShowUSDTModal }) => {
                           }}
                           type="button"
                         >
-                          Get OTP Message
+                          {getLanguage(LanguageKey.GET_OTP_ON_MESSAGE)}
                         </button>
                       </div>
                     )}
@@ -316,7 +321,7 @@ const CreateUSDTAccount = ({ refetchBankData, setShowUSDTModal }) => {
                     onClick={() => setShowUSDTModal(false)}
                     className="cancel-btn "
                   >
-                    <span className="">Cancel</span>
+                    <span className="">{getLanguage(LanguageKey.CANCEL)}</span>
                   </button>
                   <button
                     style={{
@@ -328,7 +333,9 @@ const CreateUSDTAccount = ({ refetchBankData, setShowUSDTModal }) => {
                     className="add-btn "
                     type="submit"
                   >
-                    <span className="">Add USDT Wallet</span>
+                    <span className="">
+                      {getLanguage(LanguageKey.ADD_USDT_WALLET)}
+                    </span>
                   </button>
                 </div>
               </form>

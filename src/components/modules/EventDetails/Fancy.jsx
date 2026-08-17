@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { Status } from "../../../const";
+import { LanguageKey, Status } from "../../../const";
 import { useDispatch, useSelector } from "react-redux";
 import { useExposure } from "../../../hooks/exposure";
 import {
@@ -9,8 +9,10 @@ import {
 import { useGetLadderMutation } from "../../../redux/features/events/events";
 import Ladder from "../../modals/EventDetails/Ladder";
 import { useState } from "react";
+import useLanguage from "../../../hooks/use-language";
 
 const Fancy = ({ fancy }) => {
+  const { getLanguage } = useLanguage();
   const [ladderData, setLadderData] = useState([]);
   const { eventId } = useParams();
   const navigate = useNavigate();
@@ -393,11 +395,16 @@ const Fancy = ({ fancy }) => {
                                                   }}
                                                 >
                                                   <span className="d-block">
-                                                    Min:
-                                                    <span>100</span>
+                                                    {getLanguage(
+                                                      LanguageKey.MIN,
+                                                    )}
+                                                    :<span>100</span>
                                                   </span>
                                                   <span className="d-block">
-                                                    Max:
+                                                    {getLanguage(
+                                                      LanguageKey.MAX,
+                                                    )}
+                                                    :
                                                     <span>
                                                       {
                                                         games?.maxLiabilityPerBet

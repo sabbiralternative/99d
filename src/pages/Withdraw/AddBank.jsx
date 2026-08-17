@@ -6,8 +6,11 @@ import { API, Settings } from "../../api";
 import useCloseModalClickOutside from "../../hooks/closeModal";
 import { useDispatch, useSelector } from "react-redux";
 import { setAddBank } from "../../redux/features/global/globalSlice";
+import useLanguage from "../../hooks/use-language";
+import { LanguageKey } from "../../const";
 
 const AddBank = ({ refetchBankData }) => {
+  const { getLanguage } = useLanguage();
   /* Handle close modal click outside */
   const dispatch = useDispatch();
   const [mobile, setMobile] = useState(null);
@@ -152,7 +155,9 @@ const AddBank = ({ refetchBankData }) => {
           style={{ maxWidth: "600px", borderRadius: "6px" }}
         >
           <div className="card-header">
-            <h2 style={{ color: "black" }}>Add Bank Account</h2>
+            <h2 style={{ color: "black" }}>
+              {getLanguage(LanguageKey.ADD_BANK_ACCOUNT)}
+            </h2>
             <div
               onClick={() => dispatch(setAddBank(false))}
               style={{ cursor: "pointer" }}
@@ -261,7 +266,7 @@ const AddBank = ({ refetchBankData }) => {
                           marginRight: "10px",
                         }}
                       >
-                        Retry in {timer}
+                        {getLanguage(LanguageKey.RETRY_IN)} {timer}
                       </div>
                     ) : (
                       <div
@@ -303,7 +308,7 @@ const AddBank = ({ refetchBankData }) => {
                           }}
                           type="button"
                         >
-                          Get OTP Message
+                          {getLanguage(LanguageKey.GET_OTP_ON_MESSAGE)}
                         </button>
                       </div>
                     )}
@@ -333,7 +338,7 @@ const AddBank = ({ refetchBankData }) => {
                     onClick={() => dispatch(setAddBank(false))}
                     className="cancel-btn "
                   >
-                    <span className="">Cancel</span>
+                    <span className="">{getLanguage(LanguageKey.CANCEL)}</span>
                   </button>
                   <button
                     style={{
@@ -345,7 +350,9 @@ const AddBank = ({ refetchBankData }) => {
                     className="add-btn "
                     type="submit"
                   >
-                    <span className="">Add Bank Account</span>
+                    <span className="">
+                      {getLanguage(LanguageKey.ADD_BANK_ACCOUNT)}
+                    </span>
                   </button>
                 </div>
               </form>

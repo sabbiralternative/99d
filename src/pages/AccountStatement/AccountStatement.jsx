@@ -3,8 +3,11 @@ import { useAccountStatementMutation } from "../../redux/features/events/events"
 import toast from "react-hot-toast";
 import { useState } from "react";
 import SettledBet from "../../components/modals/SettledBet/SettledBet";
+import useLanguage from "../../hooks/use-language";
+import { LanguageKey } from "../../const";
 
 const AccountStatement = () => {
+  const { getLanguage } = useLanguage();
   const [marketId, setMarketId] = useState("");
   const [getAccountStatement, { data }] = useAccountStatementMutation();
   const { register, handleSubmit } = useForm();
@@ -28,7 +31,9 @@ const AccountStatement = () => {
         <div>
           <div className="card">
             <div className="card-header">
-              <h4 className="mb-0">Account Statement</h4>
+              <h4 className="mb-0">
+                {getLanguage(LanguageKey.ACCOUNT_STATEMENT)}
+              </h4>
             </div>
             <div className="card-body container-fluid container-fluid-5">
               <form
@@ -83,17 +88,23 @@ const AccountStatement = () => {
                         className="custom-select ng-pristine ng-valid ng-touched"
                       >
                         <option value="none" disabled>
-                          Select Report Type
+                          {getLanguage(LanguageKey.SELECT_REPORT_TYPE)}
                         </option>
-                        <option value="ALL">All Reports</option>
-                        <option value="DW">Deposit/Withdraw Reports</option>
-                        <option value="GR">Game Reports</option>
+                        <option value="ALL">
+                          {getLanguage(LanguageKey.ALL_REPORTS)}
+                        </option>
+                        <option value="DW">
+                          {getLanguage(LanguageKey.DEPOSIT_WITHDRAW_REPORT)}s
+                        </option>
+                        <option value="GR">
+                          {getLanguage(LanguageKey.GAME_REPORT)}
+                        </option>
                       </select>
                     </div>
                   </div>
                   <div className="col-1">
                     <button type="submit" className="btn btn-primary btn-block">
-                      Submit
+                      {getLanguage(LanguageKey.SUBMIT)}
                     </button>
                   </div>
                 </div>
@@ -121,7 +132,7 @@ const AccountStatement = () => {
                               aria-colindex={1}
                               className="text-center"
                             >
-                              Sr No
+                              {getLanguage(LanguageKey.SR_NO)}
                             </th>
                             <th
                               role="columnheader"
@@ -129,7 +140,7 @@ const AccountStatement = () => {
                               aria-colindex={1}
                               className="text-center"
                             >
-                              Date
+                              {getLanguage(LanguageKey.DATE)}
                             </th>
                             <th
                               role="columnheader"
@@ -137,7 +148,7 @@ const AccountStatement = () => {
                               aria-colindex={1}
                               className="text-center"
                             >
-                              Credit
+                              {getLanguage(LanguageKey.CREDIT)}
                             </th>
                             <th
                               role="columnheader"
@@ -145,7 +156,7 @@ const AccountStatement = () => {
                               aria-colindex={1}
                               className="text-center"
                             >
-                              Debit
+                              {getLanguage(LanguageKey.DEBIT)}
                             </th>
                             <th
                               role="columnheader"
@@ -153,7 +164,7 @@ const AccountStatement = () => {
                               aria-colindex={1}
                               className="text-center"
                             >
-                              Balance
+                              {getLanguage(LanguageKey.BALANCE)}
                             </th>
                             <th
                               role="columnheader"
@@ -161,7 +172,7 @@ const AccountStatement = () => {
                               aria-colindex={1}
                               className="text-center"
                             >
-                              Sports
+                              {getLanguage(LanguageKey.SPORTS)}
                             </th>
                             <th
                               role="columnheader"
@@ -169,7 +180,7 @@ const AccountStatement = () => {
                               aria-colindex={1}
                               className="text-center"
                             >
-                              Remark
+                              {getLanguage(LanguageKey.REMARK)}
                             </th>
                           </tr>
                         </thead>

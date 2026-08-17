@@ -27,8 +27,11 @@ import {
 } from "../../../utils/editBetSlipPrice";
 import { AxiosJSEncrypt } from "../../../lib/AxiosJSEncrypt";
 import { isBetDelay, isDelay } from "../../../utils/isBetDelay";
+import useLanguage from "../../../hooks/use-language";
+import { LanguageKey } from "../../../const";
 
 const BetSlip = ({ profit, data }) => {
+  const { getLanguage } = useLanguage();
   const { closePopupForForever } = useSelector((state) => state?.global);
   const [isCashOut, setIsCashOut] = useState(false);
   const { eventTypeId } = useParams();
@@ -189,7 +192,9 @@ const BetSlip = ({ profit, data }) => {
       {placeBetValues && (
         <div className="card m-b-10 place-bet">
           <div className="card-header">
-            <h6 className="card-title d-inline-block">Place Bet</h6>
+            <h6 className="card-title d-inline-block">
+              {getLanguage(LanguageKey.PLACE_BET)}
+            </h6>
           </div>
 
           <div>
@@ -228,13 +233,13 @@ const BetSlip = ({ profit, data }) => {
                           (Bet for)
                         </th>
                         <th style={{ width: "25%", textAlign: "left" }}>
-                          Odds
+                          {getLanguage(LanguageKey.ODDS)}
                         </th>
                         <th style={{ width: "15%", textAlign: "left" }}>
-                          Stake
+                          {getLanguage(LanguageKey.STAKE)}
                         </th>
                         <th style={{ width: "15%", textAlign: "right" }}>
-                          Profit
+                          {getLanguage(LanguageKey.PROFIT)}
                         </th>
                       </tr>
                     </thead>
@@ -370,7 +375,7 @@ const BetSlip = ({ profit, data }) => {
                             type="button"
                             className="btn btn-secondary m-l-5 m-b-5 min-stake"
                           >
-                            min stake
+                            {getLanguage(LanguageKey.MIN)}
                           </button>
                           <button
                             onClick={() => {
@@ -386,7 +391,7 @@ const BetSlip = ({ profit, data }) => {
                             type="button"
                             className="btn btn-secondary m-l-5 m-b-5 max-stake"
                           >
-                            max stake
+                            {getLanguage(LanguageKey.MAX)}
                           </button>
                           {/* <button
                             className="btn btn-secondary m-l-5 m-b-5 min-stake"
@@ -408,7 +413,7 @@ const BetSlip = ({ profit, data }) => {
                               color: "#fff",
                             }}
                           >
-                            clear
+                            {getLanguage(LanguageKey.CLEAR)}
                           </button>
                         </td>
                       </tr>
@@ -420,14 +425,14 @@ const BetSlip = ({ profit, data }) => {
                       type="button"
                       className="btn btn-sm btn-danger float-left"
                     >
-                      Reset
+                      {getLanguage(LanguageKey.CANCEL)}
                     </button>
                     <button
                       onClick={handleOrderBets}
                       type="button"
                       className="btn btn-sm btn-success float-right m-b-5"
                     >
-                      Submit
+                      {getLanguage(LanguageKey.SUBMIT)}
                     </button>
                   </div>
                 </form>

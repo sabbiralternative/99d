@@ -7,15 +7,18 @@ import { homeTab } from "../../../static/group";
 import { useDispatch } from "react-redux";
 import { setGroup } from "../../../redux/features/global/globalSlice";
 import { Settings } from "../../../api";
+import useLanguage from "../../../hooks/use-language";
+import { LanguageKey } from "../../../const";
 
 const Sidebar = () => {
+  const { getLanguage } = useLanguage();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { data } = useMac88Query();
 
   const handleNavigateToIFrame = (casino) => {
     navigate(
-      `/casino/${casino?.game_name?.replace(/ /g, "")}/${casino?.game_id}`
+      `/casino/${casino?.game_name?.replace(/ /g, "")}/${casino?.game_id}`,
     );
   };
 
@@ -33,7 +36,7 @@ const Sidebar = () => {
           >
             <h5 className="d-inline-block m-b-0" tabIndex={0}>
               <img src={images.deposit} />
-              Deposit
+              {getLanguage(LanguageKey.DEPOSIT)}
             </h5>
           </div>
         )}
@@ -44,7 +47,7 @@ const Sidebar = () => {
           >
             <h5 className="d-inline-block m-b-0" tabIndex={0}>
               <img src={images.withdraw} />
-              Withdraw
+              {getLanguage(LanguageKey.WITHDRAW)}
             </h5>
           </div>
         )}
@@ -59,7 +62,9 @@ const Sidebar = () => {
             justifyContent: "space-between",
           }}
         >
-          <h5 className="d-inline-block m-b-0">Others</h5>
+          <h5 className="d-inline-block m-b-0">
+            {getLanguage(LanguageKey.OTHERS)}
+          </h5>
           <IoIosArrowDown color="#fff" />
         </div>
         <nav className="collapse casino show">
@@ -92,7 +97,9 @@ const Sidebar = () => {
             justifyContent: "space-between",
           }}
         >
-          <h5 className="text-white d-inline-block m-b-0">All Sports</h5>
+          <h5 className="text-white d-inline-block m-b-0">
+            {getLanguage(LanguageKey.ALL_SPORTS)}
+          </h5>
           <IoIosArrowDown color="#fff" />
         </div>
         <div id="events" className="mtree-main collapse events show">

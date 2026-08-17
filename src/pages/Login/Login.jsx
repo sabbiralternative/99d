@@ -15,8 +15,11 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { GrAndroid } from "react-icons/gr";
+import useLanguage from "../../hooks/use-language";
+import { LanguageKey } from "../../const";
 
 const Login = () => {
+  const { getLanguage } = useLanguage();
   const { closePopupForForever } = useSelector((state) => state?.global);
   const { token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
@@ -155,7 +158,7 @@ const Login = () => {
                 </div>
                 <div className="featured-box-login featured-box-secundary default">
                   <h4 className="text-center">
-                    LOGIN
+                    {getLanguage(LanguageKey.LOGIN)}
                     <FontAwesomeIcon icon={faHandPointDown} className="ml-2" />
                   </h4>
                   <form
@@ -205,7 +208,7 @@ const Login = () => {
                         type="submit"
                         className="btn btn-submit btn-login"
                       >
-                        Login
+                        {getLanguage(LanguageKey.LOGIN)}
                         <FontAwesomeIcon icon={faSignInAlt} className="ml-2" />
                       </button>
                     </div>
@@ -216,7 +219,7 @@ const Login = () => {
                           type="button"
                           className="btn btn-submit btn-login"
                         >
-                          Login with Demo ID
+                          {getLanguage(LanguageKey.DEMO_LOGIN)}
                           <FontAwesomeIcon
                             icon={faSignInAlt}
                             className="ml-2"
@@ -232,7 +235,7 @@ const Login = () => {
                           type="button"
                           className="btn btn-submit btn-login"
                         >
-                          Register
+                          {getLanguage(LanguageKey.REGISTER)}
                           <FontAwesomeIcon
                             icon={faSignInAlt}
                             className="ml-2"
@@ -247,7 +250,7 @@ const Login = () => {
                           type="button"
                           className="btn btn-submit btn-login"
                         >
-                          <GrAndroid /> Download .apk
+                          <GrAndroid /> {getLanguage(LanguageKey.DOWNLOAD_APK)}
                           <FontAwesomeIcon
                             icon={faSignInAlt}
                             className="ml-2"
@@ -279,7 +282,7 @@ const Login = () => {
                           type="button"
                           className="btn  "
                         >
-                          Forgot Password
+                          {getLanguage(LanguageKey.FORGOT_PASSWORD)}
                           <FontAwesomeIcon
                             icon={faSignInAlt}
                             className="ml-2"
@@ -299,7 +302,9 @@ const Login = () => {
                           marginBottom: "5px",
                         }}
                       >
-                        <span style={{ marginBottom: "5px" }}>Contact Us</span>
+                        <span style={{ marginBottom: "5px" }}>
+                          {getLanguage(LanguageKey.CONTACT_US)}
+                        </span>
                         <div>
                           {Settings.whatsapplink ||
                           Settings.branchWhatsapplink ? (

@@ -1,4 +1,8 @@
+import { LanguageKey } from "../../../const";
+import useLanguage from "../../../hooks/use-language";
+
 const BetHistory = () => {
+  const { getLanguage } = useLanguage();
   return (
     <div>
       <div className="modal-backdrop fade in show" />
@@ -19,7 +23,9 @@ const BetHistory = () => {
             <div>
               <div className="card modal-cs">
                 <div className="card-header">
-                  <h4 className="mb-0">Bet History</h4>
+                  <h4 className="mb-0">
+                    {getLanguage(LanguageKey.BET_HISTORY)}
+                  </h4>
                   <button
                     type="button"
                     aria-label="Close"
@@ -59,7 +65,7 @@ const BetHistory = () => {
                                   aria-colindex={1}
                                   className="text-center"
                                 >
-                                  Nation
+                                  {getLanguage(LanguageKey.NATION)}
                                 </th>
                                 <th
                                   role="columnheader"
@@ -67,7 +73,7 @@ const BetHistory = () => {
                                   aria-colindex={1}
                                   className="text-center"
                                 >
-                                  Side
+                                  {getLanguage(LanguageKey.SIDE)}
                                 </th>
                                 <th
                                   role="columnheader"
@@ -75,7 +81,7 @@ const BetHistory = () => {
                                   aria-colindex={1}
                                   className="text-center"
                                 >
-                                  Rate
+                                  {getLanguage(LanguageKey.RATE)}
                                 </th>
                                 <th
                                   role="columnheader"
@@ -83,7 +89,7 @@ const BetHistory = () => {
                                   aria-colindex={1}
                                   className="text-center"
                                 >
-                                  Amount
+                                  {getLanguage(LanguageKey.AMOUNT)}
                                 </th>
                                 <th
                                   role="columnheader"
@@ -99,7 +105,7 @@ const BetHistory = () => {
                                   aria-colindex={1}
                                   className="text-center"
                                 >
-                                  Match Date
+                                  {getLanguage(LanguageKey.MATCH_DATE)}
                                 </th>
                               </tr>
                             </thead>

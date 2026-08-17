@@ -17,7 +17,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../redux/features/auth/authSlice";
 // import getOtpOnWhatsapp from "../../utils/getOtpOnWhatsapp";
 import images from "../../assets/images";
+import useLanguage from "../../hooks/use-language";
+import { LanguageKey } from "../../const";
 const Register = () => {
+  const { getLanguage } = useLanguage();
   const affnook_token = localStorage.getItem("affnook_token");
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -174,7 +177,7 @@ const Register = () => {
                 </div>
                 <div className="featured-box-login featured-box-secundary default">
                   <h4 className="text-center">
-                    Register
+                    {getLanguage(LanguageKey.REGISTER)}
                     <FontAwesomeIcon icon={faHandPointDown} className="ml-2" />
                   </h4>
                   <form
@@ -208,7 +211,7 @@ const Register = () => {
                           className="btn btn-primary btn-block"
                           type="button"
                         >
-                          Retry in {timer}
+                          {getLanguage(LanguageKey.RETRY_IN)} {timer}
                         </button>
                       ) : (
                         <Fragment>
@@ -217,7 +220,7 @@ const Register = () => {
                             className="btn btn-primary btn-block"
                             type="button"
                           >
-                            Get OTP Message
+                            {getLanguage(LanguageKey.GET_OTP_ON_MESSAGE)}
                           </button>
                           {/* {Settings.otpWhatsapp && (
                             <button
@@ -332,7 +335,7 @@ const Register = () => {
                         type="submit"
                         className="btn btn-submit btn-login"
                       >
-                        Register
+                        {getLanguage(LanguageKey.REGISTER)}
                         <FontAwesomeIcon icon={faSignInAlt} className="ml-2" />
                       </button>
                     </div>
@@ -362,7 +365,7 @@ const Register = () => {
                                 fontSize: "14px",
                               }}
                             >
-                              Or
+                              {getLanguage(LanguageKey.OR)}
                             </span>
                             <div
                               style={{
@@ -389,7 +392,7 @@ const Register = () => {
                             />
                             <span style={{ marginLeft: "10px" }}>
                               {" "}
-                              Get OTP on Whatsapp
+                              {getLanguage(LanguageKey.GET_ID_ON_WHATSAPP)}
                             </span>
                           </button>
                         </Fragment>
@@ -397,7 +400,7 @@ const Register = () => {
                     <div className="mt-2 mb-1">
                       <b>Already have User?</b>{" "}
                       <Link to="/login" className="ms-1">
-                        <b>Login here</b>
+                        <b>{getLanguage(LanguageKey.LOGIN)}</b>
                       </Link>
                     </div>
                     {/* <small className="recaptchaTerms">

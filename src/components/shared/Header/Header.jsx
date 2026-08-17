@@ -19,15 +19,14 @@ import {
 import DownloadAPK from "../../modals/DownloadAPK/DownloadAPK";
 import BuildVersion from "../../modals/BuildVersion/BuildVersion";
 import Error from "../../modals/Error/Error";
-import useLanguage from "../../../hooks/useLanguage";
 import Language from "../../modals/Language";
-import { languageValue } from "../../../utils/language";
 import { LanguageKey } from "../../../const";
 import MiniGames from "../../modals/MiniGames/MiniGames";
+import useLanguage from "../../../hooks/use-language";
 
 const Header = () => {
   const [showMiniGamesModal, setShowMiniGamesModal] = useState(false);
-  const { valueByLanguage, setLanguage } = useLanguage();
+  const { getLanguage, setLanguage } = useLanguage();
   const [showLanguage, setShowLanguage] = useState(false);
   const [showBuildVersion, setShowBuildVersion] = useState(false);
   const stored_build_version = localStorage.getItem("build_version");
@@ -122,16 +121,13 @@ const Header = () => {
                     {Settings.deposit && (
                       <Link to="/deposit" className="btn_deposit">
                         <img src={images.deposit} className="img-fluid" />
-                        {languageValue(
-                          valueByLanguage,
-                          LanguageKey.DEPOSIT,
-                        )}{" "}
+                        {getLanguage(LanguageKey.DEPOSIT)}{" "}
                       </Link>
                     )}
                     {Settings.withdraw && (
                       <Link to="/withdraw" className="btn_withdrawal">
                         <img src={images.withdraw} className="img-fluid" />
-                        {languageValue(valueByLanguage, LanguageKey.WITHDRAW)}
+                        {getLanguage(LanguageKey.WITHDRAW)}
                       </Link>
                     )}
                   </li>
@@ -141,7 +137,7 @@ const Header = () => {
                 <li className="float-left download-apklink">
                   <div>
                     <Link to="/rules" className="rules-link m-r-5">
-                      <b>Rules</b>
+                      <b>{getLanguage(LanguageKey.RULES)}</b>
                     </Link>
                   </div>
                 </li>
@@ -157,7 +153,7 @@ const Header = () => {
                       type="button"
                       className="btn btn-submit btn-login"
                     >
-                      {languageValue(valueByLanguage, LanguageKey.LOGIN)}
+                      {getLanguage(LanguageKey.LOGIN)}
                       <FontAwesomeIcon icon={faSignInAlt} className="ml-2" />
                     </button>
                     {Settings.registration && (
@@ -171,7 +167,7 @@ const Header = () => {
                         type="button"
                         className="btn btn-submit btn-login"
                       >
-                        {languageValue(valueByLanguage, LanguageKey.REGISTER)}
+                        {getLanguage(LanguageKey.REGISTER)}
                         <FontAwesomeIcon icon={faSignInAlt} className="ml-2" />
                       </button>
                     )}
@@ -226,7 +222,7 @@ const Header = () => {
                   <Fragment>
                     <li className="ballance float-left">
                       <div>
-                        <span>Balance: </span>
+                        <span>{getLanguage(LanguageKey.BALANCE)}: </span>
                         <b>
                           <span>{balance?.availBalance}</span>
                         </b>

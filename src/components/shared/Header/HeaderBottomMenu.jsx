@@ -1,12 +1,11 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setGroup } from "../../../redux/features/global/globalSlice";
-import useLanguage from "../../../hooks/useLanguage";
-import { languageValue } from "../../../utils/language";
 import { LanguageKey } from "../../../const";
+import useLanguage from "../../../hooks/use-language";
 
 const HeaderBottomMenu = () => {
-  const { valueByLanguage } = useLanguage();
+  const { getLanguage } = useLanguage();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -22,7 +21,7 @@ const HeaderBottomMenu = () => {
   const headerTab = [
     {
       id: 0,
-      name: languageValue(valueByLanguage, LanguageKey.HOME),
+      name: getLanguage(LanguageKey.HOME),
       group: 0,
     },
 
@@ -35,28 +34,28 @@ const HeaderBottomMenu = () => {
     // },
     {
       id: 1,
-      name: languageValue(valueByLanguage, LanguageKey.CRICKET),
+      name: getLanguage(LanguageKey.CRICKET),
       group: 4,
     },
     {
       id: 2,
-      name: languageValue(valueByLanguage, LanguageKey.FOOTBALL),
+      name: getLanguage(LanguageKey.FOOTBALL),
       group: 1,
     },
     {
       id: 3,
-      name: languageValue(valueByLanguage, LanguageKey.TENNIS),
+      name: getLanguage(LanguageKey.TENNIS),
       group: 2,
     },
     {
       id: 6,
-      name: "Sports book",
+      name: getLanguage(LanguageKey.SPORTSBOOK),
       group: null,
       path: "/casino/sportsbook/550000",
     },
     {
       id: 4,
-      name: "Casino",
+      name: getLanguage(LanguageKey.CASINO),
       group: null,
       path: "/casino?product=All&category=All",
     },
@@ -69,80 +68,80 @@ const HeaderBottomMenu = () => {
 
     {
       id: 7,
-      name: languageValue(valueByLanguage, LanguageKey.HORSE),
+      name: getLanguage(LanguageKey.HORSE),
       group: 7,
     },
     {
       id: 8,
-      name: languageValue(valueByLanguage, LanguageKey.GREYHOUND),
+      name: getLanguage(LanguageKey.GREYHOUND),
       group: 4339,
     },
-    {
-      id: 9,
-      name: "Binary",
-      group: 5,
-    },
+    // {
+    //   id: 9,
+    //   name: "Binary",
+    //   group: 5,
+    // },
     {
       id: 10,
-      name: languageValue(valueByLanguage, LanguageKey.KABADDI),
+      name: getLanguage(LanguageKey.KABADDI),
       group: 6,
     },
     {
       id: 11,
-      name: "Politics",
+      name: getLanguage(LanguageKey.POLITICS),
       group: 17,
     },
     {
       id: 9,
-      name: "Basketball",
+      name: getLanguage(LanguageKey.BASKETBALL),
 
       group: 7522,
     },
     {
       id: 10,
-      name: "Baseball",
+      name: getLanguage(LanguageKey.BASEBALL),
 
       group: 7511,
     },
     {
       id: 11,
-      name: "Table Tennis",
+      name: getLanguage(LanguageKey.TABLE_TENNIS),
 
       group: 20,
     },
     {
       id: 12,
-      name: "Volleyball",
+      name: getLanguage(LanguageKey.VOLLYBALL),
 
       group: 998917,
     },
     {
       id: 13,
-      name: "Ice Hockey",
+      name: getLanguage(LanguageKey.ICE_HOCKY),
 
       group: 7524,
     },
     {
       id: 14,
-      name: "Rugby",
+      name: getLanguage(LanguageKey.RUGBY),
 
       group: 5,
     },
     {
       id: 15,
-      name: "Mixed Martial Arts",
+      name: getLanguage(LanguageKey.MIXED_MARTIAL_ARTS),
 
       group: 26420387,
     },
     {
       id: 16,
-      name: "Darts",
+      name: getLanguage(LanguageKey.DARTS),
 
       group: 3503,
     },
     {
       id: 17,
-      name: "Futsal",
+      name: getLanguage(LanguageKey.FUTSAL),
 
       group: 29,
     },

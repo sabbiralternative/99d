@@ -1,8 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/no-unknown-property */
 import { useState } from "react";
+import useLanguage from "../../hooks/use-language";
+import { LanguageKey } from "../../const";
 
 const Rules = () => {
+  const { getLanguage } = useLanguage();
   const [tab, setTab] = useState(1);
 
   const handleToggleTab = (t) => {
@@ -17,7 +20,7 @@ const Rules = () => {
       <div>
         <div className="card rules-container">
           <div className="card-header">
-            <h4 className="mb-0">Rules</h4>
+            <h4 className="mb-0">{getLanguage(LanguageKey.RULES)}</h4>
           </div>
           <div className="card-body container-fluid container-fluid-5">
             <div className="row row5 mt-2">
@@ -7548,7 +7551,8 @@ const Rules = () => {
                                         the rate 40 and 200000 back for the rate
                                         of 48) and the actual score is 38, bets
                                         of 40 lay will be voided and the bets
-                                        for 48 back will be considered valid.{" "}
+                                        for 48 back will be considered
+                                        valid.{" "}
                                       </span>
                                     </td>
                                   </tr>

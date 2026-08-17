@@ -1,4 +1,4 @@
-import { Status } from "../../../const";
+import { LanguageKey, Status } from "../../../const";
 import { useExposure } from "../../../hooks/exposure";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -13,8 +13,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import SpeedCashOut from "../../modals/SpeedCashOut/SpeedCashOut";
 import { isGameSuspended } from "../../../utils/isOddSuspended";
+import useLanguage from "../../../hooks/use-language";
 
 const MatchOdds = ({ matchOdds }) => {
+  const { getLanguage } = useLanguage();
   const [speedCashOut, setSpeedCashOut] = useState(null);
   const { eventId } = useParams();
   const [teamProfit, setTeamProfit] = useState([]);
@@ -262,7 +264,7 @@ const MatchOdds = ({ matchOdds }) => {
                         }
                         className="btn-cashout"
                       >
-                        cashout{" "}
+                        {getLanguage(LanguageKey.CASHOUT)}{" "}
                         {teamProfitForGame?.profit &&
                           `(${teamProfitForGame.profit.toFixed(0)})`}
                       </button>
@@ -290,7 +292,7 @@ const MatchOdds = ({ matchOdds }) => {
                         className="btn-cashout"
                       >
                         {" "}
-                        Speed Cashout
+                        {getLanguage(LanguageKey.SPEED_CASHOUT)}
                       </button>
                     )}
                   <a
@@ -308,8 +310,8 @@ const MatchOdds = ({ matchOdds }) => {
                 <div className="table-header">
                   <div className="float-left country-name box-4 text-info">
                     <b>
-                      Min:
-                      <span>100</span> Max:
+                      {getLanguage(LanguageKey.MIN)}:<span>100</span>{" "}
+                      {getLanguage(LanguageKey.MAX)}:
                       <span>{games?.maxLiabilityPerBet}</span>
                     </b>
                   </div>

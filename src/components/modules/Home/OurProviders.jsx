@@ -1,7 +1,10 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import useLanguage from "../../../hooks/use-language";
+import { LanguageKey } from "../../../const";
 
 const OurProviders = ({ our_provider }) => {
+  const { getLanguage } = useLanguage();
   const { token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const handleNavigateToIFrame = (casino) => {
@@ -12,7 +15,7 @@ const OurProviders = ({ our_provider }) => {
   return (
     <div className="row mx-0 mt-0">
       <h2 className="newheading">
-        <span>our providers</span>
+        <span>{getLanguage(LanguageKey.OUR_PROVIDERS)}</span>
       </h2>
 
       <div className="csn_div">

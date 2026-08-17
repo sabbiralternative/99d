@@ -8,8 +8,11 @@ import { useBankAccountMutation } from "../../../redux/features/deposit/event.ap
 import { useAccountStatement } from "../../../hooks/accountStatement";
 import useUTR from "../../../hooks/utr";
 import ImageUploadMessage from "../../modals/ImageUploadMessage/ImageUploadMessage";
+import useLanguage from "../../../hooks/use-language";
+import { LanguageKey } from "../../../const";
 
 const PaymentProof = ({ paymentId, amount, methodType }) => {
+  const { getLanguage } = useLanguage();
   const { mutate: getUTR } = useUTR();
   const [imageUploadMessage, setImageUploadMessage] = useState(null);
   const { refetch } = useAccountStatement();
@@ -166,7 +169,7 @@ const PaymentProof = ({ paymentId, amount, methodType }) => {
             {!filePath && !loading && (
               <div className="form-group">
                 <label htmlFor="proofOfDeposit128375">
-                  Upload Your Payment Proof{" "}
+                  {getLanguage(LanguageKey.UPLOAD_YOUR_PAYMENT_SLIP_BELOW)}{" "}
                   <small style={{ color: "red" }}>[Required]</small>
                 </label>
                 <input
@@ -204,7 +207,7 @@ const PaymentProof = ({ paymentId, amount, methodType }) => {
 
             <div className="form-group">
               <label htmlFor="exampleFormControlInput1">
-                Amount
+                {getLanguage(LanguageKey.AMOUNT)}
                 <small style={{ color: "red" }}>*</small>
               </label>
               <input
@@ -253,7 +256,7 @@ const PaymentProof = ({ paymentId, amount, methodType }) => {
               type="submit"
               className="btn btn-info depositBtn"
             >
-              Submit
+              {getLanguage(LanguageKey.SUBMIT)}
             </button>
           </div>
         </form>
