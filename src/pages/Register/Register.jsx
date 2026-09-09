@@ -12,7 +12,7 @@ import {
   faMobile,
   faSignInAlt,
 } from "@fortawesome/free-solid-svg-icons";
-
+import { FaMobileAlt, FaRegUser } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../redux/features/auth/authSlice";
 // import getOtpOnWhatsapp from "../../utils/getOtpOnWhatsapp";
@@ -20,6 +20,9 @@ import images from "../../assets/images";
 import useLanguage from "../../hooks/use-language";
 import { LanguageKey } from "../../const";
 const Register = () => {
+  const [tab, setTab] = useState(
+    Settings.registration_mobile ? "mobile" : "username",
+  );
   const { getLanguage } = useLanguage();
   const affnook_token = localStorage.getItem("affnook_token");
   const { token } = useSelector((state) => state.auth);
@@ -33,6 +36,7 @@ const Register = () => {
     mobileNo: "",
     otp: "",
     referralCode: "",
+    username: "",
   });
   const { logo } = useContext(ApiContext);
   const { handleSubmit } = useForm();
@@ -67,6 +71,7 @@ const Register = () => {
       return toast.error("Enter four digit OTP no");
     } else {
       const registerData = {
+        username: userData?.username,
         password: userData?.password,
         confirmPassword: userData?.confirmPassword,
         mobile: userData?.mobileNo,
@@ -75,6 +80,8 @@ const Register = () => {
         orderId: order.orderId,
         otpMethod: order.otpMethod,
         affnook_token: affnook_token || null,
+        registration_mobile: Settings.registration_mobile,
+        registration_username: Settings.registration_username,
       };
 
       const { data } = await AxiosSecure.post(API.register, registerData);
@@ -186,43 +193,117 @@ const Register = () => {
                     autoComplete="off"
                     className="ng-dirty ng-touched ng-valid"
                   >
-                    <div className="form-group m-b-20">
-                      <input
-                        onChange={(e) =>
-                          setUserData({ ...userData, mobileNo: e.target.value })
-                        }
-                        type="number"
-                        aria-required="true"
-                        aria-invalid="false"
-                        className="form-control ng-dirty ng-valid ng-touched"
-                        placeholder="Mobile No."
-                      />
-                      <FontAwesomeIcon
-                        style={{
-                          position: "absolute",
-                          right: "10px",
-                          top: "8px",
-                        }}
-                        icon={faMobile}
-                      />
-                      {timer ? (
-                        <button
-                          style={{ cursor: "auto" }}
-                          className="btn btn-primary btn-block"
-                          type="button"
+                    {Settings.registration_mobile &&
+                      Settings.registration_username && (
+                        <div
+                          style={{
+                            width: "100%",
+                            background:
+                              "color-mix(in srgb, var(--theme1-bg) 30%, transparent)",
+                            marginBottom: "12px",
+                          }}
                         >
-                          {getLanguage(LanguageKey.RETRY_IN)} {timer}
-                        </button>
-                      ) : (
-                        <Fragment>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              position: "relative",
+                              width: "100%",
+                            }}
+                          >
+                            <div
+                              onClick={() => setTab("mobile")}
+                              style={{
+                                cursor: "pointer",
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                padding: "5px",
+                                width: "100%",
+                                gap: "6px",
+                                color: tab === "mobile" ? "white" : "black",
+                                background:
+                                  tab === "mobile"
+                                    ? "var(--theme1-bg)"
+                                    : undefined,
+                              }}
+                            >
+                              <FaMobileAlt />
+
+                              <span>{getLanguage(LanguageKey.BY_PHONE)}</span>
+                            </div>
+
+                            <div
+                              onClick={() => setTab("username")}
+                              style={{
+                                cursor: "pointer",
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                padding: "5px",
+                                width: "100%",
+                                gap: "6px",
+                                color: tab === "username" ? "white" : "black",
+                                background:
+                                  tab === "username"
+                                    ? "var(--theme1-bg)"
+                                    : undefined,
+                              }}
+                            >
+                              <FaRegUser />
+
+                              <span>
+                                {getLanguage(LanguageKey.BY_USERNAME)}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    {tab === "mobile" && Settings.registration_mobile && (
+                      <div className="form-group m-b-20">
+                        <input
+                          onChange={(e) =>
+                            setUserData({
+                              ...userData,
+                              mobileNo: e.target.value,
+                            })
+                          }
+                          type="number"
+                          aria-required="true"
+                          aria-invalid="false"
+                          className="form-control ng-dirty ng-valid ng-touched"
+                          placeholder="Mobile No."
+                        />
+                        <FontAwesomeIcon
+                          style={{
+                            position: "absolute",
+                            right: "10px",
+                            top: "8px",
+                          }}
+                          icon={faMobile}
+                        />
+                        {timer ? (
                           <button
-                            onClick={getOtp}
+                            style={{ cursor: "auto" }}
                             className="btn btn-primary btn-block"
                             type="button"
                           >
-                            {getLanguage(LanguageKey.GET_OTP_ON_MESSAGE)}
+                            {getLanguage(LanguageKey.RETRY_IN)} {timer}
                           </button>
-                          {/* {Settings.otpWhatsapp && (
+                        ) : (
+                          <Fragment>
+                            <button
+                              onClick={getOtp}
+                              className="btn btn-primary btn-block"
+                              type="button"
+                            >
+                              {getLanguage(LanguageKey.GET_OTP_ON_MESSAGE)}
+                            </button>
+                            {/* {Settings.otpWhatsapp && (
                             <button
                               onClick={handleGetOtpOnWhatsapp}
                               disabled={userData?.mobileNo?.length < 10}
@@ -232,9 +313,28 @@ const Register = () => {
                               Get OTP Whatsapp
                             </button>
                           )} */}
-                        </Fragment>
-                      )}
-                    </div>
+                          </Fragment>
+                        )}
+                      </div>
+                    )}
+                    {tab === "username" && Settings.registration_username && (
+                      <div className="form-group m-b-20">
+                        <input
+                          onChange={(e) => {
+                            setUserData({
+                              ...userData,
+                              username: e.target.value,
+                            });
+                          }}
+                          placeholder="Username"
+                          type="text"
+                          aria-required="true"
+                          aria-invalid="false"
+                          className="form-control ng-dirty ng-valid ng-touched"
+                        />
+                      </div>
+                    )}
+
                     <div className="form-group m-b-20">
                       <input
                         onChange={(e) => {

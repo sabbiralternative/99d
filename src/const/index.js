@@ -384,7 +384,7 @@ export const LanguageKey = {
   PLEASE_FILL_IN_ALL_REQUIRED_FIELDS: "PLEASE_FILL_IN_ALL_REQUIRED_FIELDS",
   USER_PREVIOUS_ACCOUNT: "USER_PREVIOUS_ACCOUNT",
   AVAILABLE_TO_WITHDRAW: "AVAILABLE_TO_WITHDRAW",
-  /*  */
+
   MY_BET: "MY_BET",
   OUR_PROVIDERS: "OUR_PROVIDERS",
   COCK_FIGHT: "COCK_FIGHT",
@@ -393,5 +393,7 @@ export const LanguageKey = {
   SR_NO: "SR_NO",
   BACK_DETAILS: "BACK_DETAILS",
   EVENT_TYPE: "EVENT_TYPE",
+  BY_USERNAME: "BY_USERNAME",
+  BY_PHONE: "BY_PHONE",
 };
 export const settingsAPI = "https://api7.live/api/exchange/diamond/settings";
